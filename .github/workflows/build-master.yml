@@ -55,6 +55,7 @@ jobs:
       run: dotnet workload install android 
 
     - name: Restore dependencies
+      working-directory: ./RbfxTemplate.Android
       run: dotnet restore
 
     - name: Build Android Package
