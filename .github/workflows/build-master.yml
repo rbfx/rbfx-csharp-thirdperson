@@ -69,4 +69,5 @@ jobs:
           ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.aab
           ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.apk
         name: v${{ env.VERSION }}
+        tag_name: v${{ env.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
