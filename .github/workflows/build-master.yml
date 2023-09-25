@@ -58,9 +58,9 @@ jobs:
       working-directory: ./RbfxTemplate.Desktop
       run: dotnet restore
 
-    - name: Build Android Package
+    - name: Dotnet Publish
       working-directory: ./RbfxTemplate.Desktop
-      run: dotnet publish -f net7.0 -c Release --no-restore
+      run: dotnet publish -f net7.0 -c Release --no-restore -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
     - name: Zip Package
       run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop\bin\Release\net7.0\publish\ -o RbfxTemplate.Desktop.zip
@@ -99,9 +99,9 @@ jobs:
       working-directory: ./RbfxTemplate.Android
       run: dotnet restore
 
-    - name: Build Android Package
+    - name: Dotnet Publish
       working-directory: ./RbfxTemplate.Android
-      run: dotnet publish -f net7.0-android -c Release --no-restore
+      run: dotnet publish -f net7.0-android -c Release --no-restore -p:AndroidVersionCode=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
     - name: Release
       uses: softprops/action-gh-release@v1
