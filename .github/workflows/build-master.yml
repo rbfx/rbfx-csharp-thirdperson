@@ -63,7 +63,6 @@ jobs:
       run: dotnet publish -f net7.0 -c Release --no-restore
 
     - name: Zip Package
-      working-directory: ./RbfxTemplate.Desktop/bin/Release/net7.0/publish/
       run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop\bin\Release\net7.0\publish\ -o RbfxTemplate.Desktop.zip
 
     - name: Release
