@@ -1,0 +1,376 @@
+@spritesheet theme
+{
+    src: casual.png;
+    blue-button: 478.27417px 4px 28px 48px;
+    blue-button-inner: 491.27417px 25px 2px 2px;
+    blue-button-hover: 4px 118px 28px 48px;
+    blue-button-hover-inner: 17px 135px 2px 2px;
+    blue-button-active: 40px 118px 28px 48px;
+    blue-button-active-inner: 53px 141px 2px 2px;
+    blue-button-disabled: 76px 118px 28px 48px;
+    blue-button-disabled-inner: 89px 143px 2px 2px;
+    orange-button: 112px 118px 28px 48px;
+    orange-button-inner: 125px 139px 2px 2px;
+    orange-button-hover: 148px 118px 28px 48px;
+    orange-button-hover-inner: 161px 135px 2px 2px;
+    orange-button-active: 184px 118px 28px 48px;
+    orange-button-active-inner: 197px 141px 2px 2px;
+    orange-button-disabled: 220px 118px 28px 48px;
+    orange-button-disabled-inner: 233px 143px 2px 2px;
+    gray-inner-panel: 112px 4px 52px 58px;
+    gray-inner-panel-inner: 137px 31px 2px 2px;
+    gray-outer-panel: 4px 4px 100px 106px;
+    gray-outer-panel-inner: 53px 55px 2px 2px;
+    slidertrack: 182px 70px 14px 22px;
+    slidertrack-inner: 188px 80px 2px 2px;
+    sliderbar: 204px 70px 16px 28px;
+    sliderbar-inner: 211px 81px 2px 2px;
+    blue-checkbox: 172px 4px 30.284271px 50.28427px;
+    blue-checkbox-hover: 210.28427px 4px 30.284271px 50.28427px;
+    blue-checkbox-active: 248.56854px 4px 30.284271px 50.28427px;
+    blue-checkbox-disabled: 286.8528px 4px 30.284271px 50.28427px;
+    blue-checkbox-checked: 325.1371px 4px 30.284271px 50.28427px;
+    blue-checkbox-checked-hover: 363.42136px 4px 30.284271px 50.28427px;
+    blue-checkbox-checked-active: 401.70563px 4px 30.284271px 50.28427px;
+    blue-checkbox-checked-disabled: 439.9899px 4px 30.284271px 50.28427px;
+    blue-slider-slidertrack: 112px 70px 26px 34px;
+    blue-slider-slidertrack-inner: 124px 86px 2px 2px;
+    blue-slider-sliderbar: 146px 70px 28px 40px;
+    blue-slider-sliderbar-inner: 159px 87px 2px 2px;
+    selectarrow: 228px 70px 20px 20px;
+    icon-settings: 256px 70px 20px 20px;
+    icon-xbox: 284px 70px 20px 20px;
+    icon-discord: 312px 70px 20px 20px;
+
+}
+input.blue-button,
+select.blue-button,
+select.blue-button selectbox
+{
+    decorator: ninepatch( blue-button, blue-button-inner, 1.0 );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 28px;
+    min-height: 48px;
+    text-align: center;
+    font-effect: outline(1px #333), shadow(0px 3px #333);
+    padding-top: 16.5px;
+    padding-right: 12.5px;
+    padding-bottom: 20.5px;
+    padding-left: 12.5px;
+}
+select.blue-button,
+select.blue-button selectbox
+{
+    text-align: left;
+    padding-top: 16.5px;
+    padding-right: 12.5px;
+    padding-bottom: 40.5px;
+    padding-left: 12.5px;
+}
+select.blue-button selectvalue
+{
+    padding-right: 60px;
+}
+select.blue-button selectbox option:hover
+{
+    font-effect: outline(1px #333), shadow(0px 3px #333);
+    background: #1E90FF;
+}
+input.blue-button:hover,
+input.blue-button:navigated,
+select.blue-button:hover,
+select.blue-button:navigated
+{
+    decorator: ninepatch( blue-button-hover, blue-button-hover-inner, 1.0 );
+    padding-top: 12.5px;
+    padding-right: 12.5px;
+    padding-bottom: 24.5px;
+    padding-left: 12.5px;
+}
+select.blue-button:hover,
+select.blue-button:navigated
+{
+    text-align: left;
+    padding-top: 12.5px;
+    padding-right: 12.5px;
+    padding-bottom: 44.5px;
+    padding-left: 12.5px;
+}
+input.blue-button:active,
+input.blue-button:pressed,
+select.blue-button:active,
+select.blue-button:pressed
+{
+    decorator: ninepatch( blue-button-active, blue-button-active-inner, 1.0 );
+    padding-top: 18.5px;
+    padding-right: 12.5px;
+    padding-bottom: 18.5px;
+    padding-left: 12.5px;
+}
+select.blue-button:active,
+select.blue-button:pressed
+{
+    text-align: left;
+    padding-top: 18.5px;
+    padding-right: 12.5px;
+    padding-bottom: 38.5px;
+    padding-left: 12.5px;
+}
+input.blue-button:disabled,
+select.blue-button selectbox
+{
+    decorator: ninepatch( blue-button-disabled, blue-button-disabled-inner, 1.0 );
+    font-effect: none;
+    padding-top: 20.5px;
+    padding-right: 12.5px;
+    padding-bottom: 16.5px;
+    padding-left: 12.5px;
+}
+select.blue-button selectbox
+{
+    text-align: left;
+    padding-top: 20.5px;
+    padding-right: 12.5px;
+    padding-bottom: 36.5px;
+    padding-left: 12.5px;
+}
+input.orange-button,
+select.orange-button,
+select.orange-button selectbox
+{
+    decorator: ninepatch( orange-button, orange-button-inner, 1.0 );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 28px;
+    min-height: 48px;
+    text-align: center;
+    font-effect: outline(1px #333), shadow(0px 3px #333);
+    padding-top: 16.5px;
+    padding-right: 12.5px;
+    padding-bottom: 20.5px;
+    padding-left: 12.5px;
+}
+select.orange-button,
+select.orange-button selectbox
+{
+    text-align: left;
+    padding-top: 16.5px;
+    padding-right: 12.5px;
+    padding-bottom: 40.5px;
+    padding-left: 12.5px;
+}
+select.orange-button selectvalue
+{
+    padding-right: 60px;
+}
+select.orange-button selectbox option:hover
+{
+    font-effect: outline(1px #333), shadow(0px 3px #333);
+    background: #FFA500;
+}
+input.orange-button:hover,
+input.orange-button:navigated,
+select.orange-button:hover,
+select.orange-button:navigated
+{
+    decorator: ninepatch( orange-button-hover, orange-button-hover-inner, 1.0 );
+    padding-top: 12.5px;
+    padding-right: 12.5px;
+    padding-bottom: 24.5px;
+    padding-left: 12.5px;
+}
+select.orange-button:hover,
+select.orange-button:navigated
+{
+    text-align: left;
+    padding-top: 12.5px;
+    padding-right: 12.5px;
+    padding-bottom: 44.5px;
+    padding-left: 12.5px;
+}
+input.orange-button:active,
+input.orange-button:pressed,
+select.orange-button:active,
+select.orange-button:pressed
+{
+    decorator: ninepatch( orange-button-active, orange-button-active-inner, 1.0 );
+    padding-top: 18.5px;
+    padding-right: 12.5px;
+    padding-bottom: 18.5px;
+    padding-left: 12.5px;
+}
+select.orange-button:active,
+select.orange-button:pressed
+{
+    text-align: left;
+    padding-top: 18.5px;
+    padding-right: 12.5px;
+    padding-bottom: 38.5px;
+    padding-left: 12.5px;
+}
+input.orange-button:disabled,
+select.orange-button selectbox
+{
+    decorator: ninepatch( orange-button-disabled, orange-button-disabled-inner, 1.0 );
+    font-effect: none;
+    padding-top: 20.5px;
+    padding-right: 12.5px;
+    padding-bottom: 16.5px;
+    padding-left: 12.5px;
+}
+select.orange-button selectbox
+{
+    text-align: left;
+    padding-top: 20.5px;
+    padding-right: 12.5px;
+    padding-bottom: 36.5px;
+    padding-left: 12.5px;
+}
+.gray-inner-panel
+{
+    decorator: ninepatch( gray-inner-panel, gray-inner-panel-inner, 1.0 );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 52px;
+    min-height: 58px;
+    padding-top: 24.5px;
+    padding-right: 24.5px;
+    padding-bottom: 26.5px;
+    padding-left: 24.5px;
+}
+.gray-outer-panel
+{
+    decorator: ninepatch( gray-outer-panel, gray-outer-panel-inner, 1.0 );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 100px;
+    min-height: 106px;
+    padding-top: 48.5px;
+    padding-right: 48.5px;
+    padding-bottom: 50.5px;
+    padding-left: 48.5px;
+}
+scrollbarvertical
+{
+    width: 14px;
+}
+scrollbarhorizontal
+{
+    height: 22px;
+}
+slidertrack
+{
+    decorator: ninepatch( slidertrack, slidertrack-inner, 1.0 );
+}
+sliderbar
+{
+    decorator: ninepatch( sliderbar, sliderbar-inner, 1.0 );
+}
+input.blue-checkbox
+{
+    decorator: image( blue-checkbox );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 30.284271px;
+    min-height: 50.28427px;
+    padding-top: 16.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 22.784271px;
+    padding-left: 12.5px;
+}
+input.blue-checkbox:hover,
+input.blue-checkbox:navigated
+{
+    decorator: image( blue-checkbox-hover );
+    padding-top: 12.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 26.784271px;
+    padding-left: 12.5px;
+}
+input.blue-checkbox:active,
+input.blue-checkbox:pressed
+{
+    decorator: image( blue-checkbox-active );
+    padding-top: 18.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 20.784271px;
+    padding-left: 12.5px;
+}
+input.blue-checkbox:disabled
+{
+    decorator: image( blue-checkbox-disabled );
+    padding-top: 20.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 18.784271px;
+    padding-left: 12.5px;
+}
+input.blue-checkbox:checked
+{
+    decorator: image( blue-checkbox-checked );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 30.284271px;
+    min-height: 50.28427px;
+    padding-top: 16.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 22.784271px;
+    padding-left: 12.5px;
+}
+input.blue-checkbox:checked:hover,
+input.blue-checkbox:checked:navigated
+{
+    decorator: image( blue-checkbox-checked-hover );
+    padding-top: 12.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 26.784271px;
+    padding-left: 12.5px;
+}
+input.blue-checkbox:checked:active,
+input.blue-checkbox:checked:pressed
+{
+    decorator: image( blue-checkbox-checked-active );
+    padding-top: 18.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 20.784271px;
+    padding-left: 12.5px;
+}
+input.blue-checkbox:checked:disabled
+{
+    decorator: image( blue-checkbox-checked-disabled );
+    padding-top: 20.5px;
+    padding-right: 14.784271px;
+    padding-bottom: 18.784271px;
+    padding-left: 12.5px;
+}
+input.blue-slider slidertrack
+{
+    height: 20px;
+    decorator: ninepatch( blue-slider-slidertrack, blue-slider-slidertrack-inner, 1.0 );
+}
+input.blue-slider sliderbar
+{
+    margin-top: -10px;
+    width: 28px;
+    height: 40px;
+    decorator: ninepatch( blue-slider-sliderbar, blue-slider-sliderbar-inner, 1.0 );
+}
+select selectarrow
+{
+    decorator: image( selectarrow );
+    width: 20px;
+    height: 20px;
+}
+

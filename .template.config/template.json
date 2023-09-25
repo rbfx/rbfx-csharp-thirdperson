@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  
+  // The author of the template
+  "author": "rbfx",
+  
+  // Zero or more characteristics of the template which may be used in search. In this field you define the values shown as Tags in dotnet new
+  "classifications": [ "Common", "Solution" ],
+  
+  // The name for the template. This is displayed as the template name when using dotnet new and Visual Studio.
+  "name": "Rebel Framework Third Person Project Template",
+  
+  // A unique name for this template
+  "identity": "rbfx.template.thirdperson",
+
+  // A name for selecting the template in CLI environment. 
+  // This is the name shown as Short Name in dotnet new list of templates, and is the name to use to run this template.
+  "shortName": "rbfx.thirdperson",
+
+  // The name in the source tree to replace with the name the user specifies.
+  // The value to be replaced with can be given using the -n --name options while running a template.
+  // The template engine will look for any occurrence of the name present in the config file and replace it in file names and file contents.
+  // If no name is specified by the host, the current directory is used.
+  // The value of the sourceName is available in built-in name symbol and can be used as the source for creating other symbols and condition expressions.
+  "sourceName": "RbfxTemplate",
+
+  // An optional list of guids which appear in the template source and should be replaced in the template output.
+  "guids": [
+    "{DAAE87E1-EBB6-472A-98D6-1411941CFD8E}",
+    "{AC46195D-9A59-4725-8A77-E2309185C707}",
+    "{E5A649CE-987F-46FE-8FA8-1290951AE21D}",
+    "{E15D7151-C812-4432-AB2A-F9EF06E4DF73}",
+    "{70D12BD7-3CFE-48B6-8E28-B9554FB21AD0}",
+    "{6EC5CAE7-DD30-4181-ADF2-B1BA19BA84F0}",
+    "{7DE6BF8D-C5F4-4C2A-8F02-525A97B81F1D}"
+  ],
+
+  // You can use tags to improve the metadata of your project.
+  // Well-known tags are: language and type. To specify the template language, use the tag language.
+  // To specify the template type, use the tag type. Supported types are: project, item, solution.
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+
+  // The symbols section defines variables and their values, the values may be the defined in terms of other symbols. 
+  "symbols": {
+    "skipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "If specified, skips the automatic restore of the project on create.",
+      "defaultValue": "false"
+    }
+  },
+
+  // The set of mappings in the template content to user directories. It's defined as any array of Source
+  // "sources": [
+  // ]
+
+  // A list of template files for further processing by the host (including post-actions).
+  // The path should contain the relative path to the file prior to the symbol based renaming that may happen during template generation.
+  // It is defined as an array of Primary Outputs
+  "primaryOutputs": [
+      {
+        "path": "RbfxTemplate\\RbfxTemplate.csproj"
+      },
+      {
+        "path": "RbfxTemplate.Android\\RbfxTemplate.Android.csproj"
+      },
+      {
+        "path": "RbfxTemplate.Desktop\\RbfxTemplate.Desktop.csproj"
+      },
+      {
+        "path": "RbfxTemplate.IOS\\RbfxTemplate.IOS.csproj"
+      },
+      {
+        "path": "RbfxTemplate.Tests\\RbfxTemplate.Tests.csproj"
+      },
+      {
+        "path": "RbfxTemplate.UWP\\RbfxTemplate.UWP.csproj"
+      }
+  ],
+
+  // The set of globing patterns indicating the content that was included by sources.include that should not be processed
+  "exclude": ["**/[Bb]in/**", "**/[Oo]bj/**", ".template.config/**/*", "**/*.lock.json"]
+}

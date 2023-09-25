@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<resource>
+	<components>
+		<component _typeName="Octree" />
+		<component _typeName="RenderPipeline" />
+		<component _typeName="ReflectionProbeManager" />
+		<component _typeName="Light">
+			<attributes>
+				<attribute name="Light Type" type="String" value="Directional" />
+			</attributes>
+		</component>
+		<component _typeName="PhysicsWorld" />
+	</components>
+	<nodes>
+		<node>
+			<attributes>
+				<attribute name="Name" type="String" value="StairC" />
+				<attribute name="Tags" type="StringVector">
+					<value>
+						<element value="Untagged" />
+					</value>
+				</attribute>
+			</attributes>
+			<components>
+				<component _typeName="StaticModel">
+					<attributes>
+						<attribute name="Model" type="ResourceRef" value="Model;Models/StairC/StairC.mdl" />
+						<attribute name="Material" type="ResourceRefList" value="Material;Materials/VertexColor.xml" />
+						<attribute name="Cast Shadows" type="Bool" value="true" />
+					</attributes>
+				</component>
+				<component _typeName="CollisionShape">
+					<attributes>
+						<attribute name="Shape Type" type="String" value="TriangleMesh" />
+						<attribute name="Model" type="ResourceRef" value="Model;Models/StairC/StairC.mdl" />
+					</attributes>
+				</component>
+				<component _typeName="RigidBody" />
+			</components>
+		</node>
+	</nodes>
+</resource>

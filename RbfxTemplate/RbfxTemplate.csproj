@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+	</PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Content\**" />
+      <EmbeddedResource Remove="Content\**" />
+      <None Remove="Content\**" />
+    </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="unofficial.Urho3DNet" Version="$(Urho3DNetVersion)" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" >
+		</PackageReference>
+  </ItemGroup>
+
+</Project>

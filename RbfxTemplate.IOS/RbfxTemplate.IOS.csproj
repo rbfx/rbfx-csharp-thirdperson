@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0-ios</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>true</ImplicitUsings>
+		<SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+		<!-- FastUpToDateCheck disabled as a workaround. Without this flag the build system going to miss changes in content files. -->
+		<DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="unofficial.Urho3DNet" Version="$(Urho3DNetVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<BundleResource Include="../Content/Common/Data/**">
+			<Link>Data/%(RecursiveDir)%(FileName)%(Extension)</Link>
+		</BundleResource>
+		<BundleResource Include="../Content/IOS/Data/**">
+			<Link>Data/%(RecursiveDir)%(FileName)%(Extension)</Link>
+		</BundleResource>
+		<AndroidAsset Remove="**/*.user.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RbfxTemplate\RbfxTemplate.csproj" />
+	</ItemGroup>
+</Project>

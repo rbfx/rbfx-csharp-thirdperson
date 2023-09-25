@@ -1,0 +1,10 @@
+<animation length="1.0">
+    <variant name="Door_Double.L/@/Position" type="Vector3" interpolation="spline" tension="0.7">
+        <keyframe time="0.0" value="1.6 0.0 0.0"/>
+        <keyframe time="1.0" value="3.2 0.0 0.0"/>
+    </variant>
+    <variant name="Door_Double.R/@/Position" type="Vector3" interpolation="spline" tension="0.7">
+        <keyframe time="0.0" value="-1.6 0.0 0.0"/>
+        <keyframe time="1.0" value="-3.2 0.0 0.0"/>
+    </variant>
+</animation>

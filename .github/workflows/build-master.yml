@@ -1,0 +1,72 @@
+name: BuildNugetPackage
+
+on:
+  push:
+    branches: [ "master", "main" ]
+
+jobs:
+  set-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Restore tools
+        run: dotnet tool restore
+
+      - name: Get version
+        run: dotnet tool run ezpipeline git-height-version -- -b 0.0.1 -v BUILD_VERSION
+
+      - name: Get android version
+        run: dotnet tool run ezpipeline git-height-version -- -v ANDROID_VERSION
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ env.BUILD_VERSION }}
+          tag_name: v${{ env.BUILD_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-android:
+    needs: set-version
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Restore tools
+      run: dotnet tool restore
+
+    - name: Install Workloads
+      working-directory: ./Source
+      run: dotnet workload install android 
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build Android Package
+      working-directory: ./RbfxTemplate.Android
+      run: dotnet publish -f net7.0-android -c Release --no-restore
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.aab
+          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.apk
+        name: v${{ env.VERSION }}
+        token: ${{ secrets.GITHUB_TOKEN }}

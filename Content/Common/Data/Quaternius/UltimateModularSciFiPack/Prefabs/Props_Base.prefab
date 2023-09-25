@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<resource>
+	<components>
+		<component _typeName="Octree" />
+		<component _typeName="PhysicsWorld" />
+		<component _typeName="RenderPipeline" />
+		<component _typeName="ReflectionProbeManager" />
+	</components>
+	<nodes>
+		<node>
+			<attributes>
+				<attribute name="Name" type="String" value="Props_Base" />
+				<attribute name="Tags" type="StringVector">
+					<value>
+						<element value="Untagged" />
+					</value>
+				</attribute>
+			</attributes>
+			<components>
+				<component _typeName="CollisionShape">
+					<attributes>
+						<attribute name="Shape Type" type="String" value="TriangleMesh" />
+						<attribute name="Model" type="ResourceRef" value="Model;Quaternius/UltimateModularSciFiPack/Meshes/Props_Base/Props_Base.mdl" />
+						<attribute name="Collision Margin" type="Float" value="0.010000" />
+					</attributes>
+				</component>
+				<component _typeName="RigidBody" />
+				<component _typeName="StaticModel">
+					<attributes>
+						<attribute name="Model" type="ResourceRef" value="Model;Quaternius/UltimateModularSciFiPack/Meshes/Props_Base/Props_Base.mdl" />
+						<attribute name="Material" type="ResourceRefList" value="Material;Materials/VertexColor.xml" />
+						<attribute name="Cast Shadows" type="Bool" value="true" />
+					</attributes>
+				</component>
+			</components>
+		</node>
+	</nodes>
+</resource>

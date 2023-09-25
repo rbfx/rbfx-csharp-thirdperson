@@ -1,0 +1,72 @@
+<rml>
+
+<head>
+<link type="text/rcss" href="rml.rcss"/>
+<link type="text/rcss" href="casual.rcss"/>
+	<style>
+		/* Style of the body element, i.e. the root of the window */
+		body {
+			/* Position at the top-left corner of the viewport
+			*/
+			position: absolute;
+			left: 0;
+			top: 0;
+
+			/* Fullscreen, no margins */
+			margin: 0;
+			width: 100%;
+			height: 100%;
+
+			/* Default font to be used in child elements */
+			font-family: "Archivo Black";
+			font-weight: 800;
+			font-size: 32dp;
+			font-style: normal;
+		}
+		/* Style of the root panel element */
+		dev.menu-panel {
+			width: 50%; 
+			max-height: 90%;
+			position: absolute; 
+			top: 50%; 
+			left: 50%; 
+			transform: translate(-50%, -50%); 
+		}
+	</style>
+</head>
+
+<body navigation-group="main_menu_group" data-model="MenuComponent"  style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png)">
+	<div class="gray-inner-panel menu-panel" style="top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%); width: 50%; max-height: 90%">
+		<img src="../Images/Splash.png" style="margin: 0 auto"/>
+		<div style="text-align: center">{{game_title}}</div>
+		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Continue()">
+		<input type="button" class="blue-button" data-attrif-disabled="!is_game_played" style="display: block">
+			Continue
+		</input>
+		</navigable>
+		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="NewGame()">
+		<input type="button" class="blue-button" style="display: block" >
+			New game
+		</input>
+		</navigable>
+		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Settings()">
+			<input type="button" class="blue-button" style="display: block" >
+				Settings
+			</input>
+		</navigable>
+		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Exit()">
+		<input type="button" class="blue-button" style="display: block">
+			Exit
+		</input>
+		</navigable>
+	</div>
+	<div style="top: 100%; left: 100%; position: absolute; transform: translate(-100%, -100%);">
+		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Discord()">
+			<input type="button" class="blue-button" style="display: block; margin: 5px">
+				<img sprite="icon-discord"></img>
+			</input>
+		</navigable>
+	</div>
+</body>
+
+</rml>

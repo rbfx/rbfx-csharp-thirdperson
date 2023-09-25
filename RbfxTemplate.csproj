@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0</PackageVersion>
+    <PackageId>rbfx.template.thirdperson</PackageId>
+    <Title>Rebel Framework Project Template</Title>
+    <Authors>rbfx</Authors>
+    <Description>Templates to use when creating a 3D application using Rebel Framework.</Description>
+    <PackageTags>dotnet-new;templates;rbfx</PackageTags>
+    <TargetFramework>net7.0</TargetFramework>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;RbfxTemplate.csproj;.vs\**\*" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>RbfxTemplate</RootNamespace>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <!-- FastUpToDateCheck disabled as a workaround. Without this flag the build system going to miss changes in content files. -->
+    <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="unofficial.Urho3DNet" Version="$(Urho3DNetVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="../Content/Common/Data/**">
+      <Link>Data/%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="../Content/Desktop/Data/**">
+      <Link>Data/%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Remove="**/*.user.json"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RbfxTemplate\RbfxTemplate.csproj" />
+  </ItemGroup>
+
+</Project>

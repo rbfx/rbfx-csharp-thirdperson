@@ -1,0 +1,1521 @@
+{
+	"components": [
+		{
+			"_typeName": "Octree"
+		},
+		{
+			"_typeName": "PhysicsWorld"
+		},
+		{
+			"_typeName": "RenderPipeline"
+		},
+		{
+			"_typeName": "ReflectionProbeManager"
+		}
+	],
+	"nodes": [
+		{
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "String",
+					"value": "XBot"
+				}
+			],
+			"components": [
+				{
+					"_typeName": "KinematicCharacterController",
+					"attributes": [
+						{
+							"name": "Collision Layer",
+							"type": "Int",
+							"value": 2
+						}
+					]
+				}
+			],
+			"nodes": [
+				{
+					"attributes": [
+						{
+							"name": "Name",
+							"type": "String",
+							"value": "ModelPivot"
+						}
+					],
+					"components": [
+						{
+							"_typeName": "AnimatedModel",
+							"attributes": [
+								{
+									"name": "Model",
+									"type": "ResourceRef",
+									"value": "Model;Models/Characters/XBot/XBot.mdl"
+								},
+								{
+									"name": "Material",
+									"type": "ResourceRefList",
+									"value": "Material;Models/Characters/XBot/Limbs.xml;Materials/VertexColor.xml"
+								},
+								{
+									"name": "Cast Shadows",
+									"type": "Bool",
+									"value": true
+								},
+								{
+									"name": "Bone Animation Enabled",
+									"type": "VariantVector",
+									"value": [
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										}
+									]
+								}
+							]
+						},
+						{
+							"_typeName": "AnimationController",
+							"attributes": [
+								{
+									"name": "Animations",
+									"type": "VariantVector",
+									"value": [
+										{
+											"type": "Int",
+											"value": 1
+										},
+										{
+											"type": "ResourceRef",
+											"value": "Animation;Animations/Idle.ani"
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Bool",
+											"value": true
+										},
+										{
+											"type": "Int",
+											"value": 0
+										},
+										{
+											"type": "Int",
+											"value": 0
+										},
+										{
+											"type": "String",
+											"value": ""
+										},
+										{
+											"type": "Float",
+											"value": 0.0
+										},
+										{
+											"type": "Float",
+											"value": 0.0
+										},
+										{
+											"type": "Float",
+											"value": 0.0
+										},
+										{
+											"type": "Float",
+											"value": 3.8000001907348635
+										},
+										{
+											"type": "Float",
+											"value": 1.0
+										},
+										{
+											"type": "Bool",
+											"value": false
+										},
+										{
+											"type": "Float",
+											"value": 1.0
+										},
+										{
+											"type": "Float",
+											"value": 1.0
+										},
+										{
+											"type": "Float",
+											"value": 0.0
+										}
+									]
+								}
+							]
+						}
+					],
+					"nodes": [
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "Root"
+								},
+								{
+									"name": "Position",
+									"type": "Vector3",
+									"value": "0.056222 -0.06012 0.064117"
+								},
+								{
+									"name": "Rotation",
+									"type": "Quaternion",
+									"value": "0.929321 -0.036514 0.367229 0.013135"
+								}
+							],
+							"nodes": [
+								{
+									"attributes": [
+										{
+											"name": "Name",
+											"type": "String",
+											"value": "Hips"
+										},
+										{
+											"name": "Position",
+											"type": "Vector3",
+											"value": "1.24292e-08 1.039915 0.020761"
+										},
+										{
+											"name": "Rotation",
+											"type": "Quaternion",
+											"value": "0.536053 0.461137 -0.536053 -0.461137"
+										}
+									],
+									"nodes": [
+										{
+											"attributes": [
+												{
+													"name": "Name",
+													"type": "String",
+													"value": "Spine_01"
+												},
+												{
+													"name": "Position",
+													"type": "Vector3",
+													"value": "-0.100477 0.016513 1.23487e-07"
+												},
+												{
+													"name": "Rotation",
+													"type": "Quaternion",
+													"value": "-0.040827 0.987878 -0.149621 -0.006686"
+												}
+											],
+											"nodes": [
+												{
+													"attributes": [
+														{
+															"name": "Name",
+															"type": "String",
+															"value": "Spine_02"
+														},
+														{
+															"name": "Position",
+															"type": "Vector3",
+															"value": "-0.100212 0.015007 -1.08408e-08"
+														},
+														{
+															"name": "Rotation",
+															"type": "Quaternion",
+															"value": "-0.081912 0.996528 0.002988 0.014614"
+														}
+													],
+													"nodes": [
+														{
+															"attributes": [
+																{
+																	"name": "Name",
+																	"type": "String",
+																	"value": "Spine_03"
+																},
+																{
+																	"name": "Position",
+																	"type": "Vector3",
+																	"value": "-0.09203 -0.000294 5.50911e-08"
+																},
+																{
+																	"name": "Rotation",
+																	"type": "Quaternion",
+																	"value": "-0.081712 0.974122 -0.210153 -0.015691"
+																}
+															],
+															"nodes": [
+																{
+																	"attributes": [
+																		{
+																			"name": "Name",
+																			"type": "String",
+																			"value": "Neck"
+																		},
+																		{
+																			"name": "Position",
+																			"type": "Vector3",
+																			"value": "-0.164323 0.037753 5.14457e-08"
+																		},
+																		{
+																			"name": "Rotation",
+																			"type": "Quaternion",
+																			"value": "0.999566 -0.003566 0.001166 0.029216"
+																		}
+																	],
+																	"nodes": [
+																		{
+																			"attributes": [
+																				{
+																					"name": "Name",
+																					"type": "String",
+																					"value": "Head"
+																				},
+																				{
+																					"name": "Position",
+																					"type": "Vector3",
+																					"value": "-0.097635 -0.001358 -3.06646e-08"
+																				},
+																				{
+																					"name": "Rotation",
+																					"type": "Quaternion",
+																					"value": "0.546265 0.450503 -0.541627 0.453081"
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"attributes": [
+																		{
+																			"name": "Name",
+																			"type": "String",
+																			"value": "Clavicle_L"
+																		},
+																		{
+																			"name": "Position",
+																			"type": "Vector3",
+																			"value": "-0.107147 0.034519 -0.045704"
+																		},
+																		{
+																			"name": "Rotation",
+																			"type": "Quaternion",
+																			"value": "-0.336075 -0.559063 0.644128 -0.3995"
+																		}
+																	],
+																	"nodes": [
+																		{
+																			"attributes": [
+																				{
+																					"name": "Name",
+																					"type": "String",
+																					"value": "Shoulder_L"
+																				},
+																				{
+																					"name": "Position",
+																					"type": "Vector3",
+																					"value": "-0.104062 -0.003895 0.030024"
+																				},
+																				{
+																					"name": "Rotation",
+																					"type": "Quaternion",
+																					"value": "0.80849 0.013853 0.250383 0.53241"
+																				}
+																			],
+																			"nodes": [
+																				{
+																					"attributes": [
+																						{
+																							"name": "Name",
+																							"type": "String",
+																							"value": "Elbow_L"
+																						},
+																						{
+																							"name": "Position",
+																							"type": "Vector3",
+																							"value": "-0.277453 0.022968 0.002761"
+																						},
+																						{
+																							"name": "Rotation",
+																							"type": "Quaternion",
+																							"value": "0.912906 0.058511 0.403809 -0.010865"
+																						}
+																					],
+																					"nodes": [
+																						{
+																							"attributes": [
+																								{
+																									"name": "Name",
+																									"type": "String",
+																									"value": "Hand_L"
+																								},
+																								{
+																									"name": "Position",
+																									"type": "Vector3",
+																									"value": "-0.282561 0 -0.020287"
+																								},
+																								{
+																									"name": "Rotation",
+																									"type": "Quaternion",
+																									"value": "0.955465 0.205017 0.161447 -0.137801"
+																								}
+																							],
+																							"nodes": [
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "Thumb_01"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "-0.024662 -0.015751 0.026824"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "0.949088 0.112774 0.081651 0.282571"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "Thumb_02"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "-0.040042 -0.011531 -0.001486"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "0.999173 -0.039981 -0.00173 -0.00721"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "Thumb_03"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "-0.033646 -8.56459e-05 0.006375"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "0.960553 -0.036403 -0.152035 -0.229995"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "IndexFinger_01"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "-0.091093 -0.005171 0.022601"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "0.994944 -0.009072 -0.09488 0.031649"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "IndexFinger_02"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "-0.036445 0.000311 -0.004827"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "0.989727 -0.001923 0.005754 0.142843"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "IndexFinger_03"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "-0.028053 0.005848 -0.003168"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "0.999976 -0.006926 5.03104e-09 -2.50859e-08"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "mixamorig:LeftHandMiddle1"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "-0.095334 -4.76837e-07 6.33299e-08"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "1 -1.74623e-08 2.22045e-16 -2.27414e-11"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "mixamorig:LeftHandMiddle2"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "-0.036982 2.8624e-09 1.7037e-07"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "1 5.82077e-09 1.16415e-08 -1.81672e-08"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "mixamorig:LeftHandMiddle3"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "-0.029509 -4.70573e-07 1.97478e-07"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "1 1.16415e-08 -2.03727e-08 2.32831e-08"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "mixamorig:LeftHandRing1"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "-0.091046 -0.00044 -0.018651"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "1 -2.85608e-15 -1.81899e-09 -3.93357e-09"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "mixamorig:LeftHandRing2"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "-0.03154 -1.39888e-08 1.0035e-07"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "1 -1.13291e-16 4.72937e-09 9.75433e-09"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "mixamorig:LeftHandRing3"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "-0.029377 -5.65826e-07 -7.45058e-09"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "1 2.91038e-09 2.2817e-16 -5.09317e-09"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "Finger_01"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "-0.080778 -0.004887 -0.038061"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "0.963532 -0.008312 -0.229133 0.137965"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "Finger_02"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "-0.035632 0.004051 0.003161"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "0.981736 0.00123 0.033582 0.187258"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "Finger_03"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "-0.020862 0.003276 0.001027"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "0.999833 -0.018275 -1.14475e-08 4.25523e-08"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"attributes": [
+																		{
+																			"name": "Name",
+																			"type": "String",
+																			"value": "Clavicle_R"
+																		},
+																		{
+																			"name": "Position",
+																			"type": "Vector3",
+																			"value": "-0.107149 0.034519 0.0457"
+																		},
+																		{
+																			"name": "Rotation",
+																			"type": "Quaternion",
+																			"value": "-0.455631 0.614651 0.527439 0.36934"
+																		}
+																	],
+																	"nodes": [
+																		{
+																			"attributes": [
+																				{
+																					"name": "Name",
+																					"type": "String",
+																					"value": "Shoulder_R"
+																				},
+																				{
+																					"name": "Position",
+																					"type": "Vector3",
+																					"value": "0.104066 0.003897 -0.030027"
+																				},
+																				{
+																					"name": "Rotation",
+																					"type": "Quaternion",
+																					"value": "0.867615 0.025319 0.023842 0.49602"
+																				}
+																			],
+																			"nodes": [
+																				{
+																					"attributes": [
+																						{
+																							"name": "Name",
+																							"type": "String",
+																							"value": "Elbow_R"
+																						},
+																						{
+																							"name": "Position",
+																							"type": "Vector3",
+																							"value": "0.277453 -0.022969 -0.00276"
+																						},
+																						{
+																							"name": "Rotation",
+																							"type": "Quaternion",
+																							"value": "0.932062 -0.028465 0.35821 0.046226"
+																						}
+																					],
+																					"nodes": [
+																						{
+																							"attributes": [
+																								{
+																									"name": "Name",
+																									"type": "String",
+																									"value": "Hand_R"
+																								},
+																								{
+																									"name": "Position",
+																									"type": "Vector3",
+																									"value": "0.282561 2.38419e-07 0.020287"
+																								},
+																								{
+																									"name": "Rotation",
+																									"type": "Quaternion",
+																									"value": "0.954989 0.088331 0.260011 0.112198"
+																								}
+																							],
+																							"nodes": [
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "Finger_01 1"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "0.080767 0.004885 0.03806"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "0.997434 -0.002486 -0.04388 0.056519"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "Finger_02 1"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "0.035631 -0.004052 -0.003162"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "0.99958 0.002637 0.019492 0.021269"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "Finger_03 1"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "0.020862 -0.003276 -0.001027"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "0.992977 -0.018149 -0.071479 0.092511"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "mixamorig:RightHandRing1"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "0.091036 0.000439 0.018651"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "2.77556e-15 1 2.31012e-08 7.27596e-09"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "mixamorig:RightHandRing2"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "0.03154 5.35151e-07 4.35318e-07"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "1 -2.91038e-09 -1.01863e-08 2.23736e-08"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "mixamorig:RightHandRing3"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "0.029377 -5.28172e-07 -3.75734e-07"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "1 -2.91038e-09 2.91038e-09 3.63798e-10"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "mixamorig:RightHandMiddle1"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "0.095325 1.19209e-07 -1.8999e-07"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "2.77463e-15 1 6.13908e-09 1.45519e-09"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "mixamorig:RightHandMiddle2"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "0.036982 -9.84454e-09 -2.29704e-07"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "1 -5.82077e-09 2.22045e-16 2.85127e-08"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "mixamorig:RightHandMiddle3"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "0.029509 2.98493e-08 -7.97034e-09"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "1 5.82077e-09 -2.22045e-16 -3.32875e-08"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "IndexFinger_01 1"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "0.091083 0.005168 -0.022601"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "0.997824 0.00028 0.065794 0.004254"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "IndexFinger_02 1"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "0.036445 -0.000311 0.004827"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "0.995095 -0.001154 -0.010742 0.09833"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "IndexFinger_03 1"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "0.028053 -0.005848 0.003167"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "0.998019 -0.006912 -0.025718 0.057003"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								},
+																								{
+																									"attributes": [
+																										{
+																											"name": "Name",
+																											"type": "String",
+																											"value": "Thumb_01 1"
+																										},
+																										{
+																											"name": "Position",
+																											"type": "Vector3",
+																											"value": "0.024648 0.015727 -0.026826"
+																										},
+																										{
+																											"name": "Rotation",
+																											"type": "Quaternion",
+																											"value": "0.956534 0.025481 0.276843 0.088039"
+																										}
+																									],
+																									"nodes": [
+																										{
+																											"attributes": [
+																												{
+																													"name": "Name",
+																													"type": "String",
+																													"value": "Thumb_02 1"
+																												},
+																												{
+																													"name": "Position",
+																													"type": "Vector3",
+																													"value": "0.040042 0.011532 0.001486"
+																												},
+																												{
+																													"name": "Rotation",
+																													"type": "Quaternion",
+																													"value": "0.982068 -0.039942 -0.11784 0.141636"
+																												}
+																											],
+																											"nodes": [
+																												{
+																													"attributes": [
+																														{
+																															"name": "Name",
+																															"type": "String",
+																															"value": "Thumb_03 1"
+																														},
+																														{
+																															"name": "Position",
+																															"type": "Vector3",
+																															"value": "0.033646 8.51278e-05 -0.006374"
+																														},
+																														{
+																															"name": "Rotation",
+																															"type": "Quaternion",
+																															"value": "0.960553 -0.036403 -0.152035 -0.229995"
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"attributes": [
+												{
+													"name": "Name",
+													"type": "String",
+													"value": "UpperLeg_L"
+												},
+												{
+													"name": "Position",
+													"type": "Vector3",
+													"value": "0.064369 -0.025904 0.082078"
+												},
+												{
+													"name": "Rotation",
+													"type": "Quaternion",
+													"value": "0.743015 -0.643192 -0.184079 0.018631"
+												}
+											],
+											"nodes": [
+												{
+													"attributes": [
+														{
+															"name": "Name",
+															"type": "String",
+															"value": "LowerLeg_L"
+														},
+														{
+															"name": "Position",
+															"type": "Vector3",
+															"value": "0.443481 0.014084 0.002846"
+														},
+														{
+															"name": "Rotation",
+															"type": "Quaternion",
+															"value": "0.7957 0.514525 0.272369 -0.167152"
+														}
+													],
+													"nodes": [
+														{
+															"attributes": [
+																{
+																	"name": "Name",
+																	"type": "String",
+																	"value": "Ankle_L"
+																},
+																{
+																	"name": "Position",
+																	"type": "Vector3",
+																	"value": "0.445143 -0.009762 -0.005021"
+																},
+																{
+																	"name": "Rotation",
+																	"type": "Quaternion",
+																	"value": "-0.101758 0.825288 0.555443 -0.005265"
+																}
+															],
+															"nodes": [
+																{
+																	"attributes": [
+																		{
+																			"name": "Name",
+																			"type": "String",
+																			"value": "Ball_L"
+																		},
+																		{
+																			"name": "Position",
+																			"type": "Vector3",
+																			"value": "0.136874 0.018867 4.48718e-08"
+																		},
+																		{
+																			"name": "Rotation",
+																			"type": "Quaternion",
+																			"value": "0.95673 -0.014833 -0.024842 -0.289537"
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"attributes": [
+												{
+													"name": "Name",
+													"type": "String",
+													"value": "UpperLeg_R"
+												},
+												{
+													"name": "Position",
+													"type": "Vector3",
+													"value": "0.064369 -0.025904 -0.082078"
+												},
+												{
+													"name": "Rotation",
+													"type": "Quaternion",
+													"value": "0.143775 0.057159 -0.612878 0.774882"
+												}
+											],
+											"nodes": [
+												{
+													"attributes": [
+														{
+															"name": "Name",
+															"type": "String",
+															"value": "LowerLeg_R"
+														},
+														{
+															"name": "Position",
+															"type": "Vector3",
+															"value": "-0.443482 -0.014084 -0.002862"
+														},
+														{
+															"name": "Rotation",
+															"type": "Quaternion",
+															"value": "0.677227 0.666598 0.229921 -0.210113"
+														}
+													],
+													"nodes": [
+														{
+															"attributes": [
+																{
+																	"name": "Name",
+																	"type": "String",
+																	"value": "Ankle_R"
+																},
+																{
+																	"name": "Position",
+																	"type": "Vector3",
+																	"value": "-0.445142 0.009778 0.005023"
+																},
+																{
+																	"name": "Rotation",
+																	"type": "Quaternion",
+																	"value": "-0.137102 0.723451 0.673005 -0.0699"
+																}
+															],
+															"nodes": [
+																{
+																	"attributes": [
+																		{
+																			"name": "Name",
+																			"type": "String",
+																			"value": "Ball_R"
+																		},
+																		{
+																			"name": "Position",
+																			"type": "Vector3",
+																			"value": "-0.136874 -0.018867 1.47501e-08"
+																		},
+																		{
+																			"name": "Rotation",
+																			"type": "Quaternion",
+																			"value": "0.958522 0.003674 0.002155 -0.284988"
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "String",
+					"value": "Default Skybox"
+				}
+			],
+			"components": [
+				{
+					"_typeName": "Skybox",
+					"attributes": [
+						{
+							"name": "Model",
+							"type": "ResourceRef",
+							"value": "Model;Models/Box.mdl"
+						},
+						{
+							"name": "Material",
+							"type": "ResourceRefList",
+							"value": "Material;Materials/DefaultSkybox.xml"
+						}
+					]
+				}
+			]
+		},
+		{
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "String",
+					"value": "Default Zone"
+				}
+			],
+			"components": [
+				{
+					"_typeName": "Zone",
+					"attributes": [
+						{
+							"name": "Bounding Box Min",
+							"type": "Vector3",
+							"value": "-1000 -1000 -1000"
+						},
+						{
+							"name": "Bounding Box Max",
+							"type": "Vector3",
+							"value": "1000 1000 1000"
+						},
+						{
+							"name": "Ambient Color",
+							"type": "Color",
+							"value": "0 0 0 1"
+						},
+						{
+							"name": "Background Brightness",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"name": "Zone Texture",
+							"type": "ResourceRef",
+							"value": "TextureCube;Textures/DefaultSkybox.xml"
+						}
+					]
+				}
+			]
+		}
+	]
+}

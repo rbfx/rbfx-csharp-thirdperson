@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<resource>
+	<components>
+		<component _typeName="Octree" />
+		<component _typeName="PhysicsWorld" />
+		<component _typeName="RenderPipeline" />
+		<component _typeName="ReflectionProbeManager" />
+	</components>
+	<nodes>
+		<node>
+			<attributes>
+				<attribute name="Name" type="String" value="Door_Double" />
+				<attribute name="Tags" type="StringVector">
+					<value>
+						<element value="Untagged" />
+					</value>
+				</attribute>
+			</attributes>
+			<components>
+				<component _typeName="CollisionShape">
+					<attributes>
+						<attribute name="Size" type="Vector3" value="3 2.5 2" />
+						<attribute name="Offset Position" type="Vector3" value="0 1.25 0" />
+					</attributes>
+				</component>
+				<component _typeName="RigidBody">
+					<attributes>
+						<attribute name="Use Gravity" type="Bool" value="false" />
+						<attribute name="Is Trigger" type="Bool" value="true" />
+					</attributes>
+				</component>
+				<component _typeName="AnimationController">
+					<attributes>
+						<attribute name="Animations" type="VariantVector">
+							<value>
+								<element type="Int" value="0" />
+							</value>
+						</attribute>
+					</attributes>
+				</component>
+				<component _typeName="TriggerAnimator">
+					<attributes>
+						<attribute name="Enter Animation" type="ResourceRef" value="Animation;Animations/SlidingDoor/Open.xml" />
+						<attribute name="Exit Animation" type="ResourceRef" value="Animation;Animations/SlidingDoor/Close.xml" />
+					</attributes>
+				</component>
+			</components>
+			<nodes>
+				<node>
+					<attributes>
+						<attribute name="Name" type="String" value="Door_Double.L" />
+						<attribute name="Tags" type="StringVector">
+							<value>
+								<element value="Untagged" />
+							</value>
+						</attribute>
+						<attribute name="Position" type="Vector3" value="1.6 0 0" />
+					</attributes>
+					<components>
+						<component _typeName="CollisionShape">
+							<attributes>
+								<attribute name="Size" type="Vector3" value="1.650394 2.519741 0.454233" />
+								<attribute name="Offset Position" type="Vector3" value="-0.767207 1.259549 9.68575e-08" />
+								<attribute name="Collision Margin" type="Float" value="0.010000" />
+							</attributes>
+						</component>
+						<component _typeName="RigidBody" />
+						<component _typeName="StaticModel">
+							<attributes>
+								<attribute name="Model" type="ResourceRef" value="Model;Quaternius/UltimateModularSciFiPack/Meshes/Door_Double/Door_Double.L.mdl" />
+								<attribute name="Material" type="ResourceRefList" value="Material;Materials/VertexColor.xml" />
+								<attribute name="Cast Shadows" type="Bool" value="true" />
+							</attributes>
+						</component>
+					</components>
+				</node>
+				<node>
+					<attributes>
+						<attribute name="Name" type="String" value="Door_Double.R" />
+						<attribute name="Tags" type="StringVector">
+							<value>
+								<element value="Untagged" />
+							</value>
+						</attribute>
+						<attribute name="Position" type="Vector3" value="-1.6 0 0" />
+					</attributes>
+					<components>
+						<component _typeName="CollisionShape">
+							<attributes>
+								<attribute name="Size" type="Vector3" value="1.650394 2.519741 0.454233" />
+								<attribute name="Offset Position" type="Vector3" value="0.767207 1.259549 9.68575e-08" />
+								<attribute name="Collision Margin" type="Float" value="0.010000" />
+							</attributes>
+						</component>
+						<component _typeName="RigidBody" />
+						<component _typeName="StaticModel">
+							<attributes>
+								<attribute name="Model" type="ResourceRef" value="Model;Quaternius/UltimateModularSciFiPack/Meshes/Door_Double/Door_Double.R.mdl" />
+								<attribute name="Material" type="ResourceRefList" value="Material;Materials/VertexColor.xml" />
+								<attribute name="Cast Shadows" type="Bool" value="true" />
+							</attributes>
+						</component>
+					</components>
+				</node>
+			</nodes>
+		</node>
+	</nodes>
+</resource>

@@ -1,0 +1,126 @@
+<rml>
+
+	<head>
+		<link type="text/rcss" href="rml.rcss"/>
+		<link type="text/rcss" href="casual.rcss"/>
+		<style>
+			/* Style of the body element, i.e. the root of the window */
+			body {
+			/* Position at the top-left corner of the viewport
+			*/
+			position: absolute;
+			left: 0;
+			top: 0;
+
+			/* Fullscreen, no margins */
+			margin: 0;
+			width: 100%;
+			height: 100%;
+
+			/* Default font to be used in child elements */
+			font-family: "Archivo Black";
+			font-weight: 800;
+			font-size: 32dp;
+			font-style: normal;
+			}
+			/* Style of the root panel element */
+			dev.menu-panel {
+			width: 50%;
+			max-height: 90%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			}
+
+		</style>
+	</head>
+
+	<body navigation-group="main_menu_group" data-model="MenuComponent"  style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png)">
+		<div class="gray-inner-panel menu-panel" style="top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%); max-height: 90%; max-height: 90%; min-width: 800px">
+			<div style="text-align: center">Settings</div>
+			<br/>
+			<table>
+				<col style="text-align: right; "/>
+				<col style="text-align: left; "/>
+				<tr>
+					<td>
+						<label for="bloom">Bloom</label>
+					</td>
+					<td>
+						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav">
+							<input id="bloom" type="checkbox" class="blue-checkbox" data-checked="bloom"/>
+						</navigable>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="ssao">SSAO</label>
+					</td>
+					<td>
+						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav">
+							<input id="ssao" type="checkbox" class="blue-checkbox" data-checked="ssao" />
+						</navigable>
+					</td>
+				</tr>
+				<!--<tr>
+					<td>
+						<label for="shadow">Shadow quality</label>
+					</td>
+					<td>
+						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav"  style="display: block">
+							<select id="shadow" class="blue-button" data-value="shadows" style="width: 300px; display: inline-block;">
+								<option value="0">Low</option>
+								<option value="1">Medium</option>
+								<option value="2">High</option>
+							</select>
+						</navigable>
+					</td>
+				</tr>-->
+				<tr>
+					<td>
+						<label for="musmasteric">Master</label>
+					</td>
+					<td>
+						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav"  style="display: block">
+							<input id="master" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="master"/>
+						</navigable>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="music">Music</label>
+					</td>
+					<td>
+						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav"  style="display: block">
+							<input id="music" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="music"/>
+						</navigable>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="effects">Effects</label>
+					</td>
+					<td>
+						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav"  style="display: block">
+							<input id="effects" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="effects"/>
+						</navigable>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<div style="text-align: right;">
+			<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" style="display: inline-block;" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Apply()">
+				<input type="button" class="blue-button" style="display: inline-block; margin-left: 10px">
+					Apply
+				</input>
+			</navigable>
+			<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" style="display: inline-block;" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Cancel()">
+				<input type="button" class="orange-button" style="display: inline-block; margin-left: 10px">
+					Cancel
+				</input>
+			</navigable>
+			</div>
+		</div>
+	</body>
+</rml>

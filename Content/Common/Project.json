@@ -1,0 +1,15 @@
+{
+	"LaunchManager": {
+		"Configurations": [
+			{
+				"MainPlugin": "Builtin.SceneViewer",
+				"Name": "View Current Scene"
+			}
+		]
+	},
+	"PluginManager": {
+		"LoadedPlugins": [
+			"Builtin.SceneViewer"
+		]
+	}
+}
