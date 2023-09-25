@@ -5,7 +5,7 @@ on:
     branches: [ "master", "main" ]
 
 jobs:
-  set-version:
+  set_version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,9 +32,12 @@ jobs:
           name: v${{ env.BUILD_VERSION }}
           tag_name: v${{ env.BUILD_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      BUILD_VERSION: ${{ env.BUILD_VERSION }}
+      ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
 
-  build-android:
-    needs: set-version
+  build_android:
+    needs: set_version
     runs-on: ubuntu-latest
 
     steps:
@@ -68,6 +71,6 @@ jobs:
         files: |
           ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.aab
           ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.apk
-        name: v${{ env.VERSION }}
-        tag_name: v${{ env.BUILD_VERSION }}
+        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}

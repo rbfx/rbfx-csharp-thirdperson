@@ -3,6 +3,8 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>1.0</PackageVersion>
+    <PackageReadmeFile>./README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageId>rbfx.template.thirdperson</PackageId>
     <Title>Rebel Framework Project Template</Title>
     <Authors>rbfx</Authors>
@@ -18,6 +20,7 @@
   <ItemGroup>
     <Content Include="**\*" Exclude="**\bin\**;**\obj\**;RbfxTemplate.csproj;.vs\**\*" />
     <Compile Remove="**\*" />
+    <None Include="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
