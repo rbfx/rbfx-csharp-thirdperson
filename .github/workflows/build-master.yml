@@ -36,6 +36,45 @@ jobs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
       ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
 
+  build_desktop:
+    needs: set_version
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Restore tools
+      run: dotnet tool restore
+
+    - name: Restore dependencies
+      working-directory: ./RbfxTemplate.Desktop
+      run: dotnet restore
+
+    - name: Build Android Package
+      working-directory: ./RbfxTemplate.Desktop
+      run: dotnet publish -f net7.0 -c Release --no-restore
+
+    - name: Zip Package
+      working-directory: ./RbfxTemplate.Desktop/bin/Release/net7.0/publish/
+      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop\bin\Release\net7.0\publish\ -o RbfxTemplate.Desktop.zip
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ./RbfxTemplate.Desktop.zip
+        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+
   build_android:
     needs: set_version
     runs-on: ubuntu-latest
@@ -69,8 +108,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.aab
-          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate-Signed.apk
+          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.aab
+          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
