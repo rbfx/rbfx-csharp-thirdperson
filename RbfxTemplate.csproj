@@ -23,7 +23,6 @@
     <Content Include="**\*" Exclude="**\bin\**;**\obj\**;RbfxTemplate.csproj;.vs\**\*;.git;.vs" />
     <Compile Remove="**\*" />
     <None Include="README.md" Pack="true" PackagePath="/"/>
-    <None Include="./Content/Common/Data/Images/Splash.png" Pack="true" PackagePath="/content/Content/Common/Data/Images/"/>
   </ItemGroup>
 
 </Project>
