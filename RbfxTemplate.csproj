@@ -5,7 +5,9 @@
     <PackageVersion>1.0</PackageVersion>
     <PackageReadmeFile>./README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>./content/Content/Common/Data/Images/Splash.png</PackageIcon>
     <PackageId>rbfx.template.thirdperson</PackageId>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
     <Title>Rebel Framework Project Template</Title>
     <Authors>rbfx</Authors>
     <Description>Templates to use when creating a 3D application using Rebel Framework.</Description>
@@ -18,9 +20,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;RbfxTemplate.csproj;.vs\**\*" />
+    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;RbfxTemplate.csproj;.vs\**\*;.git;.vs" />
     <Compile Remove="**\*" />
-    <None Include="README.md" Pack="true" PackagePath="\"/>
+    <None Include="README.md" Pack="true" PackagePath="/"/>
+    <None Include="./Content/Common/Data/Images/Splash.png" Pack="true" PackagePath="/content/Content/Common/Data/Images/"/>
   </ItemGroup>
 
 </Project>
