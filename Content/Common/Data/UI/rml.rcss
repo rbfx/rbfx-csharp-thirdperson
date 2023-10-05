@@ -102,3 +102,10 @@ thead, tbody, tfoot
 {
     display: table-row-group;
 }
+input
+{
+    nav-up: auto;
+    nav-down: auto;
+    nav-left: auto;
+    nav-right: auto;
+}

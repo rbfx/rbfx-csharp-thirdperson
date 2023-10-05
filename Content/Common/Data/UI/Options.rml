@@ -36,7 +36,7 @@
 		</style>
 	</head>
 
-	<body navigation-group="main_menu_group" data-model="MenuComponent"  style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png)">
+	<body data-model="MenuComponent"  style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png)">
 		<div class="gray-inner-panel menu-panel" style="top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%); max-height: 90%; max-height: 90%; min-width: 800px">
 			<div style="text-align: center">Settings</div>
 			<br/>
@@ -48,9 +48,7 @@
 						<label for="bloom">Bloom</label>
 					</td>
 					<td>
-						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav">
-							<input id="bloom" type="checkbox" class="blue-checkbox" data-checked="bloom"/>
-						</navigable>
+						<input id="bloom" type="checkbox" class="blue-checkbox" data-checked="bloom"/>
 					</td>
 				</tr>
 				<tr>
@@ -58,9 +56,7 @@
 						<label for="ssao">SSAO</label>
 					</td>
 					<td>
-						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav">
-							<input id="ssao" type="checkbox" class="blue-checkbox" data-checked="ssao" />
-						</navigable>
+						<input id="ssao" type="checkbox" class="blue-checkbox" data-checked="ssao" />
 					</td>
 				</tr>
 				<!--<tr>
@@ -82,9 +78,7 @@
 						<label for="musmasteric">Master</label>
 					</td>
 					<td>
-						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav"  style="display: block">
-							<input id="master" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="master"/>
-						</navigable>
+						<input id="master" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="master" style="display: block"/>
 					</td>
 				</tr>
 				<tr>
@@ -92,9 +86,7 @@
 						<label for="music">Music</label>
 					</td>
 					<td>
-						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav"  style="display: block">
-							<input id="music" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="music"/>
-						</navigable>
+						<input id="music" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="music" style="display: block"/>
 					</td>
 				</tr>
 				<tr>
@@ -102,24 +94,18 @@
 						<label for="effects">Effects</label>
 					</td>
 					<td>
-						<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav"  style="display: block">
-							<input id="effects" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="effects"/>
-						</navigable>
+							<input id="effects" type="range" min="0.0" max="1.0" step="0.05" orient="horizontal" class="blue-slider" data-value="effects" style="display: block"/>
 					</td>
 				</tr>
 			</table>
 			<br/>
 			<div style="text-align: right;">
-			<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" style="display: inline-block;" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Apply()">
-				<input type="button" class="blue-button" style="display: inline-block; margin-left: 10px">
+				<input type="button" class="blue-button" style="display: inline-block; margin-left: 10px"  data-event-click="Apply">
 					Apply
 				</input>
-			</navigable>
-			<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" style="display: inline-block;" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Cancel()">
-				<input type="button" class="orange-button" style="display: inline-block; margin-left: 10px">
+				<input type="button" class="orange-button" style="display: inline-block; margin-left: 10px"  data-event-click="Cancel">
 					Cancel
 				</input>
-			</navigable>
 			</div>
 		</div>
 	</body>

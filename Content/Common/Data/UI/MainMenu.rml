@@ -35,37 +35,27 @@
 	</style>
 </head>
 
-<body navigation-group="main_menu_group" data-model="MenuComponent"  style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png)">
+<body data-model="MenuComponent"  style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png)">
 	<div class="gray-inner-panel menu-panel" style="top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%); width: 50%; max-height: 90%">
 		<img src="../Images/Splash.png" style="margin: 0 auto"/>
 		<div style="text-align: center">{{game_title}}</div>
-		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Continue()">
-		<input type="button" class="blue-button" data-attrif-disabled="!is_game_played" style="display: block">
+		<input type="button" class="blue-button" data-attrif-disabled="!is_game_played" style="display: block" data-event-click="Continue">
 			Continue
 		</input>
-		</navigable>
-		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="NewGame()">
-		<input type="button" class="blue-button" style="display: block" >
+		<input type="button" class="blue-button" style="display: block" data-event-click="NewGame">
 			New game
 		</input>
-		</navigable>
-		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Settings()">
-			<input type="button" class="blue-button" style="display: block" >
-				Settings
-			</input>
-		</navigable>
-		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Exit()">
-		<input type="button" class="blue-button" style="display: block">
+		<input type="button" class="blue-button" style="display: block"  data-event-click="Settings">
+			Settings
+		</input>
+		<input type="button" class="blue-button" style="display: block"  data-event-click="Exit">
 			Exit
 		</input>
-		</navigable>
 	</div>
 	<div style="top: 100%; left: 100%; position: absolute; transform: translate(-100%, -100%);">
-		<navigable group="main_menu_group" onnavigated="sound:Sounds/UINavigated.wav" onpressed="sound:Sounds/UIClicked.wav" data-event-depressed="Discord()">
-			<input type="button" class="blue-button" style="display: block; margin: 5px">
+			<input type="button" class="blue-button" style="display: block; margin: 5px" data-event-click="Discord">
 				<img sprite="icon-discord"></img>
 			</input>
-		</navigable>
 	</div>
 </body>
 

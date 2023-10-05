@@ -38,13 +38,27 @@ jobs:
 
   build_desktop:
     needs: set_version
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
         fetch-depth: 1
+
+    - name: Evaluate target runtime
+      run: |
+        echo "OS: $OSTYPE"
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+          echo "RUNTIME_ID=osx-x64" >> $GITHUB_ENV
+        elif [[ "$OSTYPE" == "linux"* ]]; then
+          echo "RUNTIME_ID=linux-x64" >> $GITHUB_ENV
+        else
+          echo "RUNTIME_ID=win-x64" >> $GITHUB_ENV
+        fi
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
@@ -60,10 +74,10 @@ jobs:
 
     - name: Dotnet Publish
       working-directory: ./RbfxTemplate.Desktop
-      run: dotnet publish -f net7.0 -c Release --no-restore -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+      run: dotnet publish -f net7.0 -c Release --runtime ${{ env.RUNTIME_ID }} --self-contained true -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
     - name: Zip Package
-      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop\bin\Release\net7.0\publish\ -o RbfxTemplate.Desktop.zip
+      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ -o RbfxTemplate.${{ env.RUNTIME_ID }}.zip
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -73,6 +87,14 @@ jobs:
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release to itch.io
+      if: ${{ secrets.BUTLER_API_KEY != '' }}
+      run: |
+        export BUTLER_API_KEY=${{ secrets.BUTLER_API_KEY }}
+        dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
+        tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ rebelfork/rbfx-csharp-thirdperson:${{ env.RUNTIME_ID }}
+      shell: bash
 
   build_android:
     needs: set_version
