@@ -53,12 +53,18 @@ jobs:
       shell: bash
       run: |
         echo "OS: $OSTYPE"
-        if [ "$OSTYPE" == "darwin"* ]; then
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+          echo "RUNTIME_ID: osx-x64"
           echo "RUNTIME_ID=osx-x64" >> $GITHUB_ENV
-        elif [ "$OSTYPE" == "linux"* ]; then
+        elif [[ "$OSTYPE" == "linux"* ]]; then
+          echo "RUNTIME_ID: linux-x64"
           echo "RUNTIME_ID=linux-x64" >> $GITHUB_ENV
-        else
+        elif [[ "$OSTYPE" == "msys"* ]]; then
+          echo "RUNTIME_ID: win-x64"
           echo "RUNTIME_ID=win-x64" >> $GITHUB_ENV
+        else
+          echo "Unrecognized OS type $OSTYPE"
+          exit 1
         fi
 
     - name: Setup .NET
@@ -84,7 +90,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          ./RbfxTemplate.Desktop.zip
+          ./RbfxTemplate.${{ env.RUNTIME_ID }}.zip
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
