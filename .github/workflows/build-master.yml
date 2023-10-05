@@ -89,7 +89,8 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Release to itch.io
-      env: BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      env:
+        BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       if: ${{ env.BUTLER_API_KEY != '' }}
       run: |
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
