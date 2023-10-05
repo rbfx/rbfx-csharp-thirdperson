@@ -83,6 +83,14 @@ jobs:
       working-directory: ./RbfxTemplate.Desktop
       run: dotnet publish -f net7.0 -c Release --runtime ${{ env.RUNTIME_ID }} --self-contained true -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
+    - name: Copy runtime dlls
+      if: ${{ env.RUNTIME_ID == 'win-x64' }}
+      run: |
+        copy "C:/Windows/System32/MSVCP140.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
+        copy "C:/Windows/System32/VCRUNTIME140.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
+        copy "C:/Windows/System32/VCRUNTIME140_1.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
+        copy "C:/Windows/System32/D3DCOMPILER_47.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
+
     - name: Zip Package
       run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ -o RbfxTemplate.${{ env.RUNTIME_ID }}.zip
 
