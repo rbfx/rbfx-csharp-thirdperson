@@ -50,11 +50,12 @@ jobs:
         fetch-depth: 1
 
     - name: Evaluate target runtime
+      shell: bash
       run: |
         echo "OS: $OSTYPE"
-        if [[ "$OSTYPE" == "darwin"* ]]; then
+        if [ "$OSTYPE" == "darwin"* ]; then
           echo "RUNTIME_ID=osx-x64" >> $GITHUB_ENV
-        elif [[ "$OSTYPE" == "linux"* ]]; then
+        elif [ "$OSTYPE" == "linux"* ]; then
           echo "RUNTIME_ID=linux-x64" >> $GITHUB_ENV
         else
           echo "RUNTIME_ID=win-x64" >> $GITHUB_ENV
