@@ -177,13 +177,16 @@ jobs:
       with:
         dotnet-version: 7.0.x
 
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
     - name: Restore tools
       run: dotnet tool restore
 
-    - name: Restore dependencies
+    - name: Restore application
       working-directory: ./RbfxTemplate.UWP
-      run: dotnet restore
-
+      run: msbuild RbfxTemplate.UWP.csproj /t:Restore /p:Configuration=Release
+   
     - name: Patch manifest version
       working-directory: ./RbfxTemplate.UWP
       run: dotnet tool run ezpipeline -- set-xml -i Package.appxmanifest -p default:Package/default:Identity -a Version -v ${{ needs.set_version.outputs.BUILD_VERSION }}
