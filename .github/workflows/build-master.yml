@@ -189,7 +189,7 @@ jobs:
    
     - name: Patch manifest version
       working-directory: ./RbfxTemplate.UWP
-      run: dotnet tool run ezpipeline -- set-xml -i Package.appxmanifest -p default:Package/default:Identity -a Version -v ${{ needs.set_version.outputs.BUILD_VERSION }}
+      run: dotnet tool run ezpipeline -- set-xml -i Package.appxmanifest -p default:Package/default:Identity -a Version -v ${{ needs.set_version.outputs.BUILD_VERSION }}.0
 
     - name: Dotnet Publish
       working-directory: ./RbfxTemplate.UWP
