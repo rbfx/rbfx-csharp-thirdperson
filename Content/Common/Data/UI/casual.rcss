@@ -74,14 +74,17 @@ select.blue-button selectvalue
 {
     padding-right: 60px;
 }
-select.blue-button selectbox option:hover
+select.blue-button selectbox option:hover,
+select.blue-button selectbox option:focus
 {
     font-effect: outline(1px #333), shadow(0px 3px #333);
     background: #1E90FF;
 }
 input.blue-button:hover,
+input.blue-button:focus,
 input.blue-button:navigated,
 select.blue-button:hover,
+select.blue-button:focus,
 select.blue-button:navigated
 {
     decorator: ninepatch( blue-button-hover, blue-button-hover-inner, 1.0 );
@@ -91,6 +94,7 @@ select.blue-button:navigated
     padding-left: 12.5px;
 }
 select.blue-button:hover,
+select.blue-button:focus,
 select.blue-button:navigated
 {
     text-align: left;
@@ -168,14 +172,17 @@ select.orange-button selectvalue
 {
     padding-right: 60px;
 }
-select.orange-button selectbox option:hover
+select.orange-button selectbox option:hover,
+select.orange-button selectbox option:focus
 {
     font-effect: outline(1px #333), shadow(0px 3px #333);
     background: #FFA500;
 }
 input.orange-button:hover,
+input.orange-button:focus,
 input.orange-button:navigated,
 select.orange-button:hover,
+select.orange-button:focus,
 select.orange-button:navigated
 {
     decorator: ninepatch( orange-button-hover, orange-button-hover-inner, 1.0 );
@@ -185,6 +192,7 @@ select.orange-button:navigated
     padding-left: 12.5px;
 }
 select.orange-button:hover,
+select.orange-button:focus,
 select.orange-button:navigated
 {
     text-align: left;
@@ -290,6 +298,7 @@ input.blue-checkbox
     padding-left: 12.5px;
 }
 input.blue-checkbox:hover,
+input.blue-checkbox:focus,
 input.blue-checkbox:navigated
 {
     decorator: image( blue-checkbox-hover );
@@ -330,6 +339,7 @@ input.blue-checkbox:checked
     padding-left: 12.5px;
 }
 input.blue-checkbox:checked:hover,
+input.blue-checkbox:checked:focus,
 input.blue-checkbox:checked:navigated
 {
     decorator: image( blue-checkbox-checked-hover );
