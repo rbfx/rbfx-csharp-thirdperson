@@ -8,8 +8,8 @@
 
   <Identity
     Name="39ad144a-075c-4e1b-9d81-1a1e4672a258"
-    Publisher="CN=gleb"
-    Version="1.0.0.0" />
+    Publisher="CN=RbfxTemplate"
+    Version="0.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="39ad144a-075c-4e1b-9d81-1a1e4672a258" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

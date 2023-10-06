@@ -5,6 +5,7 @@ on:
     branches: [ "master", "main" ]
 
 jobs:
+  # ---------------------------------------------------------------------------------------
   set_version:
     runs-on: ubuntu-latest
     steps:
@@ -36,6 +37,7 @@ jobs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
       ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
 
+  # ---------------------------------------------------------------------------------------
   build_desktop:
     needs: set_version
     runs-on: ${{ matrix.os }}
@@ -111,7 +113,7 @@ jobs:
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
         tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ rebelfork/rbfx-csharp-thirdperson:${{ env.RUNTIME_ID }}
       shell: bash
-
+  # ---------------------------------------------------------------------------------------
   build_android:
     needs: set_version
     runs-on: ubuntu-latest
@@ -159,3 +161,56 @@ jobs:
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
         tools/itch/butler push ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk rebelfork/rbfx-csharp-thirdperson:android
       shell: bash
+  # ---------------------------------------------------------------------------------------
+  build_uwp:
+    needs: set_version
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Restore tools
+      run: dotnet tool restore
+
+    - name: Restore dependencies
+      working-directory: ./RbfxTemplate.UWP
+      run: dotnet restore
+
+    - name: Patch manifest version
+      working-directory: ./RbfxTemplate.UWP
+      run: dotnet tool run ezpipeline -- set-xml -i Package.appxmanifest -p default:Package/default:Identity -a Version -v ${{ needs.set_version.outputs.BUILD_VERSION }}
+
+    - name: Dotnet Publish
+      working-directory: ./RbfxTemplate.UWP
+      run: msbuild RbfxTemplate.UWP.csproj \
+        /p:AppxPackageDir=appxupload \
+        /p:AppxBundle=Always \
+        /p:AppxBundlePlatforms="x64" \
+        /p:Platform=x64 \
+        /p:AppxPackageSigningEnabled=false \
+        /p:UapAppxPackageBuildMode=StoreUpload \
+        /p:Configuration=Release \
+        /p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+
+    - name: Zip Package
+      working-directory: ./RbfxTemplate.UWP
+      run: dotnet tool run ezpipeline -- zip -i appxupload/RbfxTemplate.UWP/AppPackages/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}_Test -o RbfxTemplate.UWP.x64.zip
+
+    - name: Release
+      working-directory: ./RbfxTemplate.UWP
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+           appxupload/RbfxTemplate.UWP/AppPackages/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}_x64_bundle.appxupload
+           RbfxTemplate.UWP.x64.zip
+        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        token: ${{ secrets.GITHUB_TOKEN }}
