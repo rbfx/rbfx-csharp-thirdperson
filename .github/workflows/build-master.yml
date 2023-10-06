@@ -193,15 +193,7 @@ jobs:
 
     - name: Dotnet Publish
       working-directory: ./RbfxTemplate.UWP
-      run: msbuild RbfxTemplate.UWP.csproj \
-        /p:AppxPackageDir=appxupload \
-        /p:AppxBundle=Always \
-        /p:AppxBundlePlatforms="x64" \
-        /p:Platform=x64 \
-        /p:AppxPackageSigningEnabled=false \
-        /p:UapAppxPackageBuildMode=StoreUpload \
-        /p:Configuration=Release \
-        /p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+      run: msbuild RbfxTemplate.UWP.csproj /p:AppxPackageDir=appxupload /p:AppxBundle=Always /p:AppxBundlePlatforms="x64" /p:Platform=x64 /p:AppxPackageSigningEnabled=false /p:UapAppxPackageBuildMode=StoreUpload /p:Configuration=Release /p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
     - name: Zip Package
       working-directory: ./RbfxTemplate.UWP
