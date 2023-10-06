@@ -196,13 +196,13 @@ jobs:
       run: msbuild RbfxTemplate.UWP.csproj /p:AppxPackageDir=appxupload /p:AppxBundle=Always /p:AppxBundlePlatforms="x64" /p:Platform=x64 /p:AppxPackageSigningEnabled=false /p:UapAppxPackageBuildMode=StoreUpload /p:Configuration=Release /p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
     - name: Zip Package
-      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_Test -o appxupload/RbfxTemplate.UWP.x64.zip
+      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_Test -o RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP.x64.zip
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-           RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_x64_bundle.appxupload
+           RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_x64_bundle.appxupload
            RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP.x64.zip
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
