@@ -150,3 +150,12 @@ jobs:
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release to itch.io
+      env:
+        BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      if: ${{ env.BUTLER_API_KEY != '' }}
+      run: |
+        dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
+        tools/itch/butler push ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk rebelfork/rbfx-csharp-thirdperson:android
+      shell: bash
