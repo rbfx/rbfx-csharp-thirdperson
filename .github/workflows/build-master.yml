@@ -202,15 +202,14 @@ jobs:
 
     - name: Zip Package
       working-directory: ./RbfxTemplate.UWP
-      run: dotnet tool run ezpipeline -- zip -i appxupload/RbfxTemplate.UWP/AppPackages/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}_Test -o RbfxTemplate.UWP.x64.zip
+      run: dotnet tool run ezpipeline -- zip -i appxupload/RbfxTemplate.UWP/AppPackages/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}_Test -o appxupload/RbfxTemplate.UWP.x64.zip
 
     - name: Release
-      working-directory: ./RbfxTemplate.UWP
       uses: softprops/action-gh-release@v1
       with:
         files: |
-           appxupload/RbfxTemplate.UWP/AppPackages/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}_x64_bundle.appxupload
-           RbfxTemplate.UWP.x64.zip
+           RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP/AppPackages/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}_x64_bundle.appxupload
+           RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP.x64.zip
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
