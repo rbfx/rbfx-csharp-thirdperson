@@ -23,6 +23,10 @@ namespace RbfxTemplate
         /// Current active character state.
         private BaseState _currentState;
 
+        /// <summary>
+        /// Construct Character component.
+        /// </summary>
+        /// <param name="context">Game engine context.</param>
         public Character(Context context) : base(context)
         {
             UpdateEventMask = UpdateEvent.UseUpdate;
@@ -84,10 +88,16 @@ namespace RbfxTemplate
             set => _inputs.Jump = value;
         }
 
+        /// <summary>
+        /// Update character setup.
+        /// </summary>
+        /// <param name="timeStep">Time step.</param>
         public override void Update(float timeStep)
         {
+            // Update camera position and rotation.
             ApplyRotation();
 
+            // Update character state.
             _inputs.TimeStep = timeStep;
             _inputs.InputVelocity = Velocity;
             _inputs.InputSpeed = _inputs.InputVelocity.Length;
@@ -100,44 +110,69 @@ namespace RbfxTemplate
             {
                 _inputs.InputDirection = _inputs.InputVelocity / _inputs.InputSpeed;
             }
-
             _currentState.Update(ref _inputs);
 
+            // Move character based on evaluated linear velocity.
             CharacterController.SetWalkIncrement(_inputs.CurrentVelocity * timeStep);
+
+            // Rotate character model with smoothing.
             RotateModel(timeStep);
 
             base.Update(timeStep);
         }
 
+        /// <summary>
+        /// Transition to the character state with user or AI input.
+        /// </summary>
+        /// <param name="state">Target character state.</param>
+        /// <param name="inputs">User or AI inputs.</param>
         public void TransitionToState(CharacterState state, ref Inputs inputs)
         {
             var targetState = _states[(int)state];
             if (_currentState != targetState)
             {
+                // Notify previous state about transition.
                 if (_currentState != null)
                     _currentState.Exit();
+
+                // Update current state.
                 _currentState = targetState;
+
+                // Notify new state about transition.
                 if (_currentState != null)
                 {
                     _currentState.Enter();
+                    // Allow state to update.
                     _currentState.Update(ref inputs);
                 }
             }
         }
 
+        /// <summary>
+        /// Transition to the character state.
+        /// </summary>
+        /// <param name="state">Target character state.</param>
         public void TransitionToState(CharacterState state)
         {
             var targetState = _states[(int)state];
             if (_currentState != targetState)
             {
+                // Notify previous state about transition.
                 if (_currentState != null)
                     _currentState.Exit();
+
+                // Update current state.
                 _currentState = targetState;
+
+                // Notify new state about transition.
                 if (_currentState != null)
                     _currentState.Enter();
             }
         }
 
+        /// <summary>
+        /// Update character state (stand or crouch).
+        /// </summary>
         private void UpdateHeight()
         {
             if (CharacterController != null)
@@ -155,7 +190,11 @@ namespace RbfxTemplate
             }
         }
 
-
+        /// <summary>
+        /// Evaluate smooth model rotation.
+        /// Character model rotated independently from collision capsule.
+        /// </summary>
+        /// <param name="timeStep">Time step to limit angular speed of model rotation.</param>
         private void RotateModel(float timeStep)
         {
             if (_inputs.CurrentVelocity.LengthSquared > 1e-2f)
@@ -176,6 +215,9 @@ namespace RbfxTemplate
             }
         }
 
+        /// <summary>
+        /// Rotate camera node.
+        /// </summary>
         private void ApplyRotation()
         {
             if (CameraPitch != null)
@@ -183,6 +225,7 @@ namespace RbfxTemplate
             if (CameraYaw != null)
                 CameraYaw.Rotation = new Quaternion(new Vector3(0, GetYaw()));
 
+            // Sphere cast to determine safe camera position.
             if (CameraNode != null)
             {
                 var parent = CameraNode.Parent;
