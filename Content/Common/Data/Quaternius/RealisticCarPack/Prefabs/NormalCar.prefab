@@ -1,0 +1,357 @@
+{
+	"components": [
+		{
+			"_typeName": "Octree"
+		},
+		{
+			"_typeName": "RenderPipeline"
+		},
+		{
+			"_typeName": "ReflectionProbeManager"
+		},
+		{
+			"_typeName": "PhysicsWorld"
+		}
+	],
+	"nodes": [
+		{
+			"attributes": [
+				{
+					"name": "Position",
+					"type": "Vector3",
+					"value": "0 0.068136 0"
+				}
+			],
+			"components": [
+				{
+					"_typeName": "StaticModel",
+					"attributes": [
+						{
+							"name": "Model",
+							"type": "ResourceRef",
+							"value": "Model;Quaternius/RealisticCarPack/Meshes/NormalCar.mdl"
+						},
+						{
+							"name": "Material",
+							"type": "ResourceRefList",
+							"value": "Material;Materials/VertexColor.xml"
+						}
+					]
+				},
+				{
+					"_typeName": "CollisionShape",
+					"attributes": [
+						{
+							"name": "Size",
+							"type": "Vector3",
+							"value": "1.6 1.2 4"
+						},
+						{
+							"name": "Offset Position",
+							"type": "Vector3",
+							"value": "0 0.8 0"
+						}
+					]
+				},
+				{
+					"_typeName": "RigidBody",
+					"attributes": [
+						{
+							"name": "Mass",
+							"type": "Float",
+							"value": 800.0
+						}
+					]
+				}
+			],
+			"nodes": [
+				{
+					"attributes": [
+						{
+							"name": "Name",
+							"type": "String",
+							"value": "WheelPivotFL"
+						},
+						{
+							"name": "Position",
+							"type": "Vector3",
+							"value": "-0.95 0.25 1.36"
+						}
+					],
+					"nodes": [
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "WheelModel"
+								}
+							],
+							"components": [
+								{
+									"_typeName": "StaticModel",
+									"attributes": [
+										{
+											"name": "Model",
+											"type": "ResourceRef",
+											"value": "Model;Quaternius/RealisticCarPack/Meshes/NormalCarWheel.mdl"
+										},
+										{
+											"name": "Material",
+											"type": "ResourceRefList",
+											"value": "Material;Materials/VertexColor.xml"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"attributes": [
+						{
+							"name": "Name",
+							"type": "String",
+							"value": "WheelPivotFR"
+						},
+						{
+							"name": "Position",
+							"type": "Vector3",
+							"value": "0.95 0.249785 1.36"
+						}
+					],
+					"nodes": [
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "WheelModel"
+								},
+								{
+									"name": "Rotation",
+									"type": "Quaternion",
+									"value": "-4.37114e-08 0 1 -0"
+								}
+							],
+							"components": [
+								{
+									"_typeName": "StaticModel",
+									"attributes": [
+										{
+											"name": "Model",
+											"type": "ResourceRef",
+											"value": "Model;Quaternius/RealisticCarPack/Meshes/NormalCarWheel.mdl"
+										},
+										{
+											"name": "Material",
+											"type": "ResourceRefList",
+											"value": "Material;Materials/VertexColor.xml"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"attributes": [
+						{
+							"name": "Name",
+							"type": "String",
+							"value": "WheelPivotBR"
+						},
+						{
+							"name": "Position",
+							"type": "Vector3",
+							"value": "0.95 0.249785 -1.23"
+						}
+					],
+					"nodes": [
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "WheelModel"
+								},
+								{
+									"name": "Rotation",
+									"type": "Quaternion",
+									"value": "-4.37114e-08 0 1 -0"
+								}
+							],
+							"components": [
+								{
+									"_typeName": "StaticModel",
+									"attributes": [
+										{
+											"name": "Model",
+											"type": "ResourceRef",
+											"value": "Model;Quaternius/RealisticCarPack/Meshes/NormalCarWheel.mdl"
+										},
+										{
+											"name": "Material",
+											"type": "ResourceRefList",
+											"value": "Material;Materials/VertexColor.xml"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"attributes": [
+						{
+							"name": "Name",
+							"type": "String",
+							"value": "WheelPivotBL"
+						},
+						{
+							"name": "Position",
+							"type": "Vector3",
+							"value": "-0.95 0.25 -1.23"
+						}
+					],
+					"nodes": [
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "WheelModel"
+								}
+							],
+							"components": [
+								{
+									"_typeName": "StaticModel",
+									"attributes": [
+										{
+											"name": "Model",
+											"type": "ResourceRef",
+											"value": "Model;Quaternius/RealisticCarPack/Meshes/NormalCarWheel.mdl"
+										},
+										{
+											"name": "Material",
+											"type": "ResourceRefList",
+											"value": "Material;Materials/VertexColor.xml"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "String",
+					"value": "Default Skybox"
+				}
+			],
+			"components": [
+				{
+					"_typeName": "Skybox",
+					"attributes": [
+						{
+							"name": "Model",
+							"type": "ResourceRef",
+							"value": "Model;Models/Box.mdl"
+						},
+						{
+							"name": "Material",
+							"type": "ResourceRefList",
+							"value": "Material;Materials/DefaultSkybox.xml"
+						}
+					]
+				}
+			]
+		},
+		{
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "String",
+					"value": "Default Zone"
+				}
+			],
+			"components": [
+				{
+					"_typeName": "Zone",
+					"attributes": [
+						{
+							"name": "Bounding Box Min",
+							"type": "Vector3",
+							"value": "-1000 -1000 -1000"
+						},
+						{
+							"name": "Bounding Box Max",
+							"type": "Vector3",
+							"value": "1000 1000 1000"
+						},
+						{
+							"name": "Ambient Color",
+							"type": "Color",
+							"value": "0 0 0 1"
+						},
+						{
+							"name": "Background Brightness",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"name": "Zone Texture",
+							"type": "ResourceRef",
+							"value": "TextureCube;Textures/DefaultSkybox.xml"
+						}
+					]
+				}
+			]
+		},
+		{
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "String",
+					"value": "Floor"
+				},
+				{
+					"name": "Scale",
+					"type": "Vector3",
+					"value": "10 1 10"
+				}
+			],
+			"components": [
+				{
+					"_typeName": "StaticModel",
+					"attributes": [
+						{
+							"name": "Model",
+							"type": "ResourceRef",
+							"value": "Model;Models/Plane.mdl"
+						},
+						{
+							"name": "Material",
+							"type": "ResourceRefList",
+							"value": "Material;"
+						}
+					]
+				},
+				{
+					"_typeName": "CollisionShape",
+					"attributes": [
+						{
+							"name": "Offset Position",
+							"type": "Vector3",
+							"value": "0 -0.5 0"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -3,8 +3,8 @@
 	<attribute name="Name" value="Sample" />
 	<attribute name="Time Scale" value="1.000000" />
 	<attribute name="Elapsed Time" value="0.000000" />
-	<attribute name="Next Node ID" value="9570" />
-	<attribute name="Next Component ID" value="10915" />
+	<attribute name="Next Node ID" value="9714" />
+	<attribute name="Next Component ID" value="11131" />
 	<attribute name="Variables" />
 	<attribute name="Variable Names" value="" />
 	<attribute name="Lightmaps" value="Texture2D" />
@@ -311,6 +311,76 @@
 			<attribute name="Scale" value="1 1 1" />
 			<attribute name="Variables" />
 			<component type="PrefabReference" id="8239">
+				<attribute name="Prefab" value="PrefabResource;Quaternius/UltimateModularSciFiPack/Prefabs/FloorTile_Basic.prefab" />
+			</component>
+		</node>
+		<node id="9682">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="FloorTile_Basic" />
+			<attribute name="Tags">
+				<string value="Untagged" />
+			</attribute>
+			<attribute name="Position" value="15 0 -5" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="PrefabReference" id="11093">
+				<attribute name="Prefab" value="PrefabResource;Quaternius/UltimateModularSciFiPack/Prefabs/FloorTile_Basic.prefab" />
+			</component>
+		</node>
+		<node id="9683">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="FloorTile_Basic" />
+			<attribute name="Tags">
+				<string value="Untagged" />
+			</attribute>
+			<attribute name="Position" value="15 0 5" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="PrefabReference" id="11097">
+				<attribute name="Prefab" value="PrefabResource;Quaternius/UltimateModularSciFiPack/Prefabs/FloorTile_Basic.prefab" />
+			</component>
+		</node>
+		<node id="9684">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="FloorTile_Basic" />
+			<attribute name="Tags">
+				<string value="Untagged" />
+			</attribute>
+			<attribute name="Position" value="20 0 0" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="PrefabReference" id="11101">
+				<attribute name="Prefab" value="PrefabResource;Quaternius/UltimateModularSciFiPack/Prefabs/FloorTile_Basic.prefab" />
+			</component>
+		</node>
+		<node id="9685">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="FloorTile_Basic" />
+			<attribute name="Tags">
+				<string value="Untagged" />
+			</attribute>
+			<attribute name="Position" value="20 0 5" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="PrefabReference" id="11105">
+				<attribute name="Prefab" value="PrefabResource;Quaternius/UltimateModularSciFiPack/Prefabs/FloorTile_Basic.prefab" />
+			</component>
+		</node>
+		<node id="9686">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="FloorTile_Basic" />
+			<attribute name="Tags">
+				<string value="Untagged" />
+			</attribute>
+			<attribute name="Position" value="20 0 -5" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="PrefabReference" id="11109">
 				<attribute name="Prefab" value="PrefabResource;Quaternius/UltimateModularSciFiPack/Prefabs/FloorTile_Basic.prefab" />
 			</component>
 		</node>
@@ -1000,6 +1070,18 @@
 		<component type="CollisionShape" id="8955" />
 		<component type="RigidBody" id="8956">
 			<attribute name="Physics Position" value="4.10768 0.236873 0.401472" />
+		</component>
+	</node>
+	<node id="9687">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="NormalCar" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="20 0.3 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="PrefabReference" id="11120">
+			<attribute name="Prefab" value="PrefabResource;Quaternius/RealisticCarPack/Prefabs/NormalCar.prefab" />
 		</component>
 	</node>
 </scene>
