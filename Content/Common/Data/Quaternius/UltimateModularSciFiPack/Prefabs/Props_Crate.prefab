@@ -36,6 +36,7 @@
 						<attribute name="Cast Shadows" type="Bool" value="true" />
 					</attributes>
 				</component>
+				<component _typeName="Selectable" />
 			</components>
 		</node>
 	</nodes>

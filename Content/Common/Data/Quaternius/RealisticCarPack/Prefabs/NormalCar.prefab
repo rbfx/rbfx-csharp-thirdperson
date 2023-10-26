@@ -17,6 +17,11 @@
 		{
 			"attributes": [
 				{
+					"name": "Name",
+					"type": "String",
+					"value": "Car"
+				},
+				{
 					"name": "Position",
 					"type": "Vector3",
 					"value": "0 0.068136 0"

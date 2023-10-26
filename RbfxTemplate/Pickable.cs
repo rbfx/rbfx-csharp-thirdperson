@@ -10,7 +10,7 @@ namespace RbfxTemplate
         {
         }
 
-        public string InventoryKey { get; set; }
+        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Inventory Key")] public string InventoryKey { get; set; } = string.Empty;
 
         protected override void OnNodeSet(Node previousNode, Node currentNode)
         {

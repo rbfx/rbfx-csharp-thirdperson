@@ -3,8 +3,8 @@
 	<attribute name="Name" value="Sample" />
 	<attribute name="Time Scale" value="1.000000" />
 	<attribute name="Elapsed Time" value="0.000000" />
-	<attribute name="Next Node ID" value="9714" />
-	<attribute name="Next Component ID" value="11131" />
+	<attribute name="Next Node ID" value="10705" />
+	<attribute name="Next Component ID" value="12772" />
 	<attribute name="Variables" />
 	<attribute name="Variable Names" value="" />
 	<attribute name="Lightmaps" value="Texture2D" />
@@ -750,6 +750,11 @@
 						<attribute name="Physics Rotation" value="0.707107 0 0.707107 0" />
 						<attribute name="Physics Position" value="12.2971 1.5 1.73917" />
 					</component>
+					<component type="Selectable" id="12141" />
+					<component type="DoorButton" id="12165">
+						<attribute name="Open Animation" value="Animation;Animations/SlidingDoor/Open.xml" />
+						<attribute name="Close Animation" value="Animation;Animations/SlidingDoor/Close.xml" />
+					</component>
 				</node>
 			</node>
 			<node id="7765">
@@ -1071,6 +1076,10 @@
 		<component type="RigidBody" id="8956">
 			<attribute name="Physics Position" value="4.10768 0.236873 0.401472" />
 		</component>
+		<component type="Pickable" id="12140">
+			<attribute name="Inventory Key" value="RedKey" />
+		</component>
+		<component type="Selectable" id="12164" />
 	</node>
 	<node id="9687">
 		<attribute name="Is Enabled" value="true" />
@@ -1082,6 +1091,23 @@
 		<attribute name="Variables" />
 		<component type="PrefabReference" id="11120">
 			<attribute name="Prefab" value="PrefabResource;Quaternius/RealisticCarPack/Prefabs/NormalCar.prefab" />
+		</component>
+	</node>
+	<node id="10319">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="SafeFloor" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="0 -50 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="100 100 100" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="12129">
+			<attribute name="Model" value="Model;Models/Box.mdl" />
+			<attribute name="Material" value="Material;" />
+		</component>
+		<component type="CollisionShape" id="12130" />
+		<component type="RigidBody" id="12131">
+			<attribute name="Physics Position" value="0 -50 0" />
 		</component>
 	</node>
 </scene>

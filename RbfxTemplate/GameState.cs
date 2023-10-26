@@ -25,21 +25,6 @@ namespace RbfxTemplate
             _scene = Context.CreateObject<Scene>();
             _scene.Ptr.LoadXML("Scenes/Sample.xml");
 
-            var selectables = _scene.Ptr.GetChildrenWithTag("Selectable", true);
-            foreach (var box in selectables) box.CreateComponent<Selectable>();
-
-            {
-                var doorButtons = _scene.Ptr.GetChildrenWithTag("DoorButton", true);
-                var openAnimation = Context.ResourceCache.GetResource<Animation>("Animations/SlidingDoor/Open.xml");
-                var closeAnimation = Context.ResourceCache.GetResource<Animation>("Animations/SlidingDoor/Close.xml");
-                foreach (var box in doorButtons)
-                {
-                    var c = box.CreateComponent<DoorButton>();
-                    c.OpenAnimation = openAnimation;
-                    c.CloseAnimation = closeAnimation;
-                }
-            }
-
             {
                 var doorKeys = _scene.Ptr.GetChildrenWithTag("DoorKey", true);
                 foreach (var box in doorKeys)
