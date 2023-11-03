@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RBFX Editor": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "tool run rbfx $(MSBuildProjectDirectory)/../Content/Common --plugin $(TargetDir)$(TargetFileName)",
+      "nativeDebugging": true
+    }
+  }
+}

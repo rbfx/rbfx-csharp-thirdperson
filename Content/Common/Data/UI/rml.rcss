@@ -104,8 +104,5 @@ thead, tbody, tfoot
 }
 input
 {
-    nav-up: auto;
-    nav-down: auto;
-    nav-left: auto;
-    nav-right: auto;
+    nav: auto;
 }

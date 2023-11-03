@@ -112,5 +112,10 @@ namespace RbfxTemplate
         {
             return _inventory.Contains(inventoryKey);
         }
+
+        public void GetIntoVehicle(Vehicle vehicle)
+        {
+            
+        }
     }
 }

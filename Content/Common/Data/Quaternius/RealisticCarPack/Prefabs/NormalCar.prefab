@@ -67,6 +67,12 @@
 							"value": 800.0
 						}
 					]
+				},
+				{
+					"_typeName": "Vehicle"
+				},
+				{
+					"_typeName": "Selectable"
 				}
 			],
 			"nodes": [
