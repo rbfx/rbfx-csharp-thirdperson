@@ -26,6 +26,11 @@
         Fall,
 
         /// <summary>
+        ///     Character is in vehicle.
+        /// </summary>
+        InVehicle,
+
+        /// <summary>
         ///     Total number of valid states.
         ///     This should be the last state!
         /// </summary>

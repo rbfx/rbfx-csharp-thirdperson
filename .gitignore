@@ -263,4 +263,4 @@ launchSettings.json
 Shaders.Generated
 
 # RBFX Editor sattelite files
-.user.json
+*.user.json

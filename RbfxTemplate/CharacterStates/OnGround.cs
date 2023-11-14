@@ -23,8 +23,9 @@ namespace RbfxTemplate.CharacterStates
         {
         }
 
+        /// <param name="argument"></param>
         /// <inheritdoc />
-        public override void Enter()
+        public override void Enter(object argument)
         {
             _inAirTimer = 0.0f;
             _currentAnimation = null;
@@ -32,7 +33,7 @@ namespace RbfxTemplate.CharacterStates
         }
 
         /// <inheritdoc />
-        public override void Update(ref Character.Inputs inputs)
+        public override void Update(Character.Inputs inputs)
         {
             if (!Character.CharacterController.OnGround())
                 _inAirTimer += inputs.TimeStep;
@@ -72,7 +73,7 @@ namespace RbfxTemplate.CharacterStates
             inputs.CurrentVelocity = new Quaternion(0, Character.GetYaw(), 0) * (inputs.InputDirection * _speed);
 
             _jumpTimeout -= inputs.TimeStep;
-            if (inputs.Jump && _jumpTimeout <= 0) Character.TransitionToState(CharacterState.Jump);
+            if (inputs.Jump && _jumpTimeout <= 0) Character.TransitionToState(CharacterState.Jump, null);
         }
     }
 }

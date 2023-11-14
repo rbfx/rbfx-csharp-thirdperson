@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RbfxTemplate.CharacterStates;
 using Urho3DNet;
 
 namespace RbfxTemplate
@@ -64,6 +65,12 @@ namespace RbfxTemplate
                 _usePressed = usePressed;
                 if (_usePressed)
                 {
+                    if (_character.State == CharacterState.InVehicle)
+                    {
+                        _character.TransitionToState(CharacterState.Start);
+                        return;
+                    }
+
                     BodyInArms = null;
                     if (SelectedNode != null)
                     {
@@ -115,7 +122,7 @@ namespace RbfxTemplate
 
         public void GetIntoVehicle(Vehicle vehicle)
         {
-            
+            _character.TransitionToState(CharacterState.InVehicle, vehicle);
         }
     }
 }

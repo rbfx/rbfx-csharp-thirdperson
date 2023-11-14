@@ -8,9 +8,9 @@ namespace RbfxTemplate.CharacterStates
         {
         }
 
-        public override void Enter()
+        public override void Enter(object argument)
         {
-            base.Enter();
+            base.Enter(argument);
             Character.CharacterController.Jump(new Vector3(0, 7.5f, 0));
         }
     }

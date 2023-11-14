@@ -12,14 +12,14 @@ namespace RbfxTemplate.CharacterStates
         {
         }
 
-        public override void Enter()
+        public override void Enter(object argument)
         {
             firstFrame_ = true;
             var animationParameters = new AnimationParameters(Character.Falling).Looped();
             Character.AnimationController.PlayNewExclusive(animationParameters, 0.2f);
         }
 
-        public override void Update(ref Character.Inputs inputs)
+        public override void Update(Character.Inputs inputs)
         {
             if (Character.CharacterController.OnGround())
             {

@@ -6,7 +6,7 @@
         {
         }
 
-        public override void Update(ref Character.Inputs inputs)
+        public override void Update(Character.Inputs inputs)
         {
             if (Character.CharacterController.OnGround())
                 Character.TransitionToState(CharacterState.OnGround, ref inputs);

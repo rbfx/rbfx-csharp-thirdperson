@@ -1,4 +1,6 @@
-﻿namespace RbfxTemplate.CharacterStates
+﻿using Urho3DNet;
+
+namespace RbfxTemplate.CharacterStates
 {
     /// <summary>
     ///     Base class for character state.
@@ -22,7 +24,8 @@
         /// <summary>
         ///     Executes when the state becomes active.
         /// </summary>
-        public virtual void Enter()
+        /// <param name="argument"></param>
+        public virtual void Enter(object argument)
         {
         }
 
@@ -36,8 +39,9 @@
         /// <summary>
         ///     Update state.
         /// </summary>
-        public virtual void Update(ref Character.Inputs inputs)
+        public virtual void Update(Character.Inputs _inputs)
         {
+
         }
     }
 }

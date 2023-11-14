@@ -125,6 +125,7 @@ namespace RbfxTemplate
             player.Walk = Context.ResourceCache.GetResource<Animation>("Animations/Walking.ani");
             player.Run = Context.ResourceCache.GetResource<Animation>("Animations/Running.ani");
             player.Falling = Context.ResourceCache.GetResource<Animation>("Animations/FallingIdle.ani");
+            player.Drive = Context.ResourceCache.GetResource<Animation>("Animations/Driving.ani");
             return player;
         }
 

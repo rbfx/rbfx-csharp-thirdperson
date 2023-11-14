@@ -24,7 +24,12 @@
 				{
 					"name": "Position",
 					"type": "Vector3",
-					"value": "0 0.068136 0"
+					"value": "-0.035564 0.093702 0.000614"
+				},
+				{
+					"name": "Rotation",
+					"type": "Quaternion",
+					"value": "0.999992 -0.003756 0.001658 6.54308e-06"
 				}
 			],
 			"components": [
@@ -40,6 +45,11 @@
 							"name": "Material",
 							"type": "ResourceRefList",
 							"value": "Material;Materials/VertexColor.xml"
+						},
+						{
+							"name": "Cast Shadows",
+							"type": "Bool",
+							"value": true
 						}
 					]
 				},
@@ -65,14 +75,24 @@
 							"name": "Mass",
 							"type": "Float",
 							"value": 800.0
+						},
+						{
+							"name": "Linear Damping",
+							"type": "Float",
+							"value": 0.20000000298023225
+						},
+						{
+							"name": "Angular Damping",
+							"type": "Float",
+							"value": 0.5
 						}
 					]
 				},
 				{
-					"_typeName": "Vehicle"
+					"_typeName": "RaycastVehicle"
 				},
 				{
-					"_typeName": "Selectable"
+					"_typeName": "Vehicle"
 				}
 			],
 			"nodes": [
@@ -86,7 +106,74 @@
 						{
 							"name": "Position",
 							"type": "Vector3",
-							"value": "-0.95 0.25 1.36"
+							"value": "-0.95 0.216086 1.36"
+						},
+						{
+							"name": "Rotation",
+							"type": "Quaternion",
+							"value": "1 4.91748e-20 5.30906e-10 9.26242e-11"
+						}
+					],
+					"components": [
+						{
+							"_typeName": "RaycastVehicleWheel",
+							"attributes": [
+								{
+									"name": "Connection Point",
+									"type": "Vector3",
+									"value": "-0.95 -0.45 1.361503"
+								},
+								{
+									"name": "Rotation",
+									"type": "Quaternion",
+									"value": "1 6.5609e-20 6.97577e-10 9.40528e-11"
+								},
+								{
+									"name": "Axle",
+									"type": "Vector3",
+									"value": "-1 0 0"
+								},
+								{
+									"name": "Radius",
+									"type": "Float",
+									"value": 0.3199999928474426
+								},
+								{
+									"name": "Steering Factor",
+									"type": "Float",
+									"value": 1.0
+								},
+								{
+									"name": "Suspension Stiffness",
+									"type": "Float",
+									"value": 28.0
+								},
+								{
+									"name": "Damping Compression",
+									"type": "Float",
+									"value": 4.0
+								},
+								{
+									"name": "Damping Relaxation",
+									"type": "Float",
+									"value": 2.0
+								},
+								{
+									"name": "Is In Contact",
+									"type": "Bool",
+									"value": true
+								},
+								{
+									"name": "Contact Position",
+									"type": "Vector3",
+									"value": "-0.981046 6.02752e-06 1.3645"
+								},
+								{
+									"name": "Contact Normal",
+									"type": "Vector3",
+									"value": "1.0105e-06 1 0"
+								}
+							]
 						}
 					],
 					"nodes": [
@@ -110,7 +197,12 @@
 										{
 											"name": "Material",
 											"type": "ResourceRefList",
-											"value": "Material;Materials/VertexColor.xml"
+											"value": "Material;"
+										},
+										{
+											"name": "Cast Shadows",
+											"type": "Bool",
+											"value": true
 										}
 									]
 								}
@@ -128,7 +220,74 @@
 						{
 							"name": "Position",
 							"type": "Vector3",
-							"value": "0.95 0.249785 1.36"
+							"value": "0.95 0.216089 1.36"
+						},
+						{
+							"name": "Rotation",
+							"type": "Quaternion",
+							"value": "1 6.70131e-22 3.12463e-10 2.14467e-12"
+						}
+					],
+					"components": [
+						{
+							"_typeName": "RaycastVehicleWheel",
+							"attributes": [
+								{
+									"name": "Connection Point",
+									"type": "Vector3",
+									"value": "0.95 -0.45 1.36"
+								},
+								{
+									"name": "Rotation",
+									"type": "Quaternion",
+									"value": "1 1.86191e-21 3.49244e-10 5.33124e-12"
+								},
+								{
+									"name": "Axle",
+									"type": "Vector3",
+									"value": "-1 0 0"
+								},
+								{
+									"name": "Radius",
+									"type": "Float",
+									"value": 0.3199999928474426
+								},
+								{
+									"name": "Steering Factor",
+									"type": "Float",
+									"value": 1.0
+								},
+								{
+									"name": "Suspension Stiffness",
+									"type": "Float",
+									"value": 28.0
+								},
+								{
+									"name": "Damping Compression",
+									"type": "Float",
+									"value": 4.0
+								},
+								{
+									"name": "Damping Relaxation",
+									"type": "Float",
+									"value": 2.0
+								},
+								{
+									"name": "Is In Contact",
+									"type": "Bool",
+									"value": true
+								},
+								{
+									"name": "Contact Position",
+									"type": "Vector3",
+									"value": "0.918944 1.01104e-05 1.358199"
+								},
+								{
+									"name": "Contact Normal",
+									"type": "Vector3",
+									"value": "6.73667e-07 1 2.021e-06"
+								}
+							]
 						}
 					],
 					"nodes": [
@@ -157,7 +316,12 @@
 										{
 											"name": "Material",
 											"type": "ResourceRefList",
-											"value": "Material;Materials/VertexColor.xml"
+											"value": "Material;"
+										},
+										{
+											"name": "Cast Shadows",
+											"type": "Bool",
+											"value": true
 										}
 									]
 								}
@@ -175,7 +339,173 @@
 						{
 							"name": "Position",
 							"type": "Vector3",
-							"value": "0.95 0.249785 -1.23"
+							"value": "-0.95 0.23554 -1.23"
+						},
+						{
+							"name": "Rotation",
+							"type": "Quaternion",
+							"value": "1 -1.22516e-21 4.19238e-10 -2.92236e-12"
+						}
+					],
+					"components": [
+						{
+							"_typeName": "RaycastVehicleWheel",
+							"attributes": [
+								{
+									"name": "Connection Point",
+									"type": "Vector3",
+									"value": "-0.95 -0.45 -1.23"
+								},
+								{
+									"name": "Rotation",
+									"type": "Quaternion",
+									"value": "1 1.21932e-21 3.49245e-10 3.4913e-12"
+								},
+								{
+									"name": "Axle",
+									"type": "Vector3",
+									"value": "-1 0 0"
+								},
+								{
+									"name": "Radius",
+									"type": "Float",
+									"value": 0.3199999928474426
+								},
+								{
+									"name": "Suspension Stiffness",
+									"type": "Float",
+									"value": 28.0
+								},
+								{
+									"name": "Damping Compression",
+									"type": "Float",
+									"value": 4.0
+								},
+								{
+									"name": "Damping Relaxation",
+									"type": "Float",
+									"value": 2.0
+								},
+								{
+									"name": "Is In Contact",
+									"type": "Bool",
+									"value": true
+								},
+								{
+									"name": "Contact Position",
+									"type": "Vector3",
+									"value": "-0.989635 2.68966e-06 -1.225559"
+								},
+								{
+									"name": "Contact Normal",
+									"type": "Vector3",
+									"value": "0 1 -7.1286e-07"
+								}
+							]
+						}
+					],
+					"nodes": [
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "WheelModel"
+								}
+							],
+							"components": [
+								{
+									"_typeName": "StaticModel",
+									"attributes": [
+										{
+											"name": "Model",
+											"type": "ResourceRef",
+											"value": "Model;Quaternius/RealisticCarPack/Meshes/NormalCarWheel.mdl"
+										},
+										{
+											"name": "Material",
+											"type": "ResourceRefList",
+											"value": "Material;"
+										},
+										{
+											"name": "Cast Shadows",
+											"type": "Bool",
+											"value": true
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"attributes": [
+						{
+							"name": "Name",
+							"type": "String",
+							"value": "WheelPivotBL"
+						},
+						{
+							"name": "Position",
+							"type": "Vector3",
+							"value": "0.95 0.235538 -1.23"
+						},
+						{
+							"name": "Rotation",
+							"type": "Quaternion",
+							"value": "1 -6.40721e-23 7.52112e-11 -8.51896e-13"
+						}
+					],
+					"components": [
+						{
+							"_typeName": "RaycastVehicleWheel",
+							"attributes": [
+								{
+									"name": "Connection Point",
+									"type": "Vector3",
+									"value": "0.95 -0.45 -1.23"
+								},
+								{
+									"name": "Axle",
+									"type": "Vector3",
+									"value": "-1 0 0"
+								},
+								{
+									"name": "Radius",
+									"type": "Float",
+									"value": 0.3199999928474426
+								},
+								{
+									"name": "Suspension Stiffness",
+									"type": "Float",
+									"value": 28.0
+								},
+								{
+									"name": "Damping Compression",
+									"type": "Float",
+									"value": 4.0
+								},
+								{
+									"name": "Damping Relaxation",
+									"type": "Float",
+									"value": 2.0
+								},
+								{
+									"name": "Is In Contact",
+									"type": "Bool",
+									"value": true
+								},
+								{
+									"name": "Contact Position",
+									"type": "Vector3",
+									"value": "0.910354 2.11596e-06 -1.23186"
+								},
+								{
+									"name": "Contact Normal",
+									"type": "Vector3",
+									"value": "-3.56429e-07 1 0"
+								}
+							]
 						}
 					],
 					"nodes": [
@@ -204,49 +534,12 @@
 										{
 											"name": "Material",
 											"type": "ResourceRefList",
-											"value": "Material;Materials/VertexColor.xml"
-										}
-									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"attributes": [
-						{
-							"name": "Name",
-							"type": "String",
-							"value": "WheelPivotBL"
-						},
-						{
-							"name": "Position",
-							"type": "Vector3",
-							"value": "-0.95 0.25 -1.23"
-						}
-					],
-					"nodes": [
-						{
-							"attributes": [
-								{
-									"name": "Name",
-									"type": "String",
-									"value": "WheelModel"
-								}
-							],
-							"components": [
-								{
-									"_typeName": "StaticModel",
-									"attributes": [
-										{
-											"name": "Model",
-											"type": "ResourceRef",
-											"value": "Model;Quaternius/RealisticCarPack/Meshes/NormalCarWheel.mdl"
+											"value": "Material;"
 										},
 										{
-											"name": "Material",
-											"type": "ResourceRefList",
-											"value": "Material;Materials/VertexColor.xml"
+											"name": "Cast Shadows",
+											"type": "Bool",
+											"value": true
 										}
 									]
 								}
@@ -333,7 +626,7 @@
 				{
 					"name": "Scale",
 					"type": "Vector3",
-					"value": "10 1 10"
+					"value": "100 1 100"
 				}
 			],
 			"components": [
@@ -349,6 +642,11 @@
 							"name": "Material",
 							"type": "ResourceRefList",
 							"value": "Material;"
+						},
+						{
+							"name": "Cast Shadows",
+							"type": "Bool",
+							"value": true
 						}
 					]
 				},
@@ -361,6 +659,9 @@
 							"value": "0 -0.5 0"
 						}
 					]
+				},
+				{
+					"_typeName": "RigidBody"
 				}
 			]
 		}

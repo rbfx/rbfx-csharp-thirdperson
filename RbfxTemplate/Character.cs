@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Urho3DNet;
 using RbfxTemplate.CharacterStates;
 
@@ -15,13 +16,20 @@ namespace RbfxTemplate
         private readonly PhysicsRaycastResult _physicsRaycastResult = new PhysicsRaycastResult();
 
         /// Character state input.
-        private Inputs _inputs;
+        private Inputs _inputs = new Inputs();
 
         /// Kinematic character controller.
         private KinematicCharacterController _characterController;
 
+        /// <summary>
         /// Current active character state.
+        /// </summary>
         private BaseState _currentState;
+
+        /// <summary>
+        /// Index of the current state.
+        /// </summary>
+        private CharacterState _state = CharacterState.NumStates;
 
         /// <summary>
         /// Construct Character component.
@@ -35,9 +43,10 @@ namespace RbfxTemplate
                 new StartState(this),
                 new OnGround(this),
                 new JumpState(this),
-                new Fall(this)
+                new Fall(this),
+                new InVehicle(this),
             };
-            TransitionToState(CharacterState.Start);
+            TransitionToState(CharacterState.Start, null);
         }
 
         public KinematicCharacterController CharacterController
@@ -57,10 +66,9 @@ namespace RbfxTemplate
         public Node ModelPivot { get; set; }
         public Node CameraYaw { get; set; }
         public Node CameraPitch { get; set; }
-
         public Animation Idle { get; set; }
-
         public Animation Walk { get; set; }
+        public Animation Drive { get; set; }
         public Node CameraNode { get; set; }
 
         public float CameraDistance { get; set; } = 1.4f;
@@ -89,6 +97,11 @@ namespace RbfxTemplate
         }
 
         /// <summary>
+        /// Current character state index.
+        /// </summary>
+        public CharacterState State => _state;
+
+        /// <summary>
         /// Update character setup.
         /// </summary>
         /// <param name="timeStep">Time step.</param>
@@ -110,7 +123,8 @@ namespace RbfxTemplate
             {
                 _inputs.InputDirection = _inputs.InputVelocity / _inputs.InputSpeed;
             }
-            _currentState.Update(ref _inputs);
+
+            _currentState.Update(_inputs);
 
             // Move character based on evaluated linear velocity.
             CharacterController.SetWalkIncrement(_inputs.CurrentVelocity * timeStep);
@@ -137,13 +151,14 @@ namespace RbfxTemplate
 
                 // Update current state.
                 _currentState = targetState;
+                _state = state;
 
                 // Notify new state about transition.
                 if (_currentState != null)
                 {
-                    _currentState.Enter();
+                    _currentState.Enter(null);
                     // Allow state to update.
-                    _currentState.Update(ref inputs);
+                    _currentState.Update(inputs);
                 }
             }
         }
@@ -152,7 +167,7 @@ namespace RbfxTemplate
         /// Transition to the character state.
         /// </summary>
         /// <param name="state">Target character state.</param>
-        public void TransitionToState(CharacterState state)
+        public void TransitionToState(CharacterState state, object argument = null)
         {
             var targetState = _states[(int)state];
             if (_currentState != targetState)
@@ -163,10 +178,11 @@ namespace RbfxTemplate
 
                 // Update current state.
                 _currentState = targetState;
+                _state = state;
 
                 // Notify new state about transition.
                 if (_currentState != null)
-                    _currentState.Enter();
+                    _currentState.Enter(argument);
             }
         }
 
@@ -233,10 +249,14 @@ namespace RbfxTemplate
                 if (physicsWorld != null)
                 {
                     var ray = new Ray(parent.WorldPosition, -parent.WorldDirection);
-                    var target = ray.Origin + ray.Direction * CameraDistance;
-                    physicsWorld.SphereCast(_physicsRaycastResult, ray, 0.1f, CameraDistance, CameraCollisionMask);
-                    var distance = Math.Min(CameraDistance, _physicsRaycastResult.Distance);
-                    if (CameraYaw != null && distance < CameraDistance - 1e-6f)
+
+                    var cameraDistance = CameraDistance;
+                    if (State == CharacterState.InVehicle)
+                        cameraDistance *= 2.0f;
+                    var target = ray.Origin + ray.Direction * cameraDistance;
+                    physicsWorld.SphereCast(_physicsRaycastResult, ray, 0.1f, cameraDistance, CameraCollisionMask);
+                    var distance = Math.Min(cameraDistance, _physicsRaycastResult.Distance);
+                    if (CameraYaw != null && distance < cameraDistance - 1e-6f)
                     {
                         var from = CameraYaw.WorldPosition;
                         var diff = target - from;
@@ -251,9 +271,18 @@ namespace RbfxTemplate
         }
 
         /// <summary>
+        /// Enable or disable character controller physics.
+        /// </summary>
+        /// <param name="enable"></param>
+        public void SetPhysicsEnabled(bool enable)
+        {
+            CharacterController.IsEnabled = enable;
+        }
+
+        /// <summary>
         ///     Input data for state.
         /// </summary>
-        public struct Inputs
+        public class Inputs
         {
             /// Current frame time step.
             public float TimeStep;
