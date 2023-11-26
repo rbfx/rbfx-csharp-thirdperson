@@ -111,7 +111,7 @@ jobs:
       if: ${{ env.BUTLER_API_KEY != '' }}
       run: |
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
-        tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ rebelfork/rbfx-csharp-thirdperson:${{ env.RUNTIME_ID }}
+        tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ ${{ env.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_android:
@@ -159,7 +159,7 @@ jobs:
       if: ${{ env.BUTLER_API_KEY != '' }}
       run: |
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
-        tools/itch/butler push ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk rebelfork/rbfx-csharp-thirdperson:android
+        tools/itch/butler push ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk ${{ env.ITCH_PROJECT }}:android
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_uwp:
