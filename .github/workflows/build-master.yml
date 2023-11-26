@@ -4,9 +4,6 @@ on:
   push:
     branches: [ "master", "main" ]
 
-env:
-  ITCH_PROJECT: ''
-
 jobs:
   # ---------------------------------------------------------------------------------------
   set_version:
@@ -108,14 +105,13 @@ jobs:
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Release to itch.io ${{ env.ITCH_PROJECT }}
+    - name: Release to itch.io ${{ vars.ITCH_PROJECT }}
       env:
         BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        ITCH_PROJECT: ${{ env.ITCH_PROJECT }}
-      if: ${{ env.BUTLER_API_KEY != '' && env.ITCH_PROJECT != '' }}
+      if: ${{ env.BUTLER_API_KEY != '' && vars.ITCH_PROJECT != '' }}
       run: |
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
-        tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ ${{ env.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
+        tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ ${{ vars.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_android:
@@ -157,14 +153,13 @@ jobs:
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Release to itch.io ${{ env.ITCH_PROJECT }}
+    - name: Release to itch.io ${{ vars.ITCH_PROJECT }}
       env:
         BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        ITCH_PROJECT: ${{ env.ITCH_PROJECT }}
-      if: ${{ env.BUTLER_API_KEY != '' && env.ITCH_PROJECT != '' }}
+      if: ${{ env.BUTLER_API_KEY != '' && vars.ITCH_PROJECT != '' }}
       run: |
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
-        tools/itch/butler push ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk ${{ env.ITCH_PROJECT }}:android
+        tools/itch/butler push ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk ${{ vars.ITCH_PROJECT }}:android
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_uwp:
