@@ -21,6 +21,10 @@
     gray-inner-panel-inner: 137px 31px 2px 2px;
     gray-outer-panel: 4px 4px 100px 106px;
     gray-outer-panel-inner: 53px 55px 2px 2px;
+    gray-header-panel: 396px 70px 4px 10px;
+    gray-header-panel-inner: 397px 73px 2px 2px;
+    gray-footer-panel: 408px 70px 4px 8px;
+    gray-footer-panel-inner: 409px 73px 2px 2px;
     slidertrack: 182px 70px 14px 22px;
     slidertrack-inner: 188px 80px 2px 2px;
     sliderbar: 204px 70px 16px 28px;
@@ -38,9 +42,11 @@
     blue-slider-sliderbar: 146px 70px 28px 40px;
     blue-slider-sliderbar-inner: 159px 87px 2px 2px;
     selectarrow: 228px 70px 20px 20px;
-    icon-settings: 256px 70px 20px 20px;
-    icon-xbox: 284px 70px 20px 20px;
-    icon-discord: 312px 70px 20px 20px;
+    icon-diamond: 256px 70px 20px 20px;
+    icon-money: 284px 70px 20px 20px;
+    icon-settings: 312px 70px 20px 20px;
+    icon-xbox: 340px 70px 20px 20px;
+    icon-discord: 368px 70px 20px 20px;
 
 }
 input.blue-button,
@@ -74,18 +80,15 @@ select.blue-button selectvalue
 {
     padding-right: 60px;
 }
-select.blue-button selectbox option:hover,
-select.blue-button selectbox option:focus
+select.blue-button selectbox option:hover
 {
     font-effect: outline(1px #333), shadow(0px 3px #333);
     background: #1E90FF;
 }
 input.blue-button:hover,
-input.blue-button:focus,
-input.blue-button:navigated,
+input.blue-button:focus-visible,
 select.blue-button:hover,
-select.blue-button:focus,
-select.blue-button:navigated
+select.blue-button:focus-visible
 {
     decorator: ninepatch( blue-button-hover, blue-button-hover-inner, 1.0 );
     padding-top: 12.5px;
@@ -94,8 +97,7 @@ select.blue-button:navigated
     padding-left: 12.5px;
 }
 select.blue-button:hover,
-select.blue-button:focus,
-select.blue-button:navigated
+select.blue-button:focus-visible
 {
     text-align: left;
     padding-top: 12.5px;
@@ -104,9 +106,7 @@ select.blue-button:navigated
     padding-left: 12.5px;
 }
 input.blue-button:active,
-input.blue-button:pressed,
-select.blue-button:active,
-select.blue-button:pressed
+select.blue-button:active
 {
     decorator: ninepatch( blue-button-active, blue-button-active-inner, 1.0 );
     padding-top: 18.5px;
@@ -114,8 +114,7 @@ select.blue-button:pressed
     padding-bottom: 18.5px;
     padding-left: 12.5px;
 }
-select.blue-button:active,
-select.blue-button:pressed
+select.blue-button:active
 {
     text-align: left;
     padding-top: 18.5px;
@@ -172,18 +171,15 @@ select.orange-button selectvalue
 {
     padding-right: 60px;
 }
-select.orange-button selectbox option:hover,
-select.orange-button selectbox option:focus
+select.orange-button selectbox option:hover
 {
     font-effect: outline(1px #333), shadow(0px 3px #333);
     background: #FFA500;
 }
 input.orange-button:hover,
-input.orange-button:focus,
-input.orange-button:navigated,
+input.orange-button:focus-visible,
 select.orange-button:hover,
-select.orange-button:focus,
-select.orange-button:navigated
+select.orange-button:focus-visible
 {
     decorator: ninepatch( orange-button-hover, orange-button-hover-inner, 1.0 );
     padding-top: 12.5px;
@@ -192,8 +188,7 @@ select.orange-button:navigated
     padding-left: 12.5px;
 }
 select.orange-button:hover,
-select.orange-button:focus,
-select.orange-button:navigated
+select.orange-button:focus-visible
 {
     text-align: left;
     padding-top: 12.5px;
@@ -202,9 +197,7 @@ select.orange-button:navigated
     padding-left: 12.5px;
 }
 input.orange-button:active,
-input.orange-button:pressed,
-select.orange-button:active,
-select.orange-button:pressed
+select.orange-button:active
 {
     decorator: ninepatch( orange-button-active, orange-button-active-inner, 1.0 );
     padding-top: 18.5px;
@@ -212,8 +205,7 @@ select.orange-button:pressed
     padding-bottom: 18.5px;
     padding-left: 12.5px;
 }
-select.orange-button:active,
-select.orange-button:pressed
+select.orange-button:active
 {
     text-align: left;
     padding-top: 18.5px;
@@ -267,6 +259,34 @@ select.orange-button selectbox
     padding-bottom: 50.5px;
     padding-left: 48.5px;
 }
+.gray-header-panel
+{
+    decorator: ninepatch( gray-header-panel, gray-header-panel-inner, 1.0 );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 4px;
+    min-height: 10px;
+    padding-top: 0.5px;
+    padding-right: 0.5px;
+    padding-bottom: 2.5px;
+    padding-left: 0.5px;
+}
+.gray-footer-panel
+{
+    decorator: ninepatch( gray-footer-panel, gray-footer-panel-inner, 1.0 );
+    box-sizing: border-box;
+    vertical-align: center;
+    overflow: auto;
+    display: inline-block;
+    min-width: 4px;
+    min-height: 8px;
+    padding-top: 0.5px;
+    padding-right: 0.5px;
+    padding-bottom: 0.5px;
+    padding-left: 0.5px;
+}
 scrollbarvertical
 {
     width: 14px;
@@ -298,8 +318,7 @@ input.blue-checkbox
     padding-left: 12.5px;
 }
 input.blue-checkbox:hover,
-input.blue-checkbox:focus,
-input.blue-checkbox:navigated
+input.blue-checkbox:focus-visible
 {
     decorator: image( blue-checkbox-hover );
     padding-top: 12.5px;
@@ -307,8 +326,7 @@ input.blue-checkbox:navigated
     padding-bottom: 26.784271px;
     padding-left: 12.5px;
 }
-input.blue-checkbox:active,
-input.blue-checkbox:pressed
+input.blue-checkbox:active
 {
     decorator: image( blue-checkbox-active );
     padding-top: 18.5px;
@@ -339,8 +357,7 @@ input.blue-checkbox:checked
     padding-left: 12.5px;
 }
 input.blue-checkbox:checked:hover,
-input.blue-checkbox:checked:focus,
-input.blue-checkbox:checked:navigated
+input.blue-checkbox:checked:focus-visible
 {
     decorator: image( blue-checkbox-checked-hover );
     padding-top: 12.5px;
@@ -348,8 +365,7 @@ input.blue-checkbox:checked:navigated
     padding-bottom: 26.784271px;
     padding-left: 12.5px;
 }
-input.blue-checkbox:checked:active,
-input.blue-checkbox:checked:pressed
+input.blue-checkbox:checked:active
 {
     decorator: image( blue-checkbox-checked-active );
     padding-top: 18.5px;
@@ -382,5 +398,25 @@ select selectarrow
     decorator: image( selectarrow );
     width: 20px;
     height: 20px;
+}
+icon.icon-diamond
+{
+    decorator: image( icon-diamond );
+}
+icon.icon-money
+{
+    decorator: image( icon-money );
+}
+icon.icon-settings
+{
+    decorator: image( icon-settings );
+}
+icon.icon-xbox
+{
+    decorator: image( icon-xbox );
+}
+icon.icon-discord
+{
+    decorator: image( icon-discord );
 }
 

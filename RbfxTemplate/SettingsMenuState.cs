@@ -2,7 +2,7 @@
 
 namespace RbfxTemplate
 {
-    public class SettingsMenuState : MenuStateBase
+    public class SettingsMenuState : RmlUIStateBase
     {
         public SettingsMenuState(UrhoPluginApplication app) : base(app, "UI/Options.rml")
         {
@@ -11,7 +11,7 @@ namespace RbfxTemplate
 
         public SettingFile Settings { get; private set; }
 
-        public override void OnDataModelInitialized(MenuComponent menuComponent)
+        public override void OnDataModelInitialized(GameRmlUIComponent menuComponent)
         {
             menuComponent.BindDataModelEvent("Apply", OnApply);
             menuComponent.BindDataModelEvent("Cancel", OnCancel);

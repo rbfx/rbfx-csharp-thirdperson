@@ -6,13 +6,13 @@ namespace RbfxTemplate
 {
     [ObjectFactory]
     [Preserve(AllMembers = true)]
-    public class MainMenuState : MenuStateBase
+    public class MainMenuState : RmlUIStateBase
     {
         public MainMenuState(UrhoPluginApplication app) : base(app, "UI/MainMenu.rml")
         {
         }
 
-        public override void OnDataModelInitialized(MenuComponent menuComponent)
+        public override void OnDataModelInitialized(GameRmlUIComponent menuComponent)
         {
             menuComponent.BindDataModelProperty("is_game_played", _ => _.Set(Application?.IsGameRunning == true),
                 _ => { });

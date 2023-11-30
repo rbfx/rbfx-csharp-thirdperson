@@ -1,18 +1,17 @@
-﻿using Urho3DNet;
+﻿using System;
+using Urho3DNet;
 
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class MenuComponent : RmlUIComponent
+    public class GameRmlUIComponent : RmlUIComponent
     {
-        private bool _bloom = true;
-
-        public MenuComponent(Context context) : base(context)
+        public GameRmlUIComponent(Context context) : base(context)
         {
         }
 
-        public MenuStateBase State { get; set; }
+        public RmlUIStateBase State { get; set; }
 
         public void UpdateProperties()
         {
@@ -21,7 +20,8 @@ namespace RbfxTemplate
 
         protected override void OnDataModelInitialized()
         {
-            State.OnDataModelInitialized(this);
+            State?.OnDataModelInitialized(this);
+
             base.OnDataModelInitialized();
         }
     }
