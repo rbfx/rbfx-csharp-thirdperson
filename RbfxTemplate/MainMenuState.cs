@@ -45,38 +45,9 @@ namespace RbfxTemplate
             Application.ContinueGame();
         }
 
-        private void OpenUrlInBrowser(string url)
-        {
-            // Open URL in default browser: https://stackoverflow.com/questions/4580263/how-to-open-in-default-browser-in-c-sharp
-            try
-            {
-                Process.Start(url);
-            }
-            catch
-            {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    Process.Start("xdg-open", url);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    Process.Start("open", url);
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-
         private void OnDiscord(VariantList obj)
         {
-            OpenUrlInBrowser("https://discord.gg/46aKYFQj7W");
+            Urho3D.OpenURL("https://discord.gg/46aKYFQj7W");
         }
     }
 }
