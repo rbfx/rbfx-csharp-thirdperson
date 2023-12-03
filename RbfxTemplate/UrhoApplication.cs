@@ -43,8 +43,7 @@ namespace RbfxTemplate
             EngineParameters[Urho3D.EpConfigName] = "";
 
             // Run shaders via SpirV-Cross to eliminate potential driver bugs
-            EngineParameters[Urho3D.EpShaderPolicyGlsl] = 0;
-            EngineParameters[Urho3D.EpShaderPolicyHlsl] = 2;
+            //EngineParameters[Urho3D.EpShaderPolicy] = 0;
             // Enable this if you need to debug translated shaders.
             //EngineParameters[Urho3D.EpShaderLogSources] = true;
 
