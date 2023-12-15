@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0</TargetFrameworks>
-		<!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 
     <ItemGroup>
@@ -14,6 +14,7 @@
 	<ItemGroup>
 		<PackageReference Include="unofficial.Urho3DNet" Version="$(Urho3DNetVersion)" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3">
+			<IncludeAssets>all</IncludeAssets>
 		</PackageReference>
   </ItemGroup>
 
