@@ -23,6 +23,7 @@
     <Content Include="**\*" Exclude="**\bin\**;**\obj\**;RbfxTemplate.csproj;.vs\**\*;.git;.vs" />
     <Compile Remove="**\*" />
     <None Include="README.md" Pack="true" PackagePath="/"/>
+    <None Include="RbfxTemplate/Properties/launchSettings.json" Pack="true" PackagePath="RbfxTemplate/Properties/"/>
   </ItemGroup>
 
 </Project>

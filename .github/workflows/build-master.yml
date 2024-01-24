@@ -161,12 +161,17 @@ jobs:
       working-directory: ./RbfxTemplate.Android
       run: dotnet publish -f net7.0-android -c Release --no-restore -p:AndroidVersionCode=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
+    - name: Find APK
+      run: |
+        dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.Android/bin/Release/**/*-Signed.apk -v APK_PATH
+        dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.Android/bin/Release/**/*-Signed.aab -v AAB_PATH
+
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.aab
-          ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk
+          ${{ env.APK_PATH }}
+          ${{ env.AAB_PATH }}
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -177,7 +182,7 @@ jobs:
       if: ${{ env.BUTLER_API_KEY != '' && vars.ITCH_PROJECT != '' }}
       run: |
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
-        tools/itch/butler push ./RbfxTemplate.Android/bin/Release/net7.0-android/publish/com.companyname.RbfxTemplate.android-Signed.apk ${{ vars.ITCH_PROJECT }}:android
+        tools/itch/butler push ${{ env.APK_PATH }} ${{ vars.ITCH_PROJECT }}:android
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_uwp:
