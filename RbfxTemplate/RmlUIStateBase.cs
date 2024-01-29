@@ -22,11 +22,12 @@ namespace RbfxTemplate
             Application = app;
 
             _scene = Context.CreateObject<Scene>();
-            _uiComponent = _scene.Ptr.CreateComponent<GameRmlUIComponent>();
+            _uiComponent = new GameRmlUIComponent(Context);
             _uiComponent.IsEnabled = false;
             _uiComponent.State = this;
             _uiComponent.SetResource(rmlResource);
             _uiComponent.IsEnabled = false;
+            _scene.Ptr.AddComponent(_uiComponent,0);
         }
 
         /// <summary>
