@@ -14,6 +14,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<BundleResource Include="../Content/Common/Cache/**">
+			<Link>Cache/%(RecursiveDir)%(FileName)%(Extension)</Link>
+		</BundleResource>
 		<BundleResource Include="../Content/Common/Data/**">
 			<Link>Data/%(RecursiveDir)%(FileName)%(Extension)</Link>
 		</BundleResource>

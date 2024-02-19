@@ -1,5 +1,4 @@
 # Ignore asset cache
-/Cache/
 /Cache.json
 
 # Ignore temporary files

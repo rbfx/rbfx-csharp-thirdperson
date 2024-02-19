@@ -70,7 +70,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
@@ -95,6 +95,12 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="../Content/Common/Cache/**">
+      <Link>Cache/%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>Cache/%(RecursiveDir)%(FileName)%(Extension)</PackagePath>
+    </Content>
     <Content Include="../Content/Common/Data/**">
       <Link>Data/%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -107,7 +113,7 @@
       <Pack>true</Pack>
       <PackagePath>Data/%(RecursiveDir)%(FileName)%(Extension)</PackagePath>
     </Content>
-    <Content Remove="**/*.user.json"/>
+    <Content Remove="**/*.user.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">

@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AndroidAsset Include="../Content/Common/Cache/**">
+      <Link>Cache/%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </AndroidAsset>
     <AndroidAsset Include="../Content/Common/Data/**">
       <Link>Data/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </AndroidAsset>
