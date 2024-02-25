@@ -8,6 +8,7 @@
     <ApplicationId>com.companyname.RbfxTemplate</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <AndroidBundleConfigurationFile>BundleConfig.json</AndroidBundleConfigurationFile>
     <!-- FastUpToDateCheck disabled as a workaround. Without this flag the build system going to miss changes in content files. -->
     <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
   </PropertyGroup>

@@ -1,0 +1,5 @@
+{
+"optimizations" : {
+"uncompress_native_libraries" : {}
+}
+}
