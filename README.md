@@ -21,7 +21,7 @@ Navigate to the directory where you want to create your solution.
 Run the following command to generate a new solution based on the installed template:
 
 ```
-dotnet new rbfx-thirdperson -n MyAwesomeGame
+dotnet new rbfx.thirdperson -n MyAwesomeGame
 ```
 
 Replace MyAwesomeGame with your desired solution name.
