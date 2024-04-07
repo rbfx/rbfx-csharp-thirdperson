@@ -83,18 +83,18 @@ jobs:
 
     - name: Dotnet Publish
       working-directory: ./RbfxTemplate.Desktop
-      run: dotnet publish -f net7.0 -c Release --runtime ${{ env.RUNTIME_ID }} --self-contained true -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+      run: dotnet publish -f net8.0 -c Release --runtime ${{ env.RUNTIME_ID }} --self-contained true -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
     - name: Copy runtime dlls
       if: ${{ env.RUNTIME_ID == 'win-x64' }}
       run: |
-        copy "C:/Windows/System32/MSVCP140.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
-        copy "C:/Windows/System32/VCRUNTIME140.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
-        copy "C:/Windows/System32/VCRUNTIME140_1.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
-        copy "C:/Windows/System32/D3DCOMPILER_47.dll" "RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/"
+        copy "C:/Windows/System32/MSVCP140.dll" "RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/"
+        copy "C:/Windows/System32/VCRUNTIME140.dll" "RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/"
+        copy "C:/Windows/System32/VCRUNTIME140_1.dll" "RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/"
+        copy "C:/Windows/System32/D3DCOMPILER_47.dll" "RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/"
 
     - name: Zip Package
-      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ -o RbfxTemplate.${{ env.RUNTIME_ID }}.zip
+      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/ -o RbfxTemplate.${{ env.RUNTIME_ID }}.zip
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -111,7 +111,7 @@ jobs:
       if: ${{ env.BUTLER_API_KEY != '' && vars.ITCH_PROJECT != '' }}
       run: |
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
-        tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net7.0/${{ env.RUNTIME_ID }}/publish/ ${{ vars.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
+        tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/ ${{ vars.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_android:
@@ -159,7 +159,7 @@ jobs:
 
     - name: Dotnet Publish
       working-directory: ./RbfxTemplate.Android
-      run: dotnet publish -f net7.0-android -c Release --no-restore -p:AndroidVersionCode=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+      run: dotnet publish -f net8.0-android -c Release --no-restore -p:AndroidVersionCode=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
     - name: Find APK
       run: |

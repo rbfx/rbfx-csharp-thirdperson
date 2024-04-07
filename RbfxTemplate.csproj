@@ -12,7 +12,7 @@
     <Authors>rbfx</Authors>
     <Description>Templates to use when creating a 3D application using Rebel Framework.</Description>
     <PackageTags>dotnet-new;templates;rbfx</PackageTags>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
