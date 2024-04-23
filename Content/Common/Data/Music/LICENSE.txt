@@ -1,0 +1,3 @@
+music.ogg is generated via Udio.com service and ment to be replaced with actual music made for your game.
+
+See Udio terms of Service here: https://www.udio.com/terms-of-service
