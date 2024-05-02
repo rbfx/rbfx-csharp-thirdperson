@@ -9,7 +9,7 @@ namespace RbfxTemplate
             Settings = app.Settings;
         }
 
-        public SettingFile Settings { get; private set; }
+        public GameSettings Settings { get; private set; }
 
         public override void OnDataModelInitialized(GameRmlUIComponent menuComponent)
         {
@@ -45,7 +45,7 @@ namespace RbfxTemplate
         {
             Application.HandleBackKey();
 
-            Application.Settings = SettingFile.Load(Context);
+            Application.Settings = GameSettings.Load(Context);
         }
 
         private void OnApply(VariantList obj)

@@ -5,9 +5,9 @@ using Urho3DNet;
 namespace RbfxTemplate
 {
     /// <summary>
-    ///     Setting file content.
+    /// Settings file content.
     /// </summary>
-    public class SettingFile
+    public class GameSettings
     {
         private static readonly string SOUND_MASTER = "Master";
 
@@ -47,7 +47,7 @@ namespace RbfxTemplate
         /// </summary>
         /// <param name="context">Application context.</param>
         /// <returns>Loaded or created settings file content.</returns>
-        public static SettingFile Load(Context context)
+        public static GameSettings Load(Context context)
         {
             var json = context.GetSubsystem<VirtualFileSystem>()
                 .ReadAllText(new FileIdentifier("conf", "settings.json"));
@@ -56,14 +56,14 @@ namespace RbfxTemplate
             {
                 try
                 {
-                    return JsonConvert.DeserializeObject<SettingFile>(json);
+                    return JsonConvert.DeserializeObject<GameSettings>(json);
                 }
                 catch (Exception)
                 {
                 }
             }
 
-            return new SettingFile();
+            return new GameSettings();
 
         }
 

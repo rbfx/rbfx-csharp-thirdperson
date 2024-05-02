@@ -43,7 +43,7 @@ namespace RbfxTemplate
         /// <summary>
         ///     Gets or sets the settings file.
         /// </summary>
-        public SettingFile Settings { get; set; }
+        public GameSettings Settings { get; set; }
 
         protected override void Load()
         {
@@ -65,11 +65,11 @@ namespace RbfxTemplate
             // Load settings.
             try
             {
-                Settings = SettingFile.Load(Context);
+                Settings = GameSettings.Load(Context);
             }
             catch (FileNotFoundException)
             {
-                Settings = new SettingFile();
+                Settings = new GameSettings();
             }
 
             _stateStack = new StateStack(Context.GetSubsystem<StateManager>());
