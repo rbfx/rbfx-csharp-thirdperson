@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 using Urho3DNet;
 
 namespace RbfxTemplate
@@ -41,42 +40,6 @@ namespace RbfxTemplate
         ///     Get or set effects volume.
         /// </summary>
         public float EffectVolume { get; set; } = 1.0f;
-
-        /// <summary>
-        ///     Load setting file if exists.
-        /// </summary>
-        /// <param name="context">Application context.</param>
-        /// <returns>Loaded or created settings file content.</returns>
-        public static GameSettings Load(Context context)
-        {
-            var json = context.GetSubsystem<VirtualFileSystem>()
-                .ReadAllText(new FileIdentifier("conf", "settings.json"));
-
-            if (!string.IsNullOrWhiteSpace(json))
-            {
-                try
-                {
-                    return JsonConvert.DeserializeObject<GameSettings>(json);
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            return new GameSettings();
-
-        }
-
-        /// <summary>
-        ///     Save setting file.
-        /// </summary>
-        /// <param name="context">Application context.</param>
-        /// <returns>Returns true is operation succeeds.</returns>
-        public bool Save(Context context)
-        {
-            return context.GetSubsystem<VirtualFileSystem>().WriteAllText(new FileIdentifier("conf", "settings.json"),
-                JsonConvert.SerializeObject(this));
-        }
 
         /// <summary>
         ///     Apply settings to the application global settings.

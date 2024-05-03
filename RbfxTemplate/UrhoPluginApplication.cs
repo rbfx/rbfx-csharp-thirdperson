@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Urho3DNet;
+﻿using Urho3DNet;
 
 namespace RbfxTemplate
 {
@@ -30,20 +29,22 @@ namespace RbfxTemplate
         /// </summary>
         private StateStack _stateStack;
 
+        private SharedPtr<ConfigFileContainer<GameSettings>> _settings;
+
+
         public UrhoPluginApplication(Context context) : base(context)
         {
         }
 
+        /// <summary>
+        ///     Game settings
+        /// </summary>
+        public GameSettings Settings => _settings.Ptr.Value;
 
         /// <summary>
         ///     Gets a value indicating whether the game is running.
         /// </summary>
         public bool IsGameRunning => _gameState;
-
-        /// <summary>
-        ///     Gets or sets the settings file.
-        /// </summary>
-        public GameSettings Settings { get; set; }
 
         protected override void Load()
         {
@@ -55,6 +56,16 @@ namespace RbfxTemplate
             Context.RemoveFactories(GetType().Assembly);
         }
 
+        protected override void Suspend(Archive output)
+        {
+            base.Suspend(output);
+        }
+
+        protected override void Resume(Archive input, bool differentVersion)
+        {
+            base.Resume(input, differentVersion);
+        }
+
         public override bool IsMain()
         {
             return true;
@@ -63,27 +74,11 @@ namespace RbfxTemplate
         protected override void Start(bool isMain)
         {
             // Load settings.
-            try
-            {
-                Settings = GameSettings.Load(Context);
-            }
-            catch (FileNotFoundException)
-            {
-                Settings = new GameSettings();
-            }
+            ResetSettings();
 
             _stateStack = new StateStack(Context.GetSubsystem<StateManager>());
 
-            // Loads all fonts from the resource cache and adds them to the RmlUI.
-            var cache = GetSubsystem<ResourceCache>();
-            var ui = GetSubsystem<RmlUI>();
-            var fonts = new StringList();
-            // Scan for .ttf files and load them
-            cache.Scan(fonts, "Fonts/", "*.ttf", ScanFlag.ScanFiles);
-            foreach (var font in fonts) ui.LoadFont($"Fonts/{font}");
-            // Scan for .otf files and load them
-            cache.Scan(fonts, "Fonts/", "*.otf", ScanFlag.ScanFiles);
-            foreach (var font in fonts) ui.LoadFont($"Fonts/{font}");
+            _mainMenuState = new MainMenuState(this);
 
             // Setup state manager.
             var stateManager = Context.GetSubsystem<StateManager>();
@@ -101,7 +96,6 @@ namespace RbfxTemplate
 
 
             // Crate end enqueue main menu screen.
-            _mainMenuState = _mainMenuState ?? new MainMenuState(this);
             _stateStack.Push(_mainMenuState);
 
             base.Start(isMain);
@@ -114,17 +108,6 @@ namespace RbfxTemplate
 
             base.Stop();
         }
-
-        protected override void Suspend(Archive output)
-        {
-            base.Suspend(output);
-        }
-
-        protected override void Resume(Archive input, bool differentVersion)
-        {
-            base.Resume(input, differentVersion);
-        }
-
 
         /// <summary>
         ///     Transition to settings menu
@@ -170,8 +153,20 @@ namespace RbfxTemplate
             }
             else
             {
-                _stateStack.Pop();
+                if (_stateStack.Count > 1)
+                    _stateStack.Pop();
             }
+        }
+
+        public void SaveSettings()
+        {
+            _settings.Ptr.SaveConfig();
+        }
+
+        public void ResetSettings()
+        {
+            _settings?.Dispose();
+            _settings = ConfigFileContainer<GameSettings>.LoadConfig(Context);
         }
     }
 }

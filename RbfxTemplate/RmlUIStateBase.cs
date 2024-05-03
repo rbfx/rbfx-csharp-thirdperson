@@ -1,14 +1,22 @@
-﻿using Urho3DNet;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Urho3DNet;
 
 namespace RbfxTemplate
 {
     /// <summary>
     /// Base class for a game state with RmlUI document.
     /// </summary>
-    public abstract class RmlUIStateBase : ApplicationState
+    public abstract class RmlUIStateBase : ApplicationState, INotifyPropertyChanged
     {
         private readonly SharedPtr<Scene> _scene;
         private readonly GameRmlUIComponent _uiComponent;
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Construct RmlUIStateBase.
@@ -82,6 +90,21 @@ namespace RbfxTemplate
                     Application.HandleBackKey();
                     return;
             }
+        }
+
+        protected void SetRmlVariable<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (!EqualityComparer<T>.Default.Equals(field, value))
+            {
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

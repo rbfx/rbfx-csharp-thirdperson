@@ -35,6 +35,11 @@ namespace RbfxTemplate
         public ApplicationState State => _stack.Count > 0 ? _stack.Peek() : null;
 
         /// <summary>
+        ///     Number of states in the stack.
+        /// </summary>
+        public int Count => _stack.Count;
+
+        /// <summary>
         ///     Push state to the stack and make it current.
         /// </summary>
         /// <param name="state">State to push.</param>

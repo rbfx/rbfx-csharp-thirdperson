@@ -43,15 +43,15 @@ namespace RbfxTemplate
 
         private void OnCancel(VariantList obj)
         {
-            Application.HandleBackKey();
+            Application.ResetSettings();
 
-            Application.Settings = GameSettings.Load(Context);
+            Application.HandleBackKey();
         }
 
         private void OnApply(VariantList obj)
         {
             Settings.Apply(Context);
-            Settings.Save(Context);
+            Application.SaveSettings();
 
             Application.HandleBackKey();
         }
