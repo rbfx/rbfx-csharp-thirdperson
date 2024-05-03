@@ -39,14 +39,14 @@ class Program
         return await rootCommand.InvokeAsync(args);
     }
 
-    private static void GenerateIcons(FileInfo fore, FileInfo back, string? backCol, DirectoryInfo output)
+    private static void GenerateIcons(FileInfo? fore, FileInfo? back, string? backCol, DirectoryInfo? output)
     {
         Color backgroundColor = Color.Transparent;
         if (!string.IsNullOrWhiteSpace(backCol))
             backgroundColor = System.Drawing.ColorTranslator.FromHtml(backCol);
 
-        Image foreground = (fore != null && fore.Exists) ? Image.FromFile(fore.FullName): null;
-        Image background = (back != null && back.Exists) ? Image.FromFile(back.FullName) : null;
+        Image? foreground = (fore != null && fore.Exists) ? Image.FromFile(fore.FullName) : null;
+        Image? background = (back != null && back.Exists) ? Image.FromFile(back.FullName) : null;
 
         var outPath = (output == null)?Directory.GetCurrentDirectory(): output.FullName;
 
@@ -56,7 +56,7 @@ class Program
         MakeIOSIcons(outPath, background, backgroundColor, foreground);
     }
 
-    private static void MakeWindowsIcon(string outPath, Image background, Color backgroundColor, Image foreground)
+    private static void MakeWindowsIcon(string outPath, Image? background, Color backgroundColor, Image? foreground)
     {
         MakePng(Path.Combine(outPath, "RbfxTemplate.Desktop\\icon.ico"), 64, 64, (Bitmap bmp) =>
         {
@@ -65,7 +65,7 @@ class Program
         });
     }
 
-    private static void MakeUWPIcons(string outPath, Image background, Color backgroundColor, Image foreground)
+    private static void MakeUWPIcons(string outPath, Image? background, Color backgroundColor, Image? foreground)
     {
         MakePng(Path.Combine(outPath, "RbfxTemplate.UWP\\Assets\\LockScreenLogo.scale-200.png"), 48, 48, (Bitmap bmp) =>
         {
@@ -103,7 +103,7 @@ class Program
             RenderForeground(bmp, foreground);
         });
     }
-    private static void MakeAndroidIcons(string outPath, Image background, Color backgroundColor, Image foreground)
+    private static void MakeAndroidIcons(string outPath, Image? background, Color backgroundColor, Image? foreground)
     {
         // hdpi
 
@@ -190,7 +190,7 @@ class Program
             RenderForeground(bmp, foreground);
         });
     }
-    private static void MakeIOSIcons(string outPath, Image background, Color backgroundColor, Image foreground)
+    private static void MakeIOSIcons(string outPath, Image? background, Color backgroundColor, Image? foreground)
     {
 
         MakePng(Path.Combine(outPath, "RbfxTemplate.IOS\\Assets.xcassets\\AppIcon.appiconset\\Icon1024.png"), 1024, 1024, (Bitmap bmp) =>
@@ -260,7 +260,7 @@ class Program
         });
     }
 
-    private static void RenderBackground(Bitmap bmp, Image background, Color backgroundColor)
+    private static void RenderBackground(Bitmap bmp, Image? background, Color backgroundColor)
     {
         using (var gr = Graphics.FromImage(bmp))
         {
@@ -325,7 +325,7 @@ class Program
         }
     }
 
-    private static void RenderForeground(Bitmap bmp, Image foreground)
+    private static void RenderForeground(Bitmap bmp, Image? foreground)
     {
         if (foreground != null)
         {
@@ -349,7 +349,7 @@ class Program
         {
             recipe(bmp);
 
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
 
             switch (Path.GetExtension(path).ToLower())
             {
