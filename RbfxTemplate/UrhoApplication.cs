@@ -35,8 +35,7 @@ namespace RbfxTemplate
         {
             // Set up engine parameters
             EngineParameters[Urho3D.EpFullScreen] = false;
-            EngineParameters[Urho3D.EpWindowResizable] = true;
-            EngineParameters[Urho3D.EpBorderless] = true;
+            EngineParameters[Urho3D.EpWindowResizable] = false;
             EngineParameters[Urho3D.EpWindowTitle] = "RbfxTemplate";
             EngineParameters[Urho3D.EpApplicationName] = "RbfxTemplate";
             EngineParameters[Urho3D.EpOrganizationName] = "RbfxTemplate";

@@ -92,7 +92,7 @@ namespace RbfxTemplate.Tests
         /// Await this to continue execution in the application main thread.
         /// </summary>
         /// <returns>Main thread awaitable.</returns>
-        public static ConfiguredTaskAwaitable<bool> ToMainThreadAsync(ITestOutputHelper testOutputHelper = null)
+        public static ConfiguredTaskAwaitable<bool> ToMainThreadAsync(ITestOutputHelper? testOutputHelper = null)
         {
             var tcs = new TaskCompletionSource<bool>();
             var workQueue = Context.GetSubsystem<WorkQueue>();
