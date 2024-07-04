@@ -129,3 +129,6 @@ This step use https://github.com/r0adkll/upload-google-play for the publishing. 
    1. Open Users and permissions.
    1. Click invite new user and add the email of the service account created in the previous step.
    1. Grant permissions to the app that you want the service account to deploy in `app permissions`.
+1. Create new application via Google Play Console
+   1. Open https://play.google.com/console and pick your developer account.
+   1. Press `Create App` and create new application using the same ApplicationId as in your c# project
