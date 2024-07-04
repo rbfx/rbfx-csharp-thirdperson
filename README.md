@@ -70,7 +70,7 @@ Navigate to ```Settings > Secrets and variables```.
 Add a new secret named **BUTLER_API_KEY** and set its value to your **itch.io** personal access token.
 Add new variable **ITCH_PROJECT**  to the itch.io project id like [rebelfork/rbfx-csharp-thirdperson](https://rebelfork.itch.io/rbfx-csharp-thirdperson)
 
-That’s it! Your GitHub Actions workflow will now build your game and make it available for download via GitHub Releases. Optionally, it can also publish to itch.io if configured. 🚀🎮
+That's it! Your GitHub Actions workflow will now build your game and make it available for download via GitHub Releases. Optionally, it can also publish to itch.io if configured.
 
 ## Optional: Google Play Publishing
 

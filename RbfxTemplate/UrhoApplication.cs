@@ -34,7 +34,7 @@ namespace RbfxTemplate
         public override void Setup()
         {
             // Set up engine parameters
-            EngineParameters[Urho3D.EpFullScreen] = false;
+            EngineParameters[Urho3D.EpFullScreen] = !Debugger.IsAttached;
             EngineParameters[Urho3D.EpWindowResizable] = false;
             EngineParameters[Urho3D.EpWindowTitle] = "RbfxTemplate";
             EngineParameters[Urho3D.EpApplicationName] = "RbfxTemplate";
