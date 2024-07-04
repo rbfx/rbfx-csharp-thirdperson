@@ -182,10 +182,10 @@ jobs:
       run: |
         if [ -n "${{ secrets.PLAY_KEYSTORE }}" ]; then
           echo "Secret PLAY_KEYSTORE is defined. Building and signing the aab file."
-          dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidVersionCode=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}  /p:AndroidKeyStore=true /p:AndroidSigningKeyStore=googleplay.jks /p:AndroidSigningKeyAlias=${{secrets.PLAY_KEYSTORE_ALIAS}} /p:AndroidSigningKeyPass="${{ secrets.PLAY_KEYSTORE_PASS }}" /p:AndroidSigningStorePass="${{ secrets.PLAY_KEYSTORE_PASS }}"
+          dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}  /p:AndroidKeyStore=true /p:AndroidSigningKeyStore=googleplay.jks /p:AndroidSigningKeyAlias=${{secrets.PLAY_KEYSTORE_ALIAS}} /p:AndroidSigningKeyPass="${{ secrets.PLAY_KEYSTORE_PASS }}" /p:AndroidSigningStorePass="${{ secrets.PLAY_KEYSTORE_PASS }}"
         else
           echo "Secret PLAY_KEYSTORE is not defined. Building with no signature."
-          dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidVersionCode=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+          dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
         fi
 
     - name: Find APK
