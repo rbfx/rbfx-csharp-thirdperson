@@ -42,18 +42,11 @@ jobs:
           else
             echo "HAS_PLAY_KEYSTORE=false" >> $GITHUB_ENV
           fi
-          if [ "${{ secrets.PLAYSTORE_SERVICE_ACC }}" != '' ]; then
-            echo "HAS_PLAYSTORE_SERVICE_ACC=true" >> $GITHUB_ENV
-          else
-            echo "HAS_PLAYSTORE_SERVICE_ACC=false" >> $GITHUB_ENV
-          fi
-          
 
     outputs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
       ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
       HAS_PLAY_KEYSTORE: ${{ env.HAS_PLAY_KEYSTORE }}
-      HAS_PLAYSTORE_SERVICE_ACC: ${{ env.HAS_PLAYSTORE_SERVICE_ACC }}
 
   # ---------------------------------------------------------------------------------------
   build_desktop:
@@ -221,7 +214,9 @@ jobs:
 
     - uses: r0adkll/upload-google-play@v1.1.3
       name: Upload Android Artifact to Play Console
-      if: ${{ needs.set_version.outputs.HAS_PLAYSTORE_SERVICE_ACC == 'true' }}
+      env:
+        PLAYSTORE_SERVICE_ACC: ${{ secrets.PLAYSTORE_SERVICE_ACC }}
+      if: ${{ env.PLAYSTORE_SERVICE_ACC != '' }}
       with:
         serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_SERVICE_ACC }}
         packageName: com.companyname.RbfxTemplate
