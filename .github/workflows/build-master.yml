@@ -219,7 +219,7 @@ jobs:
       if: ${{ env.PLAYSTORE_SERVICE_ACC != '' }}
       with:
         serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_SERVICE_ACC }}
-        packageName: com.companyname.RbfxTemplate
+        packageName: com.companyname.RbfxTemplate.android
         releaseFiles: ${{ env.AAB_PATH }}
         track: internal
   # ---------------------------------------------------------------------------------------
