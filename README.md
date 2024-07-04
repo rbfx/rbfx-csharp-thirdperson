@@ -132,3 +132,4 @@ This step use https://github.com/r0adkll/upload-google-play for the publishing. 
 1. Create new application via Google Play Console
    1. Open https://play.google.com/console and pick your developer account.
    1. Press `Create App` and create new application using the same ApplicationId as in your c# project
+   1. Make sure you upload an apk or aab manually first by creating a release through the play console.
