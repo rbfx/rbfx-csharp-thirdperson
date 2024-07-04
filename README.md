@@ -84,6 +84,8 @@ First you need to generate Java Key Store file by running the following command:
 keytool -v -genkey -v -keystore googleplay.jks -alias someKindOfName -keyalg RSA -validity 10000
 ```
 
+**Don't user quotes " as part of the password, it may mess up the GitHub action scripts!**
+
 Replace alias with a name related to you. Store the alias into PLAY_KEYSTORE_ALIAS secret of the GitHub pipeline. The password you set to the keystore should go into PLAY_KEYSTORE_PASS secret.
 
 Also you need to store the whole content of the googleplay.jks file into the PLAY_KEYSTORE secret. The easy way of doing that is to encode the file content into base64 string and store the string value into the secret by running the following command on windows:
