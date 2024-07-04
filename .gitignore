@@ -266,3 +266,5 @@ Shaders.Generated
 *.user.json
 
 RbfxTemplate/Content/Common
+*.jks
+googleplay.txt

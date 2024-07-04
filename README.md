@@ -71,3 +71,59 @@ Add a new secret named **BUTLER_API_KEY** and set its value to your **itch.io** 
 Add new variable **ITCH_PROJECT**  to the itch.io project id like [rebelfork/rbfx-csharp-thirdperson](https://rebelfork.itch.io/rbfx-csharp-thirdperson)
 
 That’s it! Your GitHub Actions workflow will now build your game and make it available for download via GitHub Releases. Optionally, it can also publish to itch.io if configured. 🚀🎮
+
+## Optional: Google Play Publishing
+
+To publish app to Google Play directly from the GitHub Action you need to define several secrets in the pipeline.
+
+### PLAY_KEYSTORE, PLAY_KEYSTORE_ALIAS and PLAY_KEYSTORE_PASS
+
+First you need to generate Java Key Store file by running the following command:
+
+```shell
+keytool -v -genkey -v -keystore googleplay.jks -alias someKindOfName -keyalg RSA -validity 10000
+```
+
+Replace alias with a name related to you. Store the alias into PLAY_KEYSTORE_ALIAS secret of the GitHub pipeline. The password you set to the keystore should go into PLAY_KEYSTORE_PASS secret.
+
+Also you need to store the whole content of the googleplay.jks file into the PLAY_KEYSTORE secret. The easy way of doing that is to encode the file content into base64 string and store the string value into the secret by running the following command on windows:
+
+```shell
+certutil -encodehex -f googleplay.jks googleplay.txt 0x40000001 1>nul
+```
+
+or using openssl elsewhere:
+
+```shell
+openssl base64 < googleplay.jks | tr -d '\n' | tee googleplay.txt
+```
+
+Upload the content of googleplay.txt to PLAY_KEYSTORE variable. 
+
+**Dont' forget to delete googleplay.txt and keep the googleplay.jks in a safe place locally!**
+
+More on this: https://thewissen.io/making-maui-cd-pipeline/
+
+### PLAYSTORE_SERVICE_ACC
+
+## Configure access via service account
+
+This step use https://github.com/r0adkll/upload-google-play for the publishing. Here is what you need to do:
+
+1. Enable the Google Play Android Developer API.
+   1. Go to https://console.cloud.google.com/apis/library/androidpublisher.googleapis.com.
+   1. Click on Enable.
+1. Create a new service account in Google Cloud Platform ([docs](https://developers.google.com/android-publisher/getting_started#service-account)).
+   1. Navigate to https://cloud.google.com/gcp.
+   1. Open `Console` > `IAM & Admin` > `Credentials` > `Manage service accounts` > `Create service account`.
+   1. Pick a name for the new account. Do not grant the account any permissions.
+   1. To use it from the GitHub Action use either:
+      - Account key in GitHub secrets (simpler):
+        1. Open the newly created service account, click on `keys` tab and add a new key, JSON type.
+        1. When successful, a JSON file will be automatically downloaded on your machine.
+        1. Store the content of this file to your GitHub secrets, e.g. `PLAYSTORE_SERVICE_ACC`.
+1. Add the service account to Google Play Console.
+   1. Open https://play.google.com/console and pick your developer account.
+   1. Open Users and permissions.
+   1. Click invite new user and add the email of the service account created in the previous step.
+   1. Grant permissions to the app that you want the service account to deploy in `app permissions`.
