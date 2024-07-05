@@ -12,8 +12,6 @@ namespace RbfxTemplate
 
         private static readonly string SOUND_EFFECT = "Effect";
 
-        //static readonly string SOUND_AMBIENT = "Ambient";
-        //static readonly string SOUND_VOICE = "Voice";
         private static readonly string SOUND_MUSIC = "Music";
 
         /// <summary>
@@ -25,6 +23,11 @@ namespace RbfxTemplate
         ///     Is SSAO enabled.
         /// </summary>
         public bool SSAO { get; set; } = true;
+
+        /// <summary>
+        ///     Is FXAA enabled.
+        /// </summary>
+        public bool FXAA { get; set; } = true;
 
         /// <summary>
         ///     Get or set master volume.
@@ -60,11 +63,9 @@ namespace RbfxTemplate
         /// <param name="renderPipeline">Render pipeline component.</param>
         public void Apply(RenderPipeline renderPipeline)
         {
-            var settings = renderPipeline.Settings;
-            settings.Bloom.Enabled = Bloom;
-            settings.Ssao.Enabled = SSAO;
-
-            renderPipeline.Settings = settings;
+            renderPipeline.SetRenderPassEnabled("Postprocess: SSAO", SSAO);
+            renderPipeline.SetRenderPassEnabled("Postprocess: Bloom", Bloom);
+            renderPipeline.SetRenderPassEnabled("Postprocess: FXAA v3", FXAA);
         }
     }
 }

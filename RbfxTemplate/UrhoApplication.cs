@@ -16,10 +16,12 @@ namespace RbfxTemplate
         /// </summary>
         private SharedPtr<UrhoPluginApplication> _pluginApplication;
 
+#if DEBUG
         /// <summary>
         ///     Safe pointer to debug HUD.
         /// </summary>
         private SharedPtr<DebugHud> _debugHud;
+#endif
 
         public UrhoApplication(Context context) : base(context)
         {
@@ -34,7 +36,7 @@ namespace RbfxTemplate
         public override void Setup()
         {
             // Set up engine parameters
-            EngineParameters[Urho3D.EpFullScreen] = !Debugger.IsAttached;
+            EngineParameters[Urho3D.EpFullScreen] = false; //Use !Debugger.IsAttached if you need true fullscreen in production.
             EngineParameters[Urho3D.EpWindowResizable] = false;
             EngineParameters[Urho3D.EpWindowTitle] = "RbfxTemplate";
             EngineParameters[Urho3D.EpApplicationName] = "RbfxTemplate";
@@ -131,8 +133,10 @@ namespace RbfxTemplate
             var logLevel = (LogLevel)args[E.LogMessage.Level].Int;
             switch (logLevel)
             {
+#if DEBUG
                 case LogLevel.LogError:
                     throw new ApplicationException(args[E.LogMessage.Message].String);
+#endif
                 default:
                     Debug.WriteLine(args[E.LogMessage.Message].String);
                     break;
