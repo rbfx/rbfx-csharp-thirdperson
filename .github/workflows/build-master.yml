@@ -74,7 +74,7 @@ jobs:
 
   # ---------------------------------------------------------------------------------------
   build_desktop:
-    needs: set_version, tests
+    needs: [set_version, tests]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -150,7 +150,7 @@ jobs:
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_android:
-    needs: set_version, tests
+    needs: [set_version, tests]
     runs-on: ubuntu-latest
 
     steps:
@@ -253,7 +253,7 @@ jobs:
         track: internal
   # ---------------------------------------------------------------------------------------
   build_uwp:
-    needs: set_version, tests
+    needs: [set_version, tests]
     runs-on: windows-latest
 
     steps:
