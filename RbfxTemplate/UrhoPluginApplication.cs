@@ -135,7 +135,6 @@ namespace RbfxTemplate
         public void ContinueGame()
         {
             if (_gameState) _stateStack.Push(_gameState);
-            ;
         }
 
         public void Quit()
