@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
 
       - name: Restore tools
         run: dotnet tool restore
@@ -49,8 +49,32 @@ jobs:
       HAS_PLAY_KEYSTORE: ${{ env.HAS_PLAY_KEYSTORE }}
 
   # ---------------------------------------------------------------------------------------
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore tools
+        run: dotnet tool restore
+
+      - name: Test in Debug configuration
+        working-directory: ./RbfxTemplate.Tests
+        run: dotnet test --configuration Debug --verbosity normal
+
+      - name: Test in Release configuration
+        working-directory: ./RbfxTemplate.Tests
+        run: dotnet test --configuration Release --verbosity normal
+
+  # ---------------------------------------------------------------------------------------
   build_desktop:
-    needs: set_version
+    needs: set_version, tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -83,7 +107,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 8.0.x
 
     - name: Restore tools
       run: dotnet tool restore
@@ -126,10 +150,8 @@ jobs:
       shell: bash
   # ---------------------------------------------------------------------------------------
   build_android:
-    needs: set_version
+    needs: set_version, tests
     runs-on: ubuntu-latest
-    env:
-        ANDROID_PACKAGENAME: "com.companyname.RbfxTemplate.android"
 
     steps:
     - uses: actions/checkout@v3
@@ -140,7 +162,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 8.0.x
 
     - name: Restore tools
       run: dotnet tool restore
@@ -179,6 +201,11 @@ jobs:
         fileName: 'googleplay.jks'
         encodedString: ${{ secrets.PLAY_KEYSTORE }}
 
+    - name: Extract ApplicationId from RbfxTemplate.Android.csproj
+      working-directory: ./RbfxTemplate.Android
+      run: |
+        dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.Android.csproj -p ApplicationId -v ANDROID_PACKAGENAME
+    
     - name: Dotnet Publish
       working-directory: ./RbfxTemplate.Android
       run: |
@@ -226,7 +253,7 @@ jobs:
         track: internal
   # ---------------------------------------------------------------------------------------
   build_uwp:
-    needs: set_version
+    needs: set_version, tests
     runs-on: windows-latest
 
     steps:
@@ -238,7 +265,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 8.0.x
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1

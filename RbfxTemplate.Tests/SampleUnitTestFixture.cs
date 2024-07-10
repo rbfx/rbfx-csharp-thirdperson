@@ -41,7 +41,7 @@ namespace RbfxTemplate.Tests
             await Assert.ThrowsAsync<ArgumentException>(TestMethod);
         }
 
-        [Fact]
+        [Fact(Skip = "This test demonstrates that async failing test handled properly")]
         public async Task SampleFailingTest()
         {
             await RbfxTestFramework.ToMainThreadAsync();
