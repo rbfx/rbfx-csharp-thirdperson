@@ -19,6 +19,7 @@ namespace RbfxTemplate.Tests
         {
             base.Setup();
             EngineParameters[Urho3D.EpHeadless] = true;
+            EngineParameters[Urho3D.EpSound] = false;
         }
 
         /// <summary>

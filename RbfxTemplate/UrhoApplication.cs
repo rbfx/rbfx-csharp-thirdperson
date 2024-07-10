@@ -122,8 +122,9 @@ namespace RbfxTemplate
                 _pluginApplication.Ptr.UnloadPlugin();
                 _pluginApplication.Dispose();
             }
-
+#if DEBUG
             _debugHud?.Dispose();
+#endif
             base.Stop();
         }
 
