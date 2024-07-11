@@ -23,23 +23,24 @@ class Program
             name: "--output",
             description: "Output directory.");
 
+        var foregroundRoundScaleOption = new Option<float?>(
+            name: "--foreground-round-scale",
+            description: "The icon foreground image scale when rendered for round icon.");
+
         var rootCommand = new RootCommand("Generate icons from a single image");
         rootCommand.AddOption(foregroundOption);
         rootCommand.AddOption(backgroundOption);
         rootCommand.AddOption(backgroundColorOption);
         rootCommand.AddOption(outputOption);
+        rootCommand.AddOption(foregroundRoundScaleOption);
 
-        rootCommand.SetHandler((fore, back, backCol, output) =>
-            {
-                //GenerateCode(output);
-                GenerateIcons(fore, back, backCol, output);
-            },
-            foregroundOption, backgroundOption, backgroundColorOption, outputOption);
+        rootCommand.SetHandler(GenerateIcons,
+            foregroundOption, backgroundOption, backgroundColorOption, outputOption, foregroundRoundScaleOption);
 
         return await rootCommand.InvokeAsync(args);
     }
 
-    private static void GenerateIcons(FileInfo? fore, FileInfo? back, string? backCol, DirectoryInfo? output)
+    private static void GenerateIcons(FileInfo? fore, FileInfo? back, string? backCol, DirectoryInfo? output, float? foregroundRoundScale)
     {
         Color backgroundColor = Color.Transparent;
         if (!string.IsNullOrWhiteSpace(backCol))
@@ -52,7 +53,7 @@ class Program
 
         MakeWindowsIcon(outPath, background, backgroundColor, foreground);
         MakeUWPIcons(outPath, background, backgroundColor, foreground);
-        MakeAndroidIcons(outPath, background, backgroundColor, foreground);
+        MakeAndroidIcons(outPath, background, backgroundColor, foreground, foregroundRoundScale ?? 0.7071f);
         MakeIOSIcons(outPath, background, backgroundColor, foreground);
     }
 
@@ -103,7 +104,7 @@ class Program
             RenderForeground(bmp, foreground);
         });
     }
-    private static void MakeAndroidIcons(string outPath, Image? background, Color backgroundColor, Image? foreground)
+    private static void MakeAndroidIcons(string outPath, Image? background, Color backgroundColor, Image? foreground, float foregroundRoundScale)
     {
         // hdpi
 
@@ -119,7 +120,7 @@ class Program
         MakePng(Path.Combine(outPath, "RbfxTemplate.Android\\Resources\\mipmap-hdpi\\ic_launcher_round.png"), 72, 72, (Bitmap bmp) =>
         {
             RenderBackground(bmp, background, backgroundColor);
-            RenderForeground(bmp, foreground);
+            RenderForeground(bmp, foreground, foregroundRoundScale);
         });
 
         // mdpi
@@ -136,7 +137,7 @@ class Program
         MakePng(Path.Combine(outPath, "RbfxTemplate.Android\\Resources\\mipmap-mdpi\\ic_launcher_round.png"), 48, 48, (Bitmap bmp) =>
         {
             RenderBackground(bmp, background, backgroundColor);
-            RenderForeground(bmp, foreground);
+            RenderForeground(bmp, foreground, foregroundRoundScale);
         });
 
         // xhdpi
@@ -153,7 +154,7 @@ class Program
         MakePng(Path.Combine(outPath, "RbfxTemplate.Android\\Resources\\mipmap-xhdpi\\ic_launcher_round.png"), 96, 96, (Bitmap bmp) =>
         {
             RenderBackground(bmp, background, backgroundColor);
-            RenderForeground(bmp, foreground);
+            RenderForeground(bmp, foreground, foregroundRoundScale);
         });
 
         // xxhdpi
@@ -170,7 +171,7 @@ class Program
         MakePng(Path.Combine(outPath, "RbfxTemplate.Android\\Resources\\mipmap-xxhdpi\\ic_launcher_round.png"), 144, 144, (Bitmap bmp) =>
         {
             RenderBackground(bmp, background, backgroundColor);
-            RenderForeground(bmp, foreground);
+            RenderForeground(bmp, foreground, foregroundRoundScale);
         });
 
         // xxxhdpi
@@ -187,7 +188,7 @@ class Program
         MakePng(Path.Combine(outPath, "RbfxTemplate.Android\\Resources\\mipmap-xxxhdpi\\ic_launcher_round.png"), 192, 192, (Bitmap bmp) =>
         {
             RenderBackground(bmp, background, backgroundColor);
-            RenderForeground(bmp, foreground);
+            RenderForeground(bmp, foreground, foregroundRoundScale);
         });
     }
     private static void MakeIOSIcons(string outPath, Image? background, Color backgroundColor, Image? foreground)
@@ -325,7 +326,7 @@ class Program
         }
     }
 
-    private static void RenderForeground(Bitmap bmp, Image? foreground)
+    private static void RenderForeground(Bitmap bmp, Image? foreground, float scale = 1.0f)
     {
         if (foreground != null)
         {
@@ -334,13 +335,21 @@ class Program
                 RectangleF srcRect = new RectangleF(0, 0, foreground.Width, foreground.Height);
                 RectangleF dstRect = new RectangleF(0, 0, bmp.Width, bmp.Height);
 
-                var dstAspect = dstRect.Width / dstRect.Height;
-
                 dstRect = FitRectangle(srcRect, dstRect);
+
+                dstRect = ScaleRectangle(dstRect, scale);
 
                 gr.DrawImage(foreground, dstRect, srcRect, GraphicsUnit.Pixel);
             }
         }
+    }
+
+    private static RectangleF ScaleRectangle(RectangleF dstRect, float scale)
+    {
+        var newWidth = dstRect.Width * scale;
+        var newHeight = dstRect.Height * scale;
+
+        return new RectangleF(dstRect.X+(dstRect.Width- newWidth)*0.5f, dstRect.Y + (dstRect.Height - newHeight) * 0.5f, newWidth, newHeight);
     }
 
     private static void MakePng(string path, int width, int height, Action<Bitmap> recipe)
