@@ -6,7 +6,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class Player : LogicComponent
+    public partial class Player : LogicComponent
     {
         private readonly PhysicsRaycastResult _raycastResult;
 

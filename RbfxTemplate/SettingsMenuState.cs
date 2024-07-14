@@ -2,7 +2,7 @@
 
 namespace RbfxTemplate
 {
-    public class SettingsMenuState : RmlUIStateBase
+    public partial class SettingsMenuState : RmlUIStateBase
     {
         public SettingsMenuState(UrhoPluginApplication app) : base(app, "UI/Options.rml")
         {

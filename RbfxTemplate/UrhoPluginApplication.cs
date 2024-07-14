@@ -8,7 +8,7 @@ namespace RbfxTemplate
     /// </summary>
     [LoadablePlugin]
     [Preserve(AllMembers = true)]
-    public class UrhoPluginApplication : PluginApplication
+    public partial class UrhoPluginApplication : PluginApplication
     {
         /// <summary>
         ///     Safe pointer to game screen.

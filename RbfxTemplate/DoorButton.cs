@@ -4,7 +4,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class DoorButton : Component
+    public partial class DoorButton : Component
     {
         private ResourceRef _openAnimationAttr = new ResourceRef(nameof(Animation));
         private ResourceRef _closeAnimationAttr = new ResourceRef(nameof(Animation));

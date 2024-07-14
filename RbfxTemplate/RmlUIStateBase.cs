@@ -8,7 +8,7 @@ namespace RbfxTemplate
     /// <summary>
     /// Base class for a game state with RmlUI document.
     /// </summary>
-    public abstract class RmlUIStateBase : ApplicationState, INotifyPropertyChanged
+    public abstract partial class RmlUIStateBase : ApplicationState, INotifyPropertyChanged
     {
         private readonly SharedPtr<Scene> _scene;
         private readonly GameRmlUIComponent _uiComponent;

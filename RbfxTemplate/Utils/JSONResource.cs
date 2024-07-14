@@ -6,7 +6,7 @@ using Urho3DNet;
 
 namespace RbfxTemplate.Utils
 {
-    public class JsonResource: Resource
+    public partial class JsonResource: Resource
     {
         /// <summary>
         /// Create json resource.
@@ -253,7 +253,7 @@ namespace RbfxTemplate.Utils
     /// Base class for resource files. The file contains value serialized to json via .net serialization.
     /// </summary>
     /// <typeparam name="TValue">Resource value type.</typeparam>
-    public abstract class JsonResource<TValue> : JsonResource where TValue : new()
+    public abstract partial class JsonResource<TValue> : JsonResource where TValue : new()
     {
         /// <summary>
         /// Stored resource value.

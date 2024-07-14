@@ -4,7 +4,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class Selectable : Component
+    public partial class Selectable : Component
     {
         private ComponentList _drawables;
 

@@ -5,7 +5,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class NonPlayableCharacter : LogicComponent
+    public partial class NonPlayableCharacter : LogicComponent
     {
         private static readonly Random _rnd = new Random();
         private Vector3 _targret;

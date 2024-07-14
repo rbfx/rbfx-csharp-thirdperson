@@ -4,7 +4,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class Pickable : Component
+    public partial class Pickable : Component
     {
         public Pickable(Context context) : base(context)
         {

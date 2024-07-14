@@ -7,7 +7,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class Character : MoveAndOrbitComponent
+    public partial class Character : MoveAndOrbitComponent
     {
         /// Character states (on ground, falling, etc).
         private readonly BaseState[] _states;

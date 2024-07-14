@@ -5,7 +5,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
     [Preserve(AllMembers = true)]
-    public class GameRmlUIComponent : RmlUIComponent
+    public partial class GameRmlUIComponent : RmlUIComponent
     {
         private RmlUIStateBase _state;
 

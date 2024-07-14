@@ -4,7 +4,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory]
     [Preserve(AllMembers = true)]
-    public class GameState : ApplicationState
+    public partial class GameState : ApplicationState
     {
         protected readonly SharedPtr<Scene> _scene;
         protected readonly SharedPtr<Sprite> _cross;

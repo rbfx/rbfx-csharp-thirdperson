@@ -6,7 +6,7 @@ namespace RbfxTemplate
 {
     [ObjectFactory]
     [Preserve(AllMembers = true)]
-    public class MainMenuState : RmlUIStateBase
+    public partial class MainMenuState : RmlUIStateBase
     {
         public MainMenuState(UrhoPluginApplication app) : base(app, "UI/MainMenu.rml")
         {

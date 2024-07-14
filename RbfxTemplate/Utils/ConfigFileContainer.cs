@@ -7,7 +7,7 @@ namespace RbfxTemplate.Utils
     /// This will never work as a resource because generic types can't be registered in engine reflection.
     /// Use this only via LoadConfig/SaveConfig API.
     /// </summary>
-    public sealed class ConfigFileContainer<TValue> : JsonResource<TValue> where TValue : new()
+    public sealed partial class ConfigFileContainer<TValue> : JsonResource<TValue> where TValue : new()
     {
         public ConfigFileContainer(Context context) : base(context)
         {
