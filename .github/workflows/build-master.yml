@@ -323,7 +323,7 @@ jobs:
       uses: robinraju/release-downloader@v1
       with:
         repository: ${{ github.repository }}
-        releaseId: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
         fileName: 'RbfxTemplate.win-x64.zip'
         token: ${{ secrets.GITHUB_TOKEN }}
         out-file-path: ./StandaloneWindows64
