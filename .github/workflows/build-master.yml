@@ -43,10 +43,15 @@ jobs:
             echo "HAS_PLAY_KEYSTORE=false" >> $GITHUB_ENV
           fi
 
+      - name: Output STEAM_USERNAME to env
+        run: |
+            echo "STEAM_USERNAME=${{ secrets.STEAM_USERNAME }}" >> $GITHUB_ENV
+
     outputs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
       ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
       HAS_PLAY_KEYSTORE: ${{ env.HAS_PLAY_KEYSTORE }}
+      STEAM_USERNAME: ${{ env.STEAM_USERNAME }}
 
   # ---------------------------------------------------------------------------------------
   tests:
@@ -304,7 +309,7 @@ jobs:
   publish_to_steam:
     needs: [set_version, build_desktop]
     runs-on: ubuntu-latest
-    if: secrets.STEAM_USERNAME != ''
+    if: env.STEAM_USERNAME != ''
     steps:
     - name: Download Windows Build
       uses: actions/download-release-asset@v1
