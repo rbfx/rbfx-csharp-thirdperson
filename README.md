@@ -76,20 +76,30 @@ That's it! Your GitHub Actions workflow will now build your game and make it ava
 
 This action assumes you are registered as a [partner](https://partner.steamgames.com/) with Steam.
 
-#### Set STEAM_APPID and STEAM_USERNAME action secret
+### Set STEAM_APPID and STEAM_USERNAME action secret
 
 Set STEAM_USERNAME to the builder's user name.
 
 Set STEAM_APPID to the application or demo id.
 
-#### Create a Steam Build Account
+### Depots
+
+The Github Action deploys into 3 depots:
+
+- Depot 1: Operating System : Windows, Architecture : 64-bit OS Only
+- Depot 2: Operating System : Linux + SteamOS, Architecture : 64-bit OS Only
+- Depot 3: Operating System : macOS, Architecture : 64-bit OS Only
+
+If either of these depots missing the publish_to_steam job will fail.
+
+### Create a Steam Build Account
 
 Create a specialised builder account that only has access to `Edit App Metadata` and `Publish App Changes To Steam`,
 and permissions to edit your specific app.
 
 https://partner.steamgames.com/doc/sdk/uploading#Build_Account
 
-#### Set STEAM_CONFIG_VDF action secret
+### Set STEAM_CONFIG_VDF action secret
 
 Deploying to Steam requires using Multi-Factor Authentication (MFA) through Steam Guard unless `totp` is passed.
 This means that simply using username and password isn't enough to authenticate with Steam. 
