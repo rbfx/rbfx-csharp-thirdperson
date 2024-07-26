@@ -309,8 +309,16 @@ jobs:
   publish_to_steam:
     needs: [set_version, build_desktop]
     runs-on: ubuntu-latest
-    if: env.STEAM_USERNAME != ''
     steps:
+    - name: Check if Steam user name is set
+      env:
+        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: ${{ env.STEAM_USERNAME == '' }}
+      run: |
+        echo "Steam user name is not set"
+        gh run cancel ${{ github.run_id }}
+
     - name: Download Windows Build
       uses: actions/download-release-asset@v1
       with:
@@ -329,7 +337,7 @@ jobs:
       with:
         username: ${{ secrets.STEAM_USERNAME }}   
         configVdf: ${{ secrets.STEAM_CONFIG_VDF }}       
-        appId: ${{ secrets.STEAM_APPID}}       
+        appId: ${{ secrets.STEAM_APPID }}       
         buildDescription: v${{ needs.set_version.outputs.BUILD_VERSION }}
         rootPath: ./
         depot1Path: StandaloneWindows64
