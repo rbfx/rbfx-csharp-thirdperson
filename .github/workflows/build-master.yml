@@ -50,7 +50,7 @@ jobs:
 
   # ---------------------------------------------------------------------------------------
   tests:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -149,21 +149,6 @@ jobs:
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
         tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/ ${{ vars.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
       shell: bash
-
-    # ------------ Steam ------------
-    - uses: game-ci/steam-deploy@v3
-      env:
-        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-      if: ${{ env.STEAM_USERNAME != '' && env.RUNTIME_ID == 'win-x64' }}
-      name: Steam - Publish Windows
-      with:
-        username: ${{ secrets.STEAM_USERNAME }}   
-        configVdf: ${{ secrets.STEAM_CONFIG_VDF }}       
-        appId: ${{ secrets.STEAM_APPID}}       
-        buildDescription: v${{ needs.set_version.outputs.BUILD_VERSION }}
-        rootPath: RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/
-        depot1Path: ${{ env.RUNTIME_ID }}/publish
-        releaseBranch: prerelease
 
   # ---------------------------------------------------------------------------------------
   build_android:
@@ -314,3 +299,32 @@ jobs:
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
+
+  # ------------ Steam ------------
+  publish_to_steam:
+    needs: [set_version, build_desktop]
+    runs-on: ubuntu-latest
+    if: secrets.STEAM_USERNAME != ''
+    steps:
+    - name: Download Windows Build
+      uses: actions/download-release-asset@v1
+      with:
+        repository: ${{ github.repository }}
+        tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        fileName: 'RbfxTemplate.win-x64.zip'
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Unzip Windows Build
+        run: unzip RbfxTemplate.win-x64.zip -d ./StandaloneWindows64
+
+    - uses: game-ci/steam-deploy@v3
+      env:
+        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+      name: Steam - Publish
+      with:
+        username: ${{ secrets.STEAM_USERNAME }}   
+        configVdf: ${{ secrets.STEAM_CONFIG_VDF }}       
+        appId: ${{ secrets.STEAM_APPID}}       
+        buildDescription: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        rootPath: ./
+        depot1Path: StandaloneWindows64
+        releaseBranch: prerelease

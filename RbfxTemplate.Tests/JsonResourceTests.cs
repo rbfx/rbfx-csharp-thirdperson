@@ -66,7 +66,7 @@ namespace Urho3DNet.Tests
             res.Value = testContainer;
             var fileIdentifier = new FileIdentifier("conf", "SaveJson.json");
             res.SaveFile(fileIdentifier);
-            res.Value = default;
+            res.Value = new TestContainer();
             res.LoadFile(fileIdentifier);
             Assert.NotNull(res.Value);
             Assert.Equal(testContainer.IntVector2, res.Value.IntVector2);
