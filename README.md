@@ -72,6 +72,39 @@ Add new variable **ITCH_PROJECT**  to the itch.io project id like [rebelfork/rbf
 
 That's it! Your GitHub Actions workflow will now build your game and make it available for download via GitHub Releases. Optionally, it can also publish to itch.io if configured.
 
+## Optional: Steam Publishing
+
+This action assumes you are registered as a [partner](https://partner.steamgames.com/) with Steam.
+
+#### Set STEAM_APPID and STEAM_USERNAME action secret
+
+Set STEAM_USERNAME to the builder's user name.
+
+Set STEAM_APPID to the application or demo id.
+
+#### Create a Steam Build Account
+
+Create a specialised builder account that only has access to `Edit App Metadata` and `Publish App Changes To Steam`,
+and permissions to edit your specific app.
+
+https://partner.steamgames.com/doc/sdk/uploading#Build_Account
+
+#### Set STEAM_CONFIG_VDF action secret
+
+Deploying to Steam requires using Multi-Factor Authentication (MFA) through Steam Guard unless `totp` is passed.
+This means that simply using username and password isn't enough to authenticate with Steam. 
+However, it is possible to go through the MFA process only once by setting up GitHub Secrets for `configVdf` with these steps:
+1. Install [Valve's offical steamcmd](https://partner.steamgames.com/doc/sdk/uploading#1) on your local machine. All following steps will also be done on your local machine. [Downloading_SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD#Downloading_SteamCMD)
+1. Try to login with `steamcmd +login <username> <password> +quit`, which may prompt for the MFA code. If so, type in the MFA code that was emailed to your builder account's email address.
+1. Validate that the MFA process is complete by running `steamcmd +login <username> +quit` again. It should not ask for the MFA code again.
+1. The folder from which you run `steamcmd` will now contain an updated `config/config.vdf` file.
+    1. Windows: Use certutil to convert config.vdf content to base64 encoded string ```certutil -encodehex -f config/config.vdf config_base64.txt 0x40000001 1>nul```
+    1. Linux/MacOS:  Use ```cat config/config.vdf | base64 > config_base64.txt``` to encode the file.
+1. Copy the contents of `config_base64.txt` to a GitHub Secret `STEAM_CONFIG_VDF`.
+1. `If:` when running the action you recieve another MFA code via email, run `steamcmd +set_steam_guard_code <code>` on your local machine and repeat the `config.vdf` encoding and replace secret `STEAM_CONFIG_VDF` with its contents.
+
+More documentation on steam publishing could be found at https://github.com/game-ci/steam-deploy
+
 ## Optional: Google Play Publishing
 
 To publish app to Google Play directly from the GitHub Action you need to define several secrets in the pipeline.

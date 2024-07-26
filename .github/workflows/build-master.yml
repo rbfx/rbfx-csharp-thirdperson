@@ -140,6 +140,7 @@ jobs:
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
 
+    # ------------ itch.io ------------
     - name: Release to itch.io ${{ vars.ITCH_PROJECT }}
       env:
         BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
@@ -148,6 +149,22 @@ jobs:
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
         tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/ ${{ vars.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
       shell: bash
+
+    # ------------ Steam ------------
+    - uses: game-ci/steam-deploy@v3
+      env:
+        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+      if: ${{ env.STEAM_USERNAME != '' && env.RUNTIME_ID == 'win-x64' }}
+      name: Steam - Publish Windows
+      with:
+        username: ${{ secrets.STEAM_USERNAME }}   
+        configVdf: ${{ secrets.STEAM_CONFIG_VDF }}       
+        appId: ${{ secrets.STEAM_APPID}}       
+        buildDescription: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        rootPath: RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/
+        depot1Path: ${{ env.RUNTIME_ID }}/publish
+        releaseBranch: prerelease
+
   # ---------------------------------------------------------------------------------------
   build_android:
     needs: [set_version, tests]
