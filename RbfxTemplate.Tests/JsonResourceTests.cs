@@ -43,7 +43,7 @@ namespace Urho3DNet.Tests
     }
 
     [ObjectFactory]
-    public class TestResource : JsonResource<TestContainer>
+    public partial class TestResource : JsonResource<TestContainer>
     {
         public TestResource(Context context) : base(context)
         {
