@@ -313,8 +313,9 @@ jobs:
         tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
         fileName: 'RbfxTemplate.win-x64.zip'
         token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Unzip Windows Build
-        run: unzip RbfxTemplate.win-x64.zip -d ./StandaloneWindows64
+      run: unzip RbfxTemplate.win-x64.zip -d ./StandaloneWindows64
 
     - uses: game-ci/steam-deploy@v3
       env:
