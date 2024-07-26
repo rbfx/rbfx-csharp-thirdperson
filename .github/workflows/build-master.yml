@@ -320,15 +320,14 @@ jobs:
         gh run cancel ${{ github.run_id }}
 
     - name: Download Windows Build
-      uses: actions/download-release-asset@v1
+      uses: robinraju/release-downloader@v1
       with:
         repository: ${{ github.repository }}
-        tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        releaseId: v${{ needs.set_version.outputs.BUILD_VERSION }}
         fileName: 'RbfxTemplate.win-x64.zip'
         token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Unzip Windows Build
-      run: unzip RbfxTemplate.win-x64.zip -d ./StandaloneWindows64
+        out-file-path: ./StandaloneWindows64
+        extract: true
 
     - uses: game-ci/steam-deploy@v3
       env:
