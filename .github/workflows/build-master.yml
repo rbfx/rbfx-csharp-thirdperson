@@ -326,10 +326,28 @@ jobs:
         tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
         fileName: 'RbfxTemplate.win-x64.zip'
         token: ${{ secrets.GITHUB_TOKEN }}
-        out-file-path: ./
+        out-file-path: ./StandaloneWindows64
+        extract: true
 
-    - name: Unzip Windows Build
-      run: unzip RbfxTemplate.win-x64.zip -d ./StandaloneWindows64
+    - name: Download Linux Build
+      uses: robinraju/release-downloader@v1
+      with:
+        repository: ${{ github.repository }}
+        tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        fileName: 'RbfxTemplate.linux-x64.zip'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        out-file-path: ./StandaloneLinux64
+        extract: true
+
+    - name: Download Mac Build
+      uses: robinraju/release-downloader@v1
+      with:
+        repository: ${{ github.repository }}
+        tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        fileName: 'RbfxTemplate.osx-x64.zip'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        out-file-path: ./StandaloneMac64
+        extract: true
 
     - uses: game-ci/steam-deploy@v3
       env:
@@ -342,4 +360,6 @@ jobs:
         buildDescription: v${{ needs.set_version.outputs.BUILD_VERSION }}
         rootPath: ./
         depot1Path: StandaloneWindows64
+        depot2Path: StandaloneLinux64
+        depot3Path: StandaloneMac64
         releaseBranch: prerelease
