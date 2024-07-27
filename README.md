@@ -76,11 +76,19 @@ That's it! Your GitHub Actions workflow will now build your game and make it ava
 
 This action assumes you are registered as a [partner](https://partner.steamgames.com/) with Steam.
 
+One way of publishing the app would be to download zip files for *.Desktop.* builds and manually upload them to relevant depots. The rest of this readme is dedicated to publish automation via Github Action.
+
 ### Set STEAM_APPID and STEAM_USERNAME action secret
 
 Set STEAM_USERNAME to the builder's user name.
 
 Set STEAM_APPID to the application or demo id.
+
+### Create "prerelease" branch
+
+You need to create a "prerelease" branch in the **App Data Admin**. Go to SteamPipe/Builds menu and click **Create new branch**.
+
+The reason for this is that Steam doesn't allow to make default branch live automatically and the Github Action for Steam publication will fail to do so.
 
 ### Depots
 
