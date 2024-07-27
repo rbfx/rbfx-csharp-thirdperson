@@ -349,6 +349,12 @@ jobs:
         out-file-path: ./StandaloneMac64
         extract: true
 
+    - name: Delete RbfxTemplate.*-x64.zip
+      run: |
+        ROOT_FOLDER="./"
+        PATTERN="*RbfxTemplate.*-x64.zip"
+        find "$ROOT_FOLDER" -type f -name "$PATTERN" -exec rm -f {} +
+
     - uses: game-ci/steam-deploy@v3
       env:
         STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
