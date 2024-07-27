@@ -92,6 +92,8 @@ The Github Action deploys into 3 depots:
 
 If either of these depots missing the publish_to_steam job will fail.
 
+Once you are done defining your depots, **publish the changes** that you have made from the [Publish](https://partner.steamgames.com/apps/publishing) page. If you try to run Github Action before publishing the depots the action will fail to publish binaries.
+
 ### Create a Steam Build Account
 
 Create a specialised builder account that only has access to `Edit App Metadata` and `Publish App Changes To Steam`,
