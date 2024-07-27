@@ -38,18 +38,18 @@ jobs:
         id: play-keystore-check
         run: |
           if [ "${{ secrets.PLAY_KEYSTORE }}" != '' ]; then
-            echo "::set-output name=HAS_PLAY_KEYSTORE::true"
+            echo "HAS_PLAY_KEYSTORE=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::set-output name=HAS_PLAY_KEYSTORE::false"
+            echo "HAS_PLAY_KEYSTORE=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Check for STEAM_USERNAME
         id: steam-check
         run: |
           if [ "${{ secrets.STEAM_USERNAME }}" != '' ]; then
-            echo "::set-output name=HAS_STEAM_USERNAME::true"
+            echo "HAS_STEAM_USERNAME=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::set-output name=HAS_STEAM_USERNAME::false"
+            echo "HAS_STEAM_USERNAME=false" >> "$GITHUB_OUTPUT"
           fi
 
     outputs:
