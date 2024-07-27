@@ -35,23 +35,28 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Check for Secret PLAY_KEYSTORE
-        id: secret-check
+        id: play-keystore-check
         run: |
           if [ "${{ secrets.PLAY_KEYSTORE }}" != '' ]; then
-            echo "HAS_PLAY_KEYSTORE=true" >> $GITHUB_ENV
+            echo "::set-output name=HAS_PLAY_KEYSTORE::true"
           else
-            echo "HAS_PLAY_KEYSTORE=false" >> $GITHUB_ENV
+            echo "::set-output name=HAS_PLAY_KEYSTORE::false"
           fi
 
-      - name: Output STEAM_USERNAME to env
+      - name: Check for STEAM_USERNAME
+        id: steam-check
         run: |
-            echo "STEAM_USERNAME=${{ secrets.STEAM_USERNAME }}" >> $GITHUB_ENV
+          if [ "${{ secrets.STEAM_USERNAME }}" != '' ]; then
+            echo "::set-output name=HAS_STEAM_USERNAME::true"
+          else
+            echo "::set-output name=HAS_STEAM_USERNAME::false"
+          fi
 
     outputs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
       ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
-      HAS_PLAY_KEYSTORE: ${{ env.HAS_PLAY_KEYSTORE }}
-      STEAM_USERNAME: ${{ env.STEAM_USERNAME }}
+      HAS_PLAY_KEYSTORE: ${{ steps.play-keystore-check.outputs.HAS_PLAY_KEYSTORE }}
+      HAS_STEAM_USERNAME: ${{ steps.steam-check.outputs.HAS_STEAM_USERNAME }}
 
   # ---------------------------------------------------------------------------------------
   tests:
@@ -309,9 +314,8 @@ jobs:
   publish_to_steam:
     needs: [set_version, build_desktop]
     runs-on: ubuntu-latest
-    if: needs.set_version.outputs.STEAM_USERNAME != ''
+    if: needs.set_version.outputs.HAS_STEAM_USERNAME == 'true'
     steps:
-
     - name: Download Windows Build
       uses: robinraju/release-downloader@v1
       with:
