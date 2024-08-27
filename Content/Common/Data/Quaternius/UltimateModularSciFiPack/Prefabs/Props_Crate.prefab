@@ -96,7 +96,11 @@
 						<attribute name="Cast Shadows" type="Bool" value="true" />
 					</attributes>
 				</component>
-				<component _typeName="Selectable" />
+				<component _typeName="Pickable">
+					<attributes>
+						<attribute name="Tooltip" type="String" value="Pick Crate" />
+					</attributes>
+				</component>
 			</components>
 		</node>
 	</nodes>

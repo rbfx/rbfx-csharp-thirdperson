@@ -29,17 +29,17 @@ namespace RbfxTemplate
             set
             {
                 if (_selectedNode != value)
-                {
-                    if (_selectedNode != null && !_selectedNode.IsExpired)
-                        _selectedNode.SendEvent("Unselected", Context.EventDataMap);
+                { 
+                    _interactable?.OnHoverEnd(this);
 
                     _selectedNode = value;
                     _interactable = null;
                     if (_selectedNode != null)
                     {
-                        _selectedNode.SendEvent("Selected", Context.EventDataMap);
                         _interactable = _selectedNode.GetDerivedComponent<IInteractable>() ??
                                         _selectedNode.GetParentDerivedComponent<IInteractable>();
+
+                        _interactable?.OnHoverStart(this);
                     }
                 }
             }
@@ -57,6 +57,7 @@ namespace RbfxTemplate
         public Constraint Constraint { get; set; }
 
         public InputMap InputMap { get; set; }
+        public float InteractionProgress { get; set; }
 
         public override void DelayedStart()
         {
@@ -85,22 +86,7 @@ namespace RbfxTemplate
                     BodyInArms = null;
                     if (SelectedNode != null)
                     {
-                        if (SelectedNode.HasTag("Pickable"))
-                        {
-                            BodyInArms = SelectedNode.GetComponent<RigidBody>();
-                        }
-                        else
-                        {
-                            var map = Context.EventDataMap;
-                            map["Player"] = this;
-                            SelectedNode.SendEvent("Use", map);
-                        }
-                    }
-
-                    if (BodyInArms != null && BodyInArms.Mass > 0)
-                    {
-                        Constraint.OtherBody = BodyInArms;
-                        SelectedNode = null;
+                        Interactable?.Interact(this);
                     }
                 }
                 else
@@ -134,6 +120,15 @@ namespace RbfxTemplate
         public void GetIntoVehicle(Vehicle vehicle)
         {
             _character.TransitionToState(CharacterState.InVehicle, vehicle);
+        }
+
+        public void TakeInHands(Node node)
+        {
+            BodyInArms = node.GetComponent<RigidBody>();
+            if (BodyInArms.Mass <= 0)
+                BodyInArms = null;
+            Constraint.OtherBody = BodyInArms;
+            SelectedNode = null;
         }
     }
 }

@@ -21,14 +21,14 @@
     gray-inner-panel-inner: 137px 31px 2px 2px;
     gray-outer-panel: 4px 4px 100px 106px;
     gray-outer-panel-inner: 53px 55px 2px 2px;
-    gray-header-panel: 396px 70px 4px 10px;
-    gray-header-panel-inner: 397px 73px 2px 2px;
-    gray-footer-panel: 408px 70px 4px 8px;
-    gray-footer-panel-inner: 409px 73px 2px 2px;
-    slidertrack: 182px 70px 14px 22px;
-    slidertrack-inner: 188px 80px 2px 2px;
-    sliderbar: 204px 70px 16px 28px;
-    sliderbar-inner: 211px 81px 2px 2px;
+    gray-header-panel: 492px 70px 4px 10px;
+    gray-header-panel-inner: 493px 73px 2px 2px;
+    gray-footer-panel: 504px 70px 4px 8px;
+    gray-footer-panel-inner: 505px 73px 2px 2px;
+    slidertrack: 278px 70px 14px 22px;
+    slidertrack-inner: 284px 80px 2px 2px;
+    sliderbar: 300px 70px 16px 28px;
+    sliderbar-inner: 307px 81px 2px 2px;
     blue-checkbox: 172px 4px 30.284271px 50.28427px;
     blue-checkbox-hover: 210.28427px 4px 30.284271px 50.28427px;
     blue-checkbox-active: 248.56854px 4px 30.284271px 50.28427px;
@@ -41,12 +41,15 @@
     blue-slider-slidertrack-inner: 124px 86px 2px 2px;
     blue-slider-sliderbar: 146px 70px 28px 40px;
     blue-slider-sliderbar-inner: 159px 87px 2px 2px;
-    selectarrow: 228px 70px 20px 20px;
-    icon-diamond: 256px 70px 20px 20px;
-    icon-money: 284px 70px 20px 20px;
-    icon-settings: 312px 70px 20px 20px;
-    icon-xbox: 340px 70px 20px 20px;
-    icon-discord: 368px 70px 20px 20px;
+    selectarrow: 324px 70px 20px 20px;
+    icon-diamond: 352px 70px 20px 20px;
+    icon-money: 380px 70px 20px 20px;
+    icon-settings: 408px 70px 20px 20px;
+    icon-xbox: 436px 70px 20px 20px;
+    icon-discord: 464px 70px 20px 20px;
+    icon-tap: 256px 118px 20px 20px;
+    icon-use-gauge: 182px 70px 40px 40px;
+    icon-use-gauge-fill: 230px 70px 40px 40px;
 
 }
 input.blue-button,
@@ -78,7 +81,7 @@ select.blue-button selectbox
 }
 select.blue-button selectvalue
 {
-    padding-right: 60px;
+    padding-right: 3em;
 }
 select.blue-button selectbox option:hover
 {
@@ -169,7 +172,7 @@ select.orange-button selectbox
 }
 select.orange-button selectvalue
 {
-    padding-right: 60px;
+    padding-right: 3em;
 }
 select.orange-button selectbox option:hover
 {
@@ -418,5 +421,17 @@ icon.icon-xbox
 icon.icon-discord
 {
     decorator: image( icon-discord );
+}
+icon.icon-tap
+{
+    decorator: image( icon-tap );
+}
+icon.icon-use-gauge
+{
+    decorator: image( icon-use-gauge );
+}
+icon.icon-use-gauge-fill
+{
+    decorator: image( icon-use-gauge-fill );
 }
 

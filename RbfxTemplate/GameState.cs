@@ -15,6 +15,9 @@ namespace RbfxTemplate
         private readonly Player _player;
 
         private string _interactableTooltip = string.Empty;
+        private bool _interactionEnabled = false;
+        private bool _hasInteractable = false;
+        private float _interactionProgress;
 
         public string InteractableTooltip
         {
@@ -22,6 +25,24 @@ namespace RbfxTemplate
             set => SetRmlVariable(ref _interactableTooltip, value);
         }
 
+        public bool InteractionEnabled
+        {
+            get => _interactionEnabled;
+            set => SetRmlVariable(ref _interactionEnabled, value);
+        }
+
+        public bool HasInteractable
+        {
+            get => _hasInteractable;
+            set => SetRmlVariable(ref _hasInteractable, value);
+        }
+
+        public float InteractionProgress
+        {
+            get => _interactionProgress;
+            set => SetRmlVariable(ref _interactionProgress, value);
+        }
+        
         public GameState(UrhoPluginApplication app) : base(app, "UI/GameUI.rml")
         {
             MouseMode = MouseMode.MmRelative;
@@ -82,6 +103,8 @@ namespace RbfxTemplate
         public override void OnDataModelInitialized(GameRmlUIComponent menuComponent)
         {
             menuComponent.BindDataModelProperty(nameof(InteractableTooltip), _ => _.Set(_interactableTooltip), _ => { });
+            menuComponent.BindDataModelProperty(nameof(InteractionEnabled), _ => _.Set(_interactionEnabled), _ => { });
+            menuComponent.BindDataModelProperty(nameof(HasInteractable), _ => _.Set(_hasInteractable), _ => { });
         }
 
         public override void Activate(StringVariantMap bundle)
@@ -106,7 +129,14 @@ namespace RbfxTemplate
         {
             base.Update(timeStep);
 
-            InteractableTooltip = _player.Interactable?.Title ?? string.Empty;
+            var interactable = _player.Interactable;
+            InteractionProgress = _player.InteractionProgress;
+            HasInteractable = interactable != null;
+            if (HasInteractable)
+            {
+                InteractableTooltip = interactable.Tooltip ?? string.Empty;
+                InteractionEnabled = interactable.InteractionEnabled;
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -1,6 +1,7 @@
 <rml>
 	<head>
 		<link type="text/rcss" href="rml.rcss"/>
+		<link type="text/rcss" href="casual.rcss"/>
 		<style>
 			/* Style of the body element, i.e. the root of the window */
 			body {
@@ -27,9 +28,18 @@
 			top: 50vh; left: 50vw;
 			transform: translate(32px, 32px);
 			}
+			.gauge {
+			decorator: image( icon-use-gauge );
+			width: 40px;
+			height: 40px;
+			fill-image: icon-use-gauge-fill;
+			}
 		</style>
 	</head>
 	<body data-model="GameRmlUIComponent">
-		<div class="hover-tooltip">{{InteractableTooltip}}</div>
+		<div class="hover-tooltip"  data-if="HasInteractable">
+			<progress class="gauge" direction="clockwise" start-edge="bottom" data-value="InteractionProgress" data-if="InteractionEnabled"></progress>
+			{{InteractableTooltip}}
+		</div>
 	</body>
 </rml>

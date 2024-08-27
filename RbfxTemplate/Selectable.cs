@@ -7,30 +7,42 @@ namespace RbfxTemplate
     {
         private ComponentList _drawables;
 
-        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Title")]
-        public string Title { get; set; }
+        /// <inheritdoc/>
+        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Tooltip")]
 
+        public string Tooltip { get; set; }
+
+        /// <inheritdoc/>
+        public virtual bool InteractionEnabled { get; } = false;
+
+        /// <inheritdoc/>
+        public virtual float InteractionDuration { get; }
 
         public Selectable(Context context) : base(context)
         {
         }
 
-        protected override void OnNodeSet(Node previousNode, Node currentNode)
+        /// <inheritdoc/>
+        public virtual void OnHoverStart(Player player)
         {
-            base.OnNodeSet(previousNode, currentNode);
-            if (currentNode != null)
+            var outline = Scene.GetComponent<OutlineGroup>();
+            if (outline != null)
             {
-                SubscribeToEvent("Selected", currentNode, Select);
-                SubscribeToEvent("Unselected", currentNode, Unselect);
-            }
-            else
-            {
-                UnsubscribeFromAllEvents();
+                _drawables = Node.GetDerivedComponents<Drawable>(true);
+                foreach (var component in _drawables)
+                {
+                    var drawable = component as Drawable;
+                    outline.AddDrawable(drawable);
+                }
             }
         }
 
-        private void Unselect(VariantMap obj)
+        /// <inheritdoc/>
+        public virtual void OnHoverEnd(Player player)
         {
+            if (this.IsExpired)
+                return;
+
             var outline = Scene.GetComponent<OutlineGroup>();
             if (outline != null && _drawables != null)
                 foreach (var component in _drawables)
@@ -40,18 +52,9 @@ namespace RbfxTemplate
                 }
         }
 
-        private void Select(VariantMap obj)
+        /// <inheritdoc/>
+        public virtual void Interact(Player player)
         {
-            var outline = Scene.GetComponent<OutlineGroup>();
-            if (outline != null)
-            {
-                _drawables = Node.GetComponents<StaticModel>(true);
-                foreach (var component in _drawables)
-                {
-                    var drawable = component as Drawable;
-                    outline.AddDrawable(drawable);
-                }
-            }
         }
     }
 }

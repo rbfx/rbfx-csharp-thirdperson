@@ -3,7 +3,7 @@
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    public partial class DoorButton : Component
+    public partial class DoorButton : Selectable
     {
         private ResourceRef _openAnimationAttr = new ResourceRef(nameof(Animation));
         private ResourceRef _closeAnimationAttr = new ResourceRef(nameof(Animation));
@@ -65,16 +65,7 @@ namespace RbfxTemplate
         [SerializeField]
         public bool Open { get; set; }
 
-        protected override void OnNodeSet(Node previousNode, Node currentNode)
-        {
-            if (currentNode != null)
-                SubscribeToEvent("Use", currentNode, HandleUse);
-            else
-                UnsubscribeFromEvent("Use");
-            base.OnNodeSet(previousNode, currentNode);
-        }
-
-        private void HandleUse(VariantMap obj)
+        public override void Interact(Player player)
         {
             var controller = Node.Parent.GetComponent<AnimationController>(true);
             if (controller.NumAnimations > 0)
