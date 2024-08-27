@@ -65,6 +65,10 @@ namespace RbfxTemplate
         [SerializeField]
         public bool Open { get; set; }
 
+        public override bool InteractionEnabled { get; } = true;
+
+        public override float InteractionDuration { get; } = 1.0f;
+
         public override void Interact(Player player)
         {
             var controller = Node.Parent.GetComponent<AnimationController>(true);

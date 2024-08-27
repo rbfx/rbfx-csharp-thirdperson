@@ -15,6 +15,11 @@ namespace RbfxTemplate
         private IInteractable _interactable;
         private Character _character;
 
+        /// <summary>
+        /// How much time elapsed since interaction started.
+        /// </summary>
+        private float _interactionElapsed;
+
         public Player(Context context) : base(context)
         {
             UpdateEventMask = UpdateEvent.UseUpdate | UpdateEvent.UseFixedupdate;
@@ -30,10 +35,15 @@ namespace RbfxTemplate
             {
                 if (_selectedNode != value)
                 { 
-                    _interactable?.OnHoverEnd(this);
+                    if (_selectedNode != null && !_selectedNode.IsExpired)
+                    {
+                        _interactable?.OnHoverEnd(this);
+                    }
 
                     _selectedNode = value;
                     _interactable = null;
+                    _interactionElapsed = 0.0f;
+
                     if (_selectedNode != null)
                     {
                         _interactable = _selectedNode.GetDerivedComponent<IInteractable>() ??
@@ -57,7 +67,17 @@ namespace RbfxTemplate
         public Constraint Constraint { get; set; }
 
         public InputMap InputMap { get; set; }
-        public float InteractionProgress { get; set; }
+
+        public float InteractionProgress
+        {
+            get
+            {
+                if (_selectedNode == null || _selectedNode.IsExpired || _interactable == null || _interactionElapsed == 0.0f)
+                    return 0.0f;
+
+                return _interactionElapsed / _interactable.InteractionDuration;
+            }
+        }
 
         public override void DelayedStart()
         {
@@ -69,9 +89,24 @@ namespace RbfxTemplate
         {
             base.Update(timeStep);
 
+            if (_selectedNode != null && _selectedNode.IsExpired)
+            {
+                SelectedNode = null;
+            }
+
             _character.Jump = InputMap.Evaluate("Jump") > 0.5f;
 
             var usePressed = InputMap.Evaluate("Use") > 0.5f;
+
+            if (usePressed && _interactionElapsed > 0.0f && _interactable != null)
+            {
+                _interactionElapsed += timeStep;
+                if (_interactionElapsed >= _interactable.InteractionDuration)
+                {
+                    CompleteInteraction();
+                }
+            }
+
             if (usePressed != _usePressed)
             {
                 _usePressed = usePressed;
@@ -84,9 +119,16 @@ namespace RbfxTemplate
                     }
 
                     BodyInArms = null;
-                    if (SelectedNode != null)
+                    if (_interactable != null && _interactable.InteractionEnabled)
                     {
-                        Interactable?.Interact(this);
+                        if (_interactable.InteractionDuration > timeStep)
+                        {
+                            _interactionElapsed = timeStep;
+                        }
+                        else
+                        {
+                            CompleteInteraction();
+                        }
                     }
                 }
                 else
@@ -105,6 +147,12 @@ namespace RbfxTemplate
                 var selectedNode = _raycastResult.Body?.Node;
                 SelectedNode = selectedNode;
             }
+        }
+
+        private void CompleteInteraction()
+        {
+            _interactionElapsed = 0.0f;
+            _interactable?.Interact(this);
         }
 
         public void AddToInventory(string inventoryKey)

@@ -105,6 +105,7 @@ namespace RbfxTemplate
             menuComponent.BindDataModelProperty(nameof(InteractableTooltip), _ => _.Set(_interactableTooltip), _ => { });
             menuComponent.BindDataModelProperty(nameof(InteractionEnabled), _ => _.Set(_interactionEnabled), _ => { });
             menuComponent.BindDataModelProperty(nameof(HasInteractable), _ => _.Set(_hasInteractable), _ => { });
+            menuComponent.BindDataModelProperty(nameof(InteractionProgress), _ => _.Set(_interactionProgress), _ => { });
         }
 
         public override void Activate(StringVariantMap bundle)
