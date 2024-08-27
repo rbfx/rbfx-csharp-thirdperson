@@ -4,7 +4,6 @@ using Urho3DNet;
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    [Preserve(AllMembers = true)]
     public partial class GameRmlUIComponent : RmlUIComponent
     {
         private RmlUIStateBase _state;

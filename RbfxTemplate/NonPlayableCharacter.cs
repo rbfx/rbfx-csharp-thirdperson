@@ -4,7 +4,6 @@ using Urho3DNet;
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    [Preserve(AllMembers = true)]
     public partial class NonPlayableCharacter : LogicComponent
     {
         private static readonly Random _rnd = new Random();

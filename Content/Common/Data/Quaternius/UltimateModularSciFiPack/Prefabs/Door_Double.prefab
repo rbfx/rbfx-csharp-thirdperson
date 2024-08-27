@@ -3,7 +3,67 @@
 	<components>
 		<component _typeName="Octree" />
 		<component _typeName="PhysicsWorld" />
-		<component _typeName="RenderPipeline" />
+		<component _typeName="RenderPipeline">
+			<attributes>
+				<attribute name="Render Passes" type="VariantVector">
+					<value>
+						<element type="String" value="Postprocess: Exposure" />
+						<element type="Bool" value="true" />
+						<element type="String" value="Postprocess: SSAO" />
+						<element type="Bool" value="false" />
+						<element type="String" value="Postprocess: Bloom" />
+						<element type="Bool" value="false" />
+						<element type="String" value="Postprocess: Draw Outlines" />
+						<element type="Bool" value="true" />
+						<element type="String" value="Postprocess: Tone Mapping" />
+						<element type="Bool" value="true" />
+						<element type="String" value="Postprocess: Adjust Color" />
+						<element type="Bool" value="true" />
+						<element type="String" value="Postprocess: FXAA v2" />
+						<element type="Bool" value="false" />
+						<element type="String" value="Postprocess: FXAA v3" />
+						<element type="Bool" value="false" />
+					</value>
+				</attribute>
+				<attribute name="Render Path Parameters" type="StringVariantMap">
+					<value>
+						<element key="SSAO: Near Distance" type="Float" value="1.000000" />
+						<element key="Exposure: Adapt Rate" type="Float" value="0.600000" />
+						<element key="Exposure: Min" type="Float" value="1.000000" />
+						<element key="Bloom: Max Brightness" type="Float" value="1.000000" />
+						<element key="SSAO: Normal Threshold" type="Float" value="0.200000" />
+						<element key="SSAO: Near Radius" type="Float" value="0.050000" />
+						<element key="SSAO: Strength" type="Float" value="0.700000" />
+						<element key="Adjust Color: HSVParams" type="Vector4" value="1 1 1 1" />
+						<element key="SSAO: End Fade Distance" type="Float" value="200.000000" />
+						<element key="Exposure: Automatic" type="Bool" value="false" />
+						<element key="Tone Mapping: Mode@" type="StringVector">
+							<value>
+								<element value="None" />
+								<element value="Reinhard" />
+								<element value="ReinhardWhite" />
+								<element value="Uncharted2" />
+							</value>
+						</element>
+						<element key="SSAO: Begin Fade Distance" type="Float" value="100.000000" />
+						<element key="Adjust Color: ColorOffset" type="Vector4" value="0 0 0 0" />
+						<element key="Bloom: Base Intensity" type="Float" value="1.000000" />
+						<element key="Bloom: Iteration Intensity Factor" type="Float" value="1.000000" />
+						<element key="Bloom: Min Brightness" type="Float" value="0.800000" />
+						<element key="SSAO: Depth Threshold" type="Float" value="0.100000" />
+						<element key="SSAO: Far Distance" type="Float" value="100.000000" />
+						<element key="SSAO: Downscale" type="Int" value="0" />
+						<element key="Exposure: Max" type="Float" value="3.000000" />
+						<element key="Adjust Color: ColorFilter" type="Vector4" value="1 1 1 1" />
+						<element key="SSAO: Exponent" type="Float" value="1.500000" />
+						<element key="FXAA: FXAAParams" type="Vector3" value="0.4 0.5 0.75" />
+						<element key="SSAO: Far Radius" type="Float" value="1.000000" />
+						<element key="Bloom: Num Iterations" type="Int" value="5" />
+						<element key="Tone Mapping: Mode" type="Int" value="0" />
+					</value>
+				</attribute>
+			</attributes>
+		</component>
 		<component _typeName="ReflectionProbeManager" />
 	</components>
 	<nodes>

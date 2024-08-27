@@ -6,7 +6,6 @@ using RbfxTemplate.CharacterStates;
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    [Preserve(AllMembers = true)]
     public partial class Character : MoveAndOrbitComponent
     {
         /// Character states (on ground, falling, etc).

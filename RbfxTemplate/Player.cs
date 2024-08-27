@@ -5,7 +5,6 @@ using Urho3DNet;
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    [Preserve(AllMembers = true)]
     public partial class Player : LogicComponent
     {
         private readonly PhysicsRaycastResult _raycastResult;
@@ -13,6 +12,7 @@ namespace RbfxTemplate
         private readonly HashSet<string> _inventory = new HashSet<string>();
         private bool _usePressed;
         private Node _selectedNode;
+        private IInteractable _interactable;
         private Character _character;
 
         public Player(Context context) : base(context)
@@ -34,9 +34,20 @@ namespace RbfxTemplate
                         _selectedNode.SendEvent("Unselected", Context.EventDataMap);
 
                     _selectedNode = value;
-                    if (_selectedNode != null) _selectedNode.SendEvent("Selected", Context.EventDataMap);
+                    _interactable = null;
+                    if (_selectedNode != null)
+                    {
+                        _selectedNode.SendEvent("Selected", Context.EventDataMap);
+                        _interactable = _selectedNode.GetDerivedComponent<IInteractable>() ??
+                                        _selectedNode.GetParentDerivedComponent<IInteractable>();
+                    }
                 }
             }
+        }
+
+        public IInteractable Interactable
+        {
+            get => _interactable;
         }
 
         public Node AttractionTarget { get; set; }

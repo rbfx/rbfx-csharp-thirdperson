@@ -3,8 +3,7 @@
 namespace RbfxTemplate
 {
     [ObjectFactory]
-    [Preserve(AllMembers = true)]
-    public partial class GameState : ApplicationState
+    public partial class GameState : RmlUIStateBase
     {
         protected readonly SharedPtr<Scene> _scene;
         protected readonly SharedPtr<Sprite> _cross;
@@ -13,8 +12,17 @@ namespace RbfxTemplate
         private readonly Viewport _viewport;
         private readonly Node _character;
         private readonly Node _cameraRoot;
+        private readonly Player _player;
 
-        public GameState(UrhoPluginApplication app) : base(app.Context)
+        private string _interactableTooltip = string.Empty;
+
+        public string InteractableTooltip
+        {
+            get => _interactableTooltip;
+            set => SetRmlVariable(ref _interactableTooltip, value);
+        }
+
+        public GameState(UrhoPluginApplication app) : base(app, "UI/GameUI.rml")
         {
             MouseMode = MouseMode.MmRelative;
             IsMouseVisible = false;
@@ -24,23 +32,6 @@ namespace RbfxTemplate
             _app = app;
             _scene = Context.CreateObject<Scene>();
             _scene.Ptr.LoadXML("Scenes/Sample.xml");
-
-            {
-                var doorKeys = _scene.Ptr.GetChildrenWithTag("DoorKey", true);
-                foreach (var box in doorKeys)
-                {
-                    var c = box.CreateComponent<Pickable>();
-                    c.InventoryKey = box.Name;
-                }
-
-                var redKeyDoor = _scene.Ptr.GetChild("RedKeyDoor", true);
-                var triggerAnimator = redKeyDoor.GetComponent<TriggerAnimator>(true);
-                var newTrigger = triggerAnimator.Node.CreateComponent<DoorTrigger>();
-                newTrigger.InventoryKey = "RedKey";
-                newTrigger.EnterAnimation = triggerAnimator.EnterAnimation;
-                newTrigger.ExitAnimation = triggerAnimator.ExitAnimation;
-                triggerAnimator.Remove();
-            }
 
             var nodeList = _scene.Ptr.GetChildrenWithComponent(nameof(KinematicCharacterController), true);
             foreach (var node in nodeList)
@@ -54,20 +45,20 @@ namespace RbfxTemplate
             _character.CreateComponent<PrefabReference>()
                 .SetPrefab(Context.ResourceCache.GetResource<PrefabResource>("Models/Characters/YBot/YBot.prefab"));
             var character = SetupCharacter(_character);
-            var player = _character.CreateComponent<Player>();
-            player.InputMap = inputMap;
-            player.AttractionTarget = character.ModelPivot.CreateChild("AttractionTarget");
-            player.AttractionTarget.Position = new Vector3(0, 1.0f, 1.0f);
-            player.AttractionTarget.CreateComponent<RigidBody>();
-            player.Constraint = player.AttractionTarget.CreateComponent<Constraint>();
-            player.Constraint.ConstraintType = ConstraintType.ConstraintSlider;
+            _player = _character.CreateComponent<Player>();
+            _player.InputMap = inputMap;
+            _player.AttractionTarget = character.ModelPivot.CreateChild("AttractionTarget");
+            _player.AttractionTarget.Position = new Vector3(0, 1.0f, 1.0f);
+            _player.AttractionTarget.CreateComponent<RigidBody>();
+            _player.Constraint = _player.AttractionTarget.CreateComponent<Constraint>();
+            _player.Constraint.ConstraintType = ConstraintType.ConstraintSlider;
             _cameraRoot = _character.CreateChild();
             var cameraPrefab = _cameraRoot.CreateComponent<PrefabReference>();
             cameraPrefab.SetPrefab(
                 Context.ResourceCache.GetResource<PrefabResource>("Models/Characters/Camera.prefab"));
             cameraPrefab.Inline(PrefabInlineFlag.None);
-            player.Camera = _character.GetComponent<Camera>(true);
-            _cameraNode = player.Camera.Node;
+            _player.Camera = _character.GetComponent<Camera>(true);
+            _cameraNode = _player.Camera.Node;
             _character.CreateComponent<MoveAndOrbitController>().InputMap = inputMap;
             character.CameraYaw = _character.GetChild("CameraYawPivot", true);
             character.CameraPitch = _character.GetChild("CameraPitchPivot", true);
@@ -88,6 +79,11 @@ namespace RbfxTemplate
             UIRoot.AddChild(_cross);
         }
 
+        public override void OnDataModelInitialized(GameRmlUIComponent menuComponent)
+        {
+            menuComponent.BindDataModelProperty(nameof(InteractableTooltip), _ => _.Set(_interactableTooltip), _ => { });
+        }
+
         public override void Activate(StringVariantMap bundle)
         {
             SubscribeToEvent(E.KeyUp, HandleKeyUp);
@@ -104,6 +100,13 @@ namespace RbfxTemplate
             _scene.Ptr.IsUpdateEnabled = false;
             UnsubscribeFromEvent(E.KeyUp);
             base.Deactivate();
+        }
+
+        public override void Update(float timeStep)
+        {
+            base.Update(timeStep);
+
+            InteractableTooltip = _player.Interactable?.Title ?? string.Empty;
         }
 
         protected override void Dispose(bool disposing)

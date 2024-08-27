@@ -5,7 +5,6 @@ using Urho3DNet;
 namespace RbfxTemplate
 {
     [ObjectFactory]
-    [Preserve(AllMembers = true)]
     public partial class MainMenuState : RmlUIStateBase
     {
         public MainMenuState(UrhoPluginApplication app) : base(app, "UI/MainMenu.rml")

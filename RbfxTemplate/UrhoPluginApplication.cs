@@ -7,7 +7,6 @@ namespace RbfxTemplate
     ///     This class represents an Urho3D plugin application.
     /// </summary>
     [LoadablePlugin]
-    [Preserve(AllMembers = true)]
     public partial class UrhoPluginApplication : PluginApplication
     {
         /// <summary>

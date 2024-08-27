@@ -24,7 +24,7 @@
 			font-style: normal;
 		}
 		/* Style of the root panel element */
-		dev.menu-panel {
+		div.menu-panel {
 			width: 50%; 
 			max-height: 90%;
 			position: absolute; 

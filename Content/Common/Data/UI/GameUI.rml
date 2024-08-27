@@ -1,0 +1,35 @@
+<rml>
+	<head>
+		<link type="text/rcss" href="rml.rcss"/>
+		<style>
+			/* Style of the body element, i.e. the root of the window */
+			body {
+			/* Position at the top-left corner of the viewport
+			*/
+			position: absolute;
+			left: 0;
+			top: 0;
+
+			/* Fullscreen, no margins */
+			margin: 0;
+			width: 100%;
+			height: 100%;
+
+			/* Default font to be used in child elements */
+			font-family: "Archivo Black";
+			font-weight: 800;
+			font-size: 32dp;
+			font-style: normal;
+			}
+			/* Style of the root panel element */
+			div.hover-tooltip {
+			position: absolute;
+			top: 50vh; left: 50vw;
+			transform: translate(32px, 32px);
+			}
+		</style>
+	</head>
+	<body data-model="GameRmlUIComponent">
+		<div class="hover-tooltip">{{InteractableTooltip}}</div>
+	</body>
+</rml>

@@ -3,14 +3,18 @@
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    [Preserve(AllMembers = true)]
-    public partial class Pickable : Component
+    public partial class Pickable : Component, IInteractable
     {
         public Pickable(Context context) : base(context)
         {
         }
 
-        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Inventory Key")] public string InventoryKey { get; set; } = string.Empty;
+        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Inventory Key")]
+        public string InventoryKey { get; set; } = string.Empty;
+
+        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Title")]
+        public string Title { get; set; }
+
 
         protected override void OnNodeSet(Node previousNode, Node currentNode)
         {

@@ -3,7 +3,6 @@
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    [Preserve(AllMembers = true)]
     public partial class Vehicle : MoveAndOrbitComponent
     {
         private RaycastVehicle _raycastVehicle;

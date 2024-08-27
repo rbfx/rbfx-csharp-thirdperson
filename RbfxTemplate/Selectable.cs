@@ -3,10 +3,13 @@
 namespace RbfxTemplate
 {
     [ObjectFactory(Category = "Component/Game")]
-    [Preserve(AllMembers = true)]
-    public partial class Selectable : Component
+    public partial class Selectable : Component, IInteractable
     {
         private ComponentList _drawables;
+
+        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Title")]
+        public string Title { get; set; }
+
 
         public Selectable(Context context) : base(context)
         {

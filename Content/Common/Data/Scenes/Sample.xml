@@ -3,8 +3,8 @@
 	<attribute name="Name" value="Sample" />
 	<attribute name="Time Scale" value="1.000000" />
 	<attribute name="Elapsed Time" value="0.000000" />
-	<attribute name="Next Node ID" value="10320" />
-	<attribute name="Next Component ID" value="16677" />
+	<attribute name="Next Node ID" value="10324" />
+	<attribute name="Next Component ID" value="17454" />
 	<attribute name="Variables" />
 	<attribute name="Update Events">
 		<string value="@SceneForcedUpdate" />
@@ -93,7 +93,7 @@
 		<attribute name="Type" value="Music" />
 		<attribute name="Frequency" value="48000.000000" />
 		<attribute name="Is Playing" value="true" />
-		<attribute name="Play Position" value="-246967056" />
+		<attribute name="Play Position" value="-33619920" />
 	</component>
 	<node id="6">
 		<attribute name="Is Enabled" value="true" />
@@ -910,9 +910,76 @@
 				<attribute name="Rotation" value="1 0 0 0" />
 				<attribute name="Scale" value="1 1 1" />
 				<attribute name="Variables" />
-				<component type="PrefabReference" id="8220">
-					<attribute name="Prefab" value="PrefabResource;Quaternius/UltimateModularSciFiPack/Prefabs/Door_Double.prefab" />
+				<component type="DoorTrigger" id="17095">
+					<attribute name="Enter Animation" value="Animation;Animations/SlidingDoor/Open.xml" />
+					<attribute name="Exit Animation" value="Animation;Animations/SlidingDoor/Close.xml" />
+					<attribute name="Inventory Key" value="RedKey" />
 				</component>
+				<component type="CollisionShape" id="17245">
+					<attribute name="Size" value="3 2.5 2" />
+					<attribute name="Offset Position" value="0 1.25 0" />
+				</component>
+				<component type="RigidBody" id="17246">
+					<attribute name="Physics Position" value="10 0 -7.5" />
+					<attribute name="Use Gravity" value="false" />
+					<attribute name="Is Trigger" value="true" />
+				</component>
+				<component type="AnimationController" id="17247">
+					<attribute name="Animations">
+						<variant type="Int" value="0" />
+					</attribute>
+				</component>
+				<component type="Selectable" id="17453">
+					<attribute name="Title" value="Requires Red Key" />
+				</component>
+				<node id="10322">
+					<attribute name="Is Enabled" value="true" />
+					<attribute name="Name" value="Door_Double.L" />
+					<attribute name="Tags">
+						<string value="Untagged" />
+					</attribute>
+					<attribute name="Position" value="1.6 0 0" />
+					<attribute name="Rotation" value="1 0 0 0" />
+					<attribute name="Scale" value="1 1 1" />
+					<attribute name="Variables" />
+					<component type="CollisionShape" id="17249">
+						<attribute name="Size" value="1.65039 2.51974 0.454233" />
+						<attribute name="Offset Position" value="-0.767207 1.25955 9.68575e-08" />
+						<attribute name="Collision Margin" value="0.010000" />
+					</component>
+					<component type="RigidBody" id="17250">
+						<attribute name="Physics Position" value="11.6 0 -7.5" />
+					</component>
+					<component type="StaticModel" id="17251">
+						<attribute name="Model" value="Model;Quaternius/UltimateModularSciFiPack/Meshes/Door_Double/Door_Double.L.mdl" />
+						<attribute name="Material" value="Material;Materials/VertexColor.xml" />
+						<attribute name="Cast Shadows" value="true" />
+					</component>
+				</node>
+				<node id="10323">
+					<attribute name="Is Enabled" value="true" />
+					<attribute name="Name" value="Door_Double.R" />
+					<attribute name="Tags">
+						<string value="Untagged" />
+					</attribute>
+					<attribute name="Position" value="-1.6 0 0" />
+					<attribute name="Rotation" value="1 0 0 0" />
+					<attribute name="Scale" value="1 1 1" />
+					<attribute name="Variables" />
+					<component type="CollisionShape" id="17252">
+						<attribute name="Size" value="1.65039 2.51974 0.454233" />
+						<attribute name="Offset Position" value="0.767207 1.25955 9.68575e-08" />
+						<attribute name="Collision Margin" value="0.010000" />
+					</component>
+					<component type="RigidBody" id="17253">
+						<attribute name="Physics Position" value="8.4 0 -7.5" />
+					</component>
+					<component type="StaticModel" id="17254">
+						<attribute name="Model" value="Model;Quaternius/UltimateModularSciFiPack/Meshes/Door_Double/Door_Double.R.mdl" />
+						<attribute name="Material" value="Material;Materials/VertexColor.xml" />
+						<attribute name="Cast Shadows" value="true" />
+					</component>
+				</node>
 			</node>
 			<node id="7883">
 				<attribute name="Is Enabled" value="true" />
@@ -1136,7 +1203,13 @@
 		<component type="RigidBody" id="8956">
 			<attribute name="Physics Position" value="4.10768 0.236873 0.401472" />
 		</component>
-		<component type="Selectable" id="16466" />
+		<component type="Selectable" id="16466">
+			<attribute name="Title" value="Red Key" />
+		</component>
+		<component type="Pickable" id="16885">
+			<attribute name="Inventory Key" value="RedKey" />
+			<attribute name="Title" value="Red Key" />
+		</component>
 	</node>
 	<node id="9687">
 		<attribute name="Is Enabled" value="true" />
