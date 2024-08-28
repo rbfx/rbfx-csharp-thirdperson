@@ -135,6 +135,7 @@ namespace RbfxTemplate
                 {
                     Constraint.OtherBody = null;
                     BodyInArms = null;
+                    _interactionElapsed = 0.0f;
                 }
             }
 

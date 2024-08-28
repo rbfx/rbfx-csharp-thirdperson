@@ -306,6 +306,16 @@
 				},
 				{
 					"_typeName": "Vehicle"
+				},
+				{
+					"_typeName": "VehicleInteraction",
+					"attributes": [
+						{
+							"name": "Tooltip",
+							"type": "String",
+							"value": "Get into car"
+						}
+					]
 				}
 			],
 			"nodes": [

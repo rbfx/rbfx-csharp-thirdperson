@@ -93,7 +93,7 @@
 		<attribute name="Type" value="Music" />
 		<attribute name="Frequency" value="48000.000000" />
 		<attribute name="Is Playing" value="true" />
-		<attribute name="Play Position" value="-314948752" />
+		<attribute name="Play Position" value="-316987600" />
 	</component>
 	<node id="6">
 		<attribute name="Is Enabled" value="true" />
@@ -109,7 +109,6 @@
 			<attribute name="Light Type" value="Directional" />
 			<attribute name="Cast Shadows" value="true" />
 			<attribute name="CSM Splits" value="4 16 128 150" />
-			<attribute name="Depth Constant Bias" value="0.000050" />
 		</component>
 	</node>
 	<node id="12">
