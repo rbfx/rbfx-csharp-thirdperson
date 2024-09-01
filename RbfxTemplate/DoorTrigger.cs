@@ -9,15 +9,15 @@ namespace RbfxTemplate
         {
         }
 
-        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Inventory Key")]
-        public string InventoryKey { get; set; }
+        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Item Definition")]
+        public ResourceRef ItemDefinition { get; set; } = new ResourceRef(nameof(ItemDefinitionResource));
 
         public override bool Filter(Node node)
         {
-            if (!string.IsNullOrEmpty(InventoryKey))
+            if (ItemDefinition != null)
             {
                 var player = node.GetComponent<Player>();
-                if (player != null) return player.HasInInventory(InventoryKey);
+                if (player != null) return player.HasInInventory(ItemDefinition);
                 return false;
             }
 

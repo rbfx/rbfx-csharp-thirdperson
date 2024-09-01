@@ -32,12 +32,18 @@ namespace RbfxTemplate
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            DirtyVariable(e.PropertyName);
+            UpdateProperty(e.PropertyName);
         }
 
         public void UpdateProperties()
         {
             DirtyAllVariables();
+        }
+
+        public void UpdateProperty(string propertyName)
+        {
+            if (!string.IsNullOrEmpty(propertyName))
+                DirtyVariable(propertyName);
         }
 
         protected override void OnDataModelInitialized()

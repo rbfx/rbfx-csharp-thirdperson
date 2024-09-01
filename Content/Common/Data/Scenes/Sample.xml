@@ -3,8 +3,8 @@
 	<attribute name="Name" value="Sample" />
 	<attribute name="Time Scale" value="1.000000" />
 	<attribute name="Elapsed Time" value="0.000000" />
-	<attribute name="Next Node ID" value="10324" />
-	<attribute name="Next Component ID" value="17653" />
+	<attribute name="Next Node ID" value="10454" />
+	<attribute name="Next Component ID" value="18089" />
 	<attribute name="Variables" />
 	<attribute name="Update Events">
 		<string value="@SceneForcedUpdate" />
@@ -93,7 +93,7 @@
 		<attribute name="Type" value="Music" />
 		<attribute name="Frequency" value="48000.000000" />
 		<attribute name="Is Playing" value="true" />
-		<attribute name="Play Position" value="-316987600" />
+		<attribute name="Play Position" value="-320450176" />
 	</component>
 	<node id="6">
 		<attribute name="Is Enabled" value="true" />
@@ -912,7 +912,7 @@
 				<component type="DoorTrigger" id="17095">
 					<attribute name="Enter Animation" value="Animation;Animations/SlidingDoor/Open.xml" />
 					<attribute name="Exit Animation" value="Animation;Animations/SlidingDoor/Close.xml" />
-					<attribute name="Inventory Key" value="RedKey" />
+					<attribute name="Item Definition" value="ItemDefinitionResource;Items/RedKey.json" />
 				</component>
 				<component type="CollisionShape" id="17245">
 					<attribute name="Size" value="3 2.5 2" />
@@ -1191,20 +1191,10 @@
 		</attribute>
 		<attribute name="Position" value="4.10768 0.236873 0.401472" />
 		<attribute name="Rotation" value="1 0 0 0" />
-		<attribute name="Scale" value="0.3 0.05 0.2" />
+		<attribute name="Scale" value="1 1 1" />
 		<attribute name="Variables" />
-		<component type="StaticModel" id="8775">
-			<attribute name="Model" value="Model;Models/Box.mdl" />
-			<attribute name="Material" value="Material;Materials/RedKey.material" />
-			<attribute name="Cast Shadows" value="true" />
-		</component>
-		<component type="CollisionShape" id="8955" />
-		<component type="RigidBody" id="8956">
-			<attribute name="Physics Position" value="4.10768 0.236873 0.401472" />
-		</component>
-		<component type="InventoryItem" id="17652">
-			<attribute name="Inventory Key" value="RedKey" />
-			<attribute name="Tooltip" value="Red Key" />
+		<component type="PrefabReference" id="17852">
+			<attribute name="Prefab" value="PrefabResource;Objects/RedKey.prefab" />
 		</component>
 	</node>
 	<node id="9687">
@@ -1234,6 +1224,18 @@
 		<component type="CollisionShape" id="12130" />
 		<component type="RigidBody" id="12131">
 			<attribute name="Physics Position" value="0 -50 0" />
+		</component>
+	</node>
+	<node id="10453">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="FirstAidKit" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="3.99924 0.508375 -1.26181" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="PrefabReference" id="18088">
+			<attribute name="Prefab" value="PrefabResource;Quaternius/SurvivalPack/Prefabs/FirstAidKit.prefab" />
 		</component>
 	</node>
 </scene>

@@ -63,6 +63,9 @@ namespace RbfxTemplate
         /// <param name="renderPipeline">Render pipeline component.</param>
         public void Apply(RenderPipeline renderPipeline)
         {
+            if (renderPipeline == null)
+                return;
+
             renderPipeline.SetRenderPassEnabled("Postprocess: SSAO", SSAO);
             renderPipeline.SetRenderPassEnabled("Postprocess: Bloom", Bloom);
             renderPipeline.SetRenderPassEnabled("Postprocess: FXAA v3", FXAA);

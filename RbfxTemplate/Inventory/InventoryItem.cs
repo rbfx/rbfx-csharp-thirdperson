@@ -9,15 +9,15 @@ namespace RbfxTemplate
         {
         }
 
-        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Inventory Key")]
-        public string InventoryKey { get; set; } = string.Empty;
+        [SerializeField(Mode = AttributeMode.AmDefault, Name = "Item Definition")]
+        public ResourceRef ItemDefinition { get; set; } = new ResourceRef(nameof(ItemDefinitionResource));
 
         /// <inheritdoc/>
         public override bool InteractionEnabled { get; } = true;
 
         public override void Interact(Player player)
         {
-            player.AddToInventory(InventoryKey);
+            player.AddToInventory(ItemDefinition);
             OnHoverEnd(player);
             Node.Remove();
         }

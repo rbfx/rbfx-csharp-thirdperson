@@ -1,0 +1,5 @@
+{
+  "name": "First Aid Kit",
+  "prefab": "PrefabResource;Quaternius/SurvivalPack/Prefabs/FirstAidKit.prefab",
+  "weight": 1.0
+}

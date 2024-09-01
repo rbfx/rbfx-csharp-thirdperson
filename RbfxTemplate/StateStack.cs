@@ -43,11 +43,14 @@ namespace RbfxTemplate
         ///     Push state to the stack and make it current.
         /// </summary>
         /// <param name="state">State to push.</param>
-        public void Push(ApplicationState state)
+        public void Push(ApplicationState state, StringVariantMap bundle = null)
         {
             if (state != null)
             {
-                _stateManager.EnqueueState(state);
+                if (bundle == null)
+                    _stateManager.EnqueueState(state);
+                else
+                    _stateManager.EnqueueState(state, bundle);
                 _stack.Push(state);
             }
         }

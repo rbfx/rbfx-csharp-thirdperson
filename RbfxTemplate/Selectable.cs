@@ -28,7 +28,7 @@ namespace RbfxTemplate
             var outline = Scene.GetComponent<OutlineGroup>();
             if (outline != null)
             {
-                _drawables = Node.GetDerivedComponents<Drawable>(true);
+                _drawables = Node.FindComponents<Drawable>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Derived);
                 foreach (var component in _drawables)
                 {
                     var drawable = component as Drawable;

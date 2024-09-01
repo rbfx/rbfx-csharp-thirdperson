@@ -15,6 +15,11 @@ namespace RbfxTemplate
         private SharedPtr<GameState> _gameState;
 
         /// <summary>
+        /// Inventory application state.
+        /// </summary>
+        private SharedPtr<InventoryState> _inventoryState;
+
+        /// <summary>
         ///     Safe pointer to menu screen.
         /// </summary>
         private SharedPtr<MainMenuState> _mainMenuState;
@@ -45,6 +50,11 @@ namespace RbfxTemplate
         ///     Gets a value indicating whether the game is running.
         /// </summary>
         public bool IsGameRunning => _gameState;
+
+        /// <summary>
+        /// Current game state or null if no game is running.
+        /// </summary>
+        public GameState Game => _gameState.Ptr;
 
         protected override void Load()
         {
@@ -94,7 +104,6 @@ namespace RbfxTemplate
                 stateManager.EnqueueState(splash);
             }
 
-
             // Crate end enqueue main menu screen.
             _stateStack.Push(_mainMenuState);
 
@@ -105,6 +114,7 @@ namespace RbfxTemplate
         {
             _mainMenuState?.Dispose();
             _gameState?.Dispose();
+            _inventoryState?.Dispose();
 
             base.Stop();
         }
@@ -166,6 +176,12 @@ namespace RbfxTemplate
         {
             _settings?.Dispose();
             _settings = ConfigFileContainer<GameSettings>.LoadConfig(Context);
+        }
+
+        public void OpenInventory()
+        {
+            _inventoryState = _inventoryState ?? new SharedPtr<InventoryState>(new InventoryState(this));
+            _stateStack.Push(_inventoryState);
         }
     }
 }

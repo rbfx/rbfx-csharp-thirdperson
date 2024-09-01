@@ -1,0 +1,35 @@
+<rml>
+	<head>
+		<link type="text/rcss" href="rml.rcss"/>
+		<link type="text/rcss" href="casual.rcss"/>
+		<style>
+			/* Style of the body element, i.e. the root of the window */
+			body {
+			/* Position at the top-left corner of the viewport
+			*/
+			position: absolute;
+			left: 0;
+			top: 0;
+
+			/* Fullscreen, no margins */
+			margin: 0;
+			width: 100%;
+			height: 100%;
+
+			/* Default font to be used in child elements */
+			font-family: "Archivo Black";
+			font-weight: 800;
+			font-size: 20px;
+			font-style: normal;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="gray-outer-panel" style="position:absolute; width:25vw; height:100vh" data-model="GameRmlUIComponent">
+			Inventory items: {{ inventory_items.size }}<br/>
+			<div class="gray-inner-panel" style="display: block;" data-for="item_value : inventory_items">
+				{{ item_value.name }}
+			</div>
+		</div>
+	</body>
+</rml>

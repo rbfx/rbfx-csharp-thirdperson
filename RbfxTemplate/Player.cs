@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RbfxTemplate.CharacterStates;
+using RbfxTemplate.Inventory;
 using Urho3DNet;
 
 namespace RbfxTemplate
@@ -9,7 +11,12 @@ namespace RbfxTemplate
     {
         private readonly PhysicsRaycastResult _raycastResult;
 
-        private readonly HashSet<string> _inventory = new HashSet<string>();
+        private static readonly StringHash FieldNameResource = "Resource";
+        private static readonly StringHash FieldNameCount = "Count";
+
+        private readonly Dictionary<string, InventorySlot> _inventory = new Dictionary<string, InventorySlot>();
+
+        //private readonly HashSet<ResourceRef> _inventory = new HashSet<ResourceRef>();
         private bool _usePressed;
         private Node _selectedNode;
         private IInteractable _interactable;
@@ -24,6 +31,11 @@ namespace RbfxTemplate
         {
             UpdateEventMask = UpdateEvent.UseUpdate | UpdateEvent.UseFixedupdate;
             _raycastResult = new PhysicsRaycastResult();
+        }
+
+        public IReadOnlyDictionary<string, InventorySlot> Inventory
+        {
+            get => _inventory;
         }
 
         public Camera Camera { get; set; }
@@ -47,7 +59,7 @@ namespace RbfxTemplate
                     if (_selectedNode != null)
                     {
                         _interactable = _selectedNode.GetDerivedComponent<IInteractable>() ??
-                                        _selectedNode.GetParentDerivedComponent<IInteractable>();
+                                        _selectedNode.FindComponent<IInteractable>(ComponentSearchFlag.SelfOrParentRecursive | ComponentSearchFlag.Derived);
 
                         _interactable?.OnHoverStart(this);
                     }
@@ -156,14 +168,31 @@ namespace RbfxTemplate
             _interactable?.Interact(this);
         }
 
-        public void AddToInventory(string inventoryKey)
+        public void AddToInventory(ResourceRef inventoryKey)
         {
-            _inventory.Add(inventoryKey);
+            if (inventoryKey == null || string.IsNullOrEmpty(inventoryKey.Name))
+            {
+                return;
+            }
+
+            if (!_inventory.TryGetValue(inventoryKey.Name, out var inventorySlot))
+            {
+                inventorySlot = new InventorySlot()
+                    { ItemDefinition = Context.ResourceCache.GetResource<ItemDefinitionResource>(inventoryKey.Name) };
+                _inventory.Add(inventoryKey.Name, inventorySlot);
+            }
+
+            ++inventorySlot.Count;
         }
 
-        public bool HasInInventory(string inventoryKey)
+        public bool HasInInventory(ResourceRef inventoryKey)
         {
-            return _inventory.Contains(inventoryKey);
+            if (inventoryKey == null || string.IsNullOrEmpty(inventoryKey.Name))
+            {
+                return false;
+            }
+
+            return _inventory.ContainsKey(inventoryKey.Name);
         }
 
         public void GetIntoVehicle(Vehicle vehicle)

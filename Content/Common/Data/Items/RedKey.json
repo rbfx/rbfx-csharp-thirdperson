@@ -1,0 +1,5 @@
+{
+  "name": "Red Key",
+  "prefab": "PrefabResource;Objects/RedKey.prefab",
+  "weight": 0.1
+}

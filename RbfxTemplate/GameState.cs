@@ -7,7 +7,6 @@ namespace RbfxTemplate
     {
         protected readonly SharedPtr<Scene> _scene;
         protected readonly SharedPtr<Sprite> _cross;
-        private readonly UrhoPluginApplication _app;
         private readonly Node _cameraNode;
         private readonly Viewport _viewport;
         private readonly Node _character;
@@ -18,6 +17,10 @@ namespace RbfxTemplate
         private bool _interactionEnabled = false;
         private bool _hasInteractable = false;
         private float _interactionProgress;
+        private readonly InputMap _inputMap;
+        private bool _inTransition = false;
+
+        public Player Player => _player;
 
         public string InteractableTooltip
         {
@@ -48,9 +51,8 @@ namespace RbfxTemplate
             MouseMode = MouseMode.MmRelative;
             IsMouseVisible = false;
 
-            var inputMap = Context.ResourceCache.GetResource<InputMap>("Input/MoveAndOrbit.inputmap");
+            _inputMap = Context.ResourceCache.GetResource<InputMap>("Input/MoveAndOrbit.inputmap");
 
-            _app = app;
             _scene = Context.CreateObject<Scene>();
             _scene.Ptr.LoadXML("Scenes/Sample.xml");
 
@@ -67,7 +69,7 @@ namespace RbfxTemplate
                 .SetPrefab(Context.ResourceCache.GetResource<PrefabResource>("Models/Characters/YBot/YBot.prefab"));
             var character = SetupCharacter(_character);
             _player = _character.CreateComponent<Player>();
-            _player.InputMap = inputMap;
+            _player.InputMap = _inputMap;
             _player.AttractionTarget = character.ModelPivot.CreateChild("AttractionTarget");
             _player.AttractionTarget.Position = new Vector3(0, 1.0f, 1.0f);
             _player.AttractionTarget.CreateComponent<RigidBody>();
@@ -78,9 +80,9 @@ namespace RbfxTemplate
             cameraPrefab.SetPrefab(
                 Context.ResourceCache.GetResource<PrefabResource>("Models/Characters/Camera.prefab"));
             cameraPrefab.Inline(PrefabInlineFlag.None);
-            _player.Camera = _character.GetComponent<Camera>(true);
+            _player.Camera = _character.FindComponent<Camera>(ComponentSearchFlag.Default);
             _cameraNode = _player.Camera.Node;
-            _character.CreateComponent<MoveAndOrbitController>().InputMap = inputMap;
+            _character.CreateComponent<MoveAndOrbitController>().InputMap = _inputMap;
             character.CameraYaw = _character.GetChild("CameraYawPivot", true);
             character.CameraPitch = _character.GetChild("CameraPitchPivot", true);
             character.CameraNode = _cameraNode;
@@ -110,24 +112,37 @@ namespace RbfxTemplate
 
         public override void Activate(StringVariantMap bundle)
         {
-            SubscribeToEvent(E.KeyUp, HandleKeyUp);
-
-            _scene.Ptr.IsUpdateEnabled = true;
-
-            _app.Settings.Apply(_scene.Ptr.GetComponent<RenderPipeline>());
+            Application.Settings.Apply(_scene.Ptr.GetComponent<RenderPipeline>());
 
             base.Activate(bundle);
         }
 
-        public override void Deactivate()
+        public override void TransitionStarted()
         {
+            _inTransition = true;
+
             _scene.Ptr.IsUpdateEnabled = false;
             UnsubscribeFromEvent(E.KeyUp);
+        }
+
+        public override void TransitionComplete()
+        {
+            _inTransition = false;
+
+            SubscribeToEvent(E.KeyUp, HandleKeyUp);
+            _scene.Ptr.IsUpdateEnabled = true;
+        }
+
+        public override void Deactivate()
+        {
             base.Deactivate();
         }
 
         public override void Update(float timeStep)
         {
+            if (_inTransition)
+                return;
+
             base.Update(timeStep);
 
             var interactable = _player.Interactable;
@@ -137,6 +152,12 @@ namespace RbfxTemplate
             {
                 InteractableTooltip = interactable.Tooltip ?? string.Empty;
                 InteractionEnabled = interactable.InteractionEnabled;
+            }
+
+            if (_inputMap.Evaluate("Inventory") > 0.5f)
+            {
+                Application.OpenInventory();
+                _scene.Ptr.IsUpdateEnabled = false;
             }
         }
 
@@ -152,7 +173,7 @@ namespace RbfxTemplate
             var player = _character.CreateComponent<Character>();
             player.CharacterController = _character.GetComponent<KinematicCharacterController>();
             player.CameraCollisionMask = uint.MaxValue & ~player.CharacterController.CollisionLayer;
-            player.AnimationController = _character.GetComponent<AnimationController>(true);
+            player.AnimationController = _character.FindComponent<AnimationController>(ComponentSearchFlag.Default);
             player.ModelPivot = _character.GetChild("ModelPivot");
             player.Idle = Context.ResourceCache.GetResource<Animation>("Animations/Idle.ani");
             //player.Idle = Context.ResourceCache.GetResource<Animation>("Animations/CrouchIdle.ani");
@@ -170,7 +191,7 @@ namespace RbfxTemplate
             {
                 case Key.KeyEscape:
                 case Key.KeyBackspace:
-                    _app.HandleBackKey();
+                    Application.HandleBackKey();
                     return;
             }
         }

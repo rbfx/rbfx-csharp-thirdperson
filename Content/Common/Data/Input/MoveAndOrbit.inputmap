@@ -122,23 +122,39 @@
 				]
 			}
 		},
-    {
-      "key": "Use",
-      "value": {
-        "buttons": [
+		{
+			"key": "Use",
+			"value": {
+				"buttons": [
 					{
-            "button": "X",
-            "controller": true
+						"button": "X",
+						"controller": true
 					}
+				],
+				"keys": [
+					{
+						"scancode": "E"
+					}
+				],
+				"mouseButtons": [
+					{
+						"button": "Left"
+					}
+				]
+			}
+		},
+		{
+			"key": "Inventory",
+			"value": {
+				"buttons": [
+					{
+						"button": "Y",
+            "controller": true
+          }
         ],
         "keys": [
           {
-            "scancode": "E"
-          }
-        ],
-        "mouseButtons": [
-          {
-            "button": "Left"
+            "scancode": "I"
           }
         ]
       }
