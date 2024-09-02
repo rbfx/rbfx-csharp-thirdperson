@@ -26,6 +26,12 @@ namespace RbfxTemplate.Inventory
             get; set;
         }
 
+        [JsonPropertyName("holdingStyle")]
+        public HoldingStyle HoldingStyle
+        {
+            get; set;
+        }
+
         [JsonPropertyName("weight")]
         public float Weight
         {

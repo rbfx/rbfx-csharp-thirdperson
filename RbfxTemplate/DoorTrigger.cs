@@ -14,7 +14,7 @@ namespace RbfxTemplate
 
         public override bool Filter(Node node)
         {
-            if (ItemDefinition != null)
+            if (ItemDefinition != null && !string.IsNullOrEmpty(ItemDefinition.Name))
             {
                 var player = node.GetComponent<Player>();
                 if (player != null) return player.HasInInventory(ItemDefinition);

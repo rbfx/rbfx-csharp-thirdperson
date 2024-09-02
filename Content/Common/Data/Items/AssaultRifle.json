@@ -1,0 +1,6 @@
+{
+  "name": "Assault Rifle",
+  "prefab": "PrefabResource;Quaternius/SciFiModularGunPack/Prefabs/AssaultRifle.prefab",
+  "weight": 2.0,
+  "holdingStyle": "Rifle"
+}

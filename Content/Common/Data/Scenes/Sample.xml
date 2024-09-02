@@ -3,8 +3,8 @@
 	<attribute name="Name" value="Sample" />
 	<attribute name="Time Scale" value="1.000000" />
 	<attribute name="Elapsed Time" value="0.000000" />
-	<attribute name="Next Node ID" value="10454" />
-	<attribute name="Next Component ID" value="18089" />
+	<attribute name="Next Node ID" value="10575" />
+	<attribute name="Next Component ID" value="18302" />
 	<attribute name="Variables" />
 	<attribute name="Update Events">
 		<string value="@SceneForcedUpdate" />
@@ -93,7 +93,7 @@
 		<attribute name="Type" value="Music" />
 		<attribute name="Frequency" value="48000.000000" />
 		<attribute name="Is Playing" value="true" />
-		<attribute name="Play Position" value="-320450176" />
+		<attribute name="Play Position" value="-39158960" />
 	</component>
 	<node id="6">
 		<attribute name="Is Enabled" value="true" />
@@ -1189,7 +1189,7 @@
 			<string value="Selectable" />
 			<string value="DoorKey" />
 		</attribute>
-		<attribute name="Position" value="4.10768 0.236873 0.401472" />
+		<attribute name="Position" value="3.63817 0.236873 -0.525089" />
 		<attribute name="Rotation" value="1 0 0 0" />
 		<attribute name="Scale" value="1 1 1" />
 		<attribute name="Variables" />
@@ -1236,6 +1236,30 @@
 		<attribute name="Variables" />
 		<component type="PrefabReference" id="18088">
 			<attribute name="Prefab" value="PrefabResource;Quaternius/SurvivalPack/Prefabs/FirstAidKit.prefab" />
+		</component>
+	</node>
+	<node id="10573">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Pistol" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="4.21176 0.264452 1.15613" />
+		<attribute name="Rotation" value="0.707107 0 0 0.707107" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="PrefabReference" id="18296">
+			<attribute name="Prefab" value="PrefabResource;Quaternius/SciFiModularGunPack/Prefabs/Pistol.prefab" />
+		</component>
+	</node>
+	<node id="10574">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="AssaultRifle" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="3.3968 0.280958 0.818743" />
+		<attribute name="Rotation" value="0.707107 0 0 0.707107" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="PrefabReference" id="18301">
+			<attribute name="Prefab" value="PrefabResource;Quaternius/SciFiModularGunPack/Prefabs/AssaultRifle.prefab" />
 		</component>
 	</node>
 </scene>

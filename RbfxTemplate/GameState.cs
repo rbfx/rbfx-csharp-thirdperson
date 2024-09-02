@@ -67,11 +67,16 @@ namespace RbfxTemplate
             _character.Position = new Vector3(0, 0.2f);
             _character.CreateComponent<PrefabReference>()
                 .SetPrefab(Context.ResourceCache.GetResource<PrefabResource>("Models/Characters/YBot/YBot.prefab"));
+
             var character = SetupCharacter(_character);
             _player = _character.CreateComponent<Player>();
             _player.InputMap = _inputMap;
+            _player.PistolAttachment = character.ModelPivot.CreateChild("PistolAttachment");
+            _player.PistolAttachment.Position = new Vector3(0.2f, 1.2f, 0.5f);
+            _player.RifleAttachment = character.ModelPivot.CreateChild("RifleAttachment");
+            _player.RifleAttachment.Position = new Vector3(0.2f, 1.2f, 0.7f);
             _player.AttractionTarget = character.ModelPivot.CreateChild("AttractionTarget");
-            _player.AttractionTarget.Position = new Vector3(0, 1.0f, 1.0f);
+            _player.AttractionTarget.Position = new Vector3(0, 1.0f, 1.5f);
             _player.AttractionTarget.CreateComponent<RigidBody>();
             _player.Constraint = _player.AttractionTarget.CreateComponent<Constraint>();
             _player.Constraint.ConstraintType = ConstraintType.ConstraintSlider;

@@ -19,6 +19,7 @@ namespace RbfxTemplate
         //private readonly HashSet<ResourceRef> _inventory = new HashSet<ResourceRef>();
         private bool _usePressed;
         private Node _selectedNode;
+        private PrefabReference _wieldAttachment;
         private IInteractable _interactable;
         private Character _character;
 
@@ -90,6 +91,9 @@ namespace RbfxTemplate
                 return _interactionElapsed / _interactable.InteractionDuration;
             }
         }
+
+        public Node PistolAttachment { get; set; }
+        public Node RifleAttachment { get; set; }
 
         public override void DelayedStart()
         {
@@ -183,6 +187,51 @@ namespace RbfxTemplate
             }
 
             ++inventorySlot.Count;
+
+            ItemDefinition itemDefinition = inventorySlot.ItemDefinition?.Value;
+            if (itemDefinition != null)
+            {
+                if (itemDefinition.HoldingStyle != HoldingStyle.NotWieldable)
+                {
+                    TakeWieldable(inventorySlot);
+                }
+            }
+        }
+
+        private void TakeWieldable(InventorySlot inventorySlot)
+        {
+            var itemDefinition = inventorySlot?.ItemDefinition?.Value;
+            if (itemDefinition == null || itemDefinition.HoldingStyle == HoldingStyle.NotWieldable)
+            {
+                return;
+            }
+
+            Node node = null;
+            switch (itemDefinition.HoldingStyle)
+            {
+                case HoldingStyle.Pistol:
+                    node = PistolAttachment ?? node;
+                    break;
+                case HoldingStyle.Rifle:
+                    node = RifleAttachment ?? node;
+                    break;
+            }
+
+            if (node == null)
+                return;
+
+            Holster();
+
+            _wieldAttachment = node.GetOrCreateComponent<PrefabReference>();
+            if (_wieldAttachment != null)
+            {
+                _wieldAttachment.SetPrefab(Context.ResourceCache.GetResource<PrefabResource>(itemDefinition.Prefab.Name));
+                var rigidBody = node.FindComponent<RigidBody>(ComponentSearchFlag.Default);
+                if (rigidBody != null)
+                {
+                    rigidBody.IsEnabled = false;
+                }
+            }
         }
 
         public bool HasInInventory(ResourceRef inventoryKey)
@@ -202,11 +251,31 @@ namespace RbfxTemplate
 
         public void TakeInHands(Node node)
         {
+            Holster();
             BodyInArms = node.GetComponent<RigidBody>();
-            if (BodyInArms.Mass <= 0)
+            if (BodyInArms != null)
+            {
+                if (BodyInArms.Mass <= 0)
+                    BodyInArms = null;
+                Constraint.OtherBody = BodyInArms;
+                SelectedNode = null;
+            }
+        }
+
+        private void Holster()
+        {
+            if (BodyInArms != null)
+            {
+                Constraint.OtherBody = null;
                 BodyInArms = null;
-            Constraint.OtherBody = BodyInArms;
-            SelectedNode = null;
+                _interactionElapsed = 0.0f;
+            }
+
+            if (_wieldAttachment != null)
+            {
+                _wieldAttachment.SetPrefab(null);
+                _wieldAttachment = null;
+            }
         }
     }
 }

@@ -1,0 +1,6 @@
+{
+  "name": "Pistol",
+  "prefab": "PrefabResource;Quaternius/SciFiModularGunPack/Prefabs/Pistol.prefab",
+  "weight": 1.0,
+  "holdingStyle": "Pistol"
+}
