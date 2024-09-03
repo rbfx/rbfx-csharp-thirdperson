@@ -7,7 +7,220 @@
 			"_typeName": "PhysicsWorld"
 		},
 		{
-			"_typeName": "RenderPipeline"
+			"_typeName": "RenderPipeline",
+			"attributes": [
+				{
+					"name": "Render Passes",
+					"type": "VariantVector",
+					"value": [
+						{
+							"type": "String",
+							"value": "Postprocess: Exposure"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: SSAO"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Bloom"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Draw Outlines"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Tone Mapping"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Adjust Color"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: FXAA v2"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: FXAA v3"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						}
+					]
+				},
+				{
+					"name": "Render Path Parameters",
+					"type": "StringVariantMap",
+					"value": [
+						{
+							"key": "SSAO: Near Distance",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Exposure: Adapt Rate",
+							"type": "Float",
+							"value": 0.6000000238418579
+						},
+						{
+							"key": "Exposure: Min",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Max Brightness",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "SSAO: Normal Threshold",
+							"type": "Float",
+							"value": 0.20000000298023225
+						},
+						{
+							"key": "SSAO: Near Radius",
+							"type": "Float",
+							"value": 0.05000000074505806
+						},
+						{
+							"key": "SSAO: Strength",
+							"type": "Float",
+							"value": 0.699999988079071
+						},
+						{
+							"key": "Adjust Color: HSVParams",
+							"type": "Vector4",
+							"value": "1 1 1 1"
+						},
+						{
+							"key": "SSAO: End Fade Distance",
+							"type": "Float",
+							"value": 200.0
+						},
+						{
+							"key": "Exposure: Automatic",
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"key": "Tone Mapping: Mode@",
+							"type": "StringVector",
+							"value": [
+								"None",
+								"Reinhard",
+								"ReinhardWhite",
+								"Uncharted2"
+							]
+						},
+						{
+							"key": "SSAO: Begin Fade Distance",
+							"type": "Float",
+							"value": 100.0
+						},
+						{
+							"key": "Adjust Color: ColorOffset",
+							"type": "Vector4",
+							"value": "0 0 0 0"
+						},
+						{
+							"key": "Bloom: Base Intensity",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Iteration Intensity Factor",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Min Brightness",
+							"type": "Float",
+							"value": 0.800000011920929
+						},
+						{
+							"key": "SSAO: Depth Threshold",
+							"type": "Float",
+							"value": 0.10000000149011612
+						},
+						{
+							"key": "SSAO: Far Distance",
+							"type": "Float",
+							"value": 100.0
+						},
+						{
+							"key": "SSAO: Downscale",
+							"type": "Int",
+							"value": 0
+						},
+						{
+							"key": "Exposure: Max",
+							"type": "Float",
+							"value": 3.0
+						},
+						{
+							"key": "Adjust Color: ColorFilter",
+							"type": "Vector4",
+							"value": "1 1 1 1"
+						},
+						{
+							"key": "SSAO: Exponent",
+							"type": "Float",
+							"value": 1.5
+						},
+						{
+							"key": "FXAA: FXAAParams",
+							"type": "Vector3",
+							"value": "0.4 0.5 0.75"
+						},
+						{
+							"key": "SSAO: Far Radius",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Num Iterations",
+							"type": "Int",
+							"value": 5
+						},
+						{
+							"key": "Tone Mapping: Mode",
+							"type": "Int",
+							"value": 0
+						}
+					]
+				}
+			]
 		},
 		{
 			"_typeName": "ReflectionProbeManager"
@@ -30,6 +243,36 @@
 							"name": "Collision Layer",
 							"type": "Int",
 							"value": 2
+						}
+					]
+				},
+				{
+					"_typeName": "IKSpineSolver",
+					"attributes": [
+						{
+							"name": "Bone Names",
+							"type": "StringVector",
+							"value": [
+								"Spine_01",
+								"Spine_02",
+								"Spine_03",
+								"Neck"
+							]
+						},
+						{
+							"name": "Target Name",
+							"type": "String",
+							"value": "TwistTarget"
+						},
+						{
+							"name": "Twist Target Name",
+							"type": "String",
+							"value": "BowTarget"
+						},
+						{
+							"name": "Twist Rotation Offset",
+							"type": "Quaternion",
+							"value": "1 0 0 0"
 						}
 					]
 				}
@@ -295,7 +538,7 @@
 										},
 										{
 											"type": "ResourceRef",
-											"value": "Animation;Animations/Idle.ani"
+											"value": "Animation;Animations/EmptyHanded/Idle.ani"
 										},
 										{
 											"type": "Bool",
@@ -354,6 +597,76 @@
 											"value": 0.0
 										}
 									]
+								}
+							]
+						},
+						{
+							"_typeName": "IKSolver",
+							"attributes": [
+								{
+									"name": "Solve when Paused",
+									"type": "Bool",
+									"value": true
+								}
+							]
+						},
+						{
+							"_typeName": "IKArmSolver",
+							"attributes": [
+								{
+									"name": "Arm Bone Name",
+									"type": "String",
+									"value": "Shoulder_R"
+								},
+								{
+									"name": "Forearm Bone Name",
+									"type": "String",
+									"value": "Elbow_R"
+								},
+								{
+									"name": "Hand Bone Name",
+									"type": "String",
+									"value": "Hand_R"
+								},
+								{
+									"name": "Target Name",
+									"type": "String",
+									"value": "RightHandTarget"
+								},
+								{
+									"name": "Bend Direction",
+									"type": "Vector3",
+									"value": "0 0 -1"
+								}
+							]
+						},
+						{
+							"_typeName": "IKArmSolver",
+							"attributes": [
+								{
+									"name": "Arm Bone Name",
+									"type": "String",
+									"value": "Shoulder_L"
+								},
+								{
+									"name": "Forearm Bone Name",
+									"type": "String",
+									"value": "Elbow_L"
+								},
+								{
+									"name": "Hand Bone Name",
+									"type": "String",
+									"value": "Hand_L"
+								},
+								{
+									"name": "Target Name",
+									"type": "String",
+									"value": "LeftHandTarget"
+								},
+								{
+									"name": "Bend Direction",
+									"type": "Vector3",
+									"value": "0 0 -1"
 								}
 							]
 						}
@@ -1441,6 +1754,40 @@
 													]
 												}
 											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "TwistTarget"
+								}
+							]
+						},
+						{
+							"attributes": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "BowPivot"
+								},
+								{
+									"name": "Position",
+									"type": "Vector3",
+									"value": "0 0.89744 0"
+								}
+							],
+							"nodes": [
+								{
+									"attributes": [
+										{
+											"name": "Name",
+											"type": "String",
+											"value": "BowTarget"
 										}
 									]
 								}

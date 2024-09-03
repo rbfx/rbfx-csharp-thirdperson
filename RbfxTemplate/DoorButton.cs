@@ -71,7 +71,7 @@ namespace RbfxTemplate
 
         public override void Interact(Player player)
         {
-            var controller = Node.Parent.FindComponent<AnimationController>(ComponentSearchFlag.Default);
+            var controller = Node.Parent.FindComponent<AnimationController>();
             if (controller.NumAnimations > 0)
                 return;
 

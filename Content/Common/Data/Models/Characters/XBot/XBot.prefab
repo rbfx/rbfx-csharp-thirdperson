@@ -295,7 +295,7 @@
 										},
 										{
 											"type": "ResourceRef",
-											"value": "Animation;Animations/Idle.ani"
+											"value": "Animation;Animations/EmptyHanded/Idle.ani"
 										},
 										{
 											"type": "Bool",

@@ -21,9 +21,9 @@ namespace RbfxTemplate
             _scene.Ptr.LoadXML("Scenes/Inventory.scene");
             _scene.Ptr.IsUpdateEnabled = false;
 
-            var cameraNode = _scene.Ptr.FindComponent<Camera>(ComponentSearchFlag.Default)?.Node;
+            var cameraNode = _scene.Ptr.FindComponent<Camera>()?.Node;
 
-            _prefabReference = _scene.Ptr.FindComponent<PrefabReference>(ComponentSearchFlag.Default);
+            _prefabReference = _scene.Ptr.FindComponent<PrefabReference>();
 
             _viewport = Context.CreateObject<Viewport>();
             _viewport.Camera = cameraNode?.GetComponent<Camera>();

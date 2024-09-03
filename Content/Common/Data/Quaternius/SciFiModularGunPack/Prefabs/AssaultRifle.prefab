@@ -97,8 +97,8 @@
 				</component>
 				<component _typeName="CollisionShape">
 					<attributes>
-						<attribute name="Size" type="Vector3" value="0.13 0.43 1.78" />
-						<attribute name="Offset Position" type="Vector3" value="0 0.14 0" />
+						<attribute name="Size" type="Vector3" value="0.06 0.18 0.71" />
+						<attribute name="Offset Position" type="Vector3" value="0 0.06 0" />
 					</attributes>
 				</component>
 				<component _typeName="RigidBody">
@@ -113,6 +113,20 @@
 					</attributes>
 				</component>
 			</components>
+			<nodes>
+				<node>
+					<attributes>
+						<attribute name="Name" type="String" value="LeftHandTarget" />
+						<attribute name="Position" type="Vector3" value="-7.45058e-09 0.011014 0.203039" />
+					</attributes>
+				</node>
+				<node>
+					<attributes>
+						<attribute name="Name" type="String" value="RightHandTarget" />
+						<attribute name="Position" type="Vector3" value="0.029518 -0.013804 -0.112361" />
+					</attributes>
+				</node>
+			</nodes>
 		</node>
 		<node>
 			<attributes>

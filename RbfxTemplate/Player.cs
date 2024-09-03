@@ -28,6 +28,8 @@ namespace RbfxTemplate
         /// </summary>
         private float _interactionElapsed;
 
+        private IKSolver _solver;
+
         public Player(Context context) : base(context)
         {
             UpdateEventMask = UpdateEvent.UseUpdate | UpdateEvent.UseFixedupdate;
@@ -98,6 +100,7 @@ namespace RbfxTemplate
         public override void DelayedStart()
         {
             base.DelayedStart();
+            _solver = Node.FindComponent<IKSolver>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Disabled);
             _character = Node.GetDerivedComponent<MoveAndOrbitComponent>() as Character;
         }
 
@@ -226,11 +229,19 @@ namespace RbfxTemplate
             if (_wieldAttachment != null)
             {
                 _wieldAttachment.SetPrefab(Context.ResourceCache.GetResource<PrefabResource>(itemDefinition.Prefab.Name));
-                var rigidBody = node.FindComponent<RigidBody>(ComponentSearchFlag.Default);
+                var rigidBody = node.FindComponent<RigidBody>();
                 if (rigidBody != null)
                 {
                     rigidBody.IsEnabled = false;
                 }
+
+                _solver.IsEnabled = true;
+
+                //foreach (var solver in node.FindComponents<IKSolverComponent>())
+                //{
+                //    solver.IsEnabled = false;
+                //    solver.IsEnabled = true;
+                //}
             }
         }
 
@@ -273,6 +284,7 @@ namespace RbfxTemplate
 
             if (_wieldAttachment != null)
             {
+                _solver.IsEnabled = false;
                 _wieldAttachment.SetPrefab(null);
                 _wieldAttachment = null;
             }

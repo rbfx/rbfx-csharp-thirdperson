@@ -72,9 +72,9 @@ namespace RbfxTemplate
             _player = _character.CreateComponent<Player>();
             _player.InputMap = _inputMap;
             _player.PistolAttachment = character.ModelPivot.CreateChild("PistolAttachment");
-            _player.PistolAttachment.Position = new Vector3(0.2f, 1.2f, 0.5f);
+            _player.PistolAttachment.Position = new Vector3(0.1f, 1.2f, 0.3f);
             _player.RifleAttachment = character.ModelPivot.CreateChild("RifleAttachment");
-            _player.RifleAttachment.Position = new Vector3(0.2f, 1.2f, 0.7f);
+            _player.RifleAttachment.Position = new Vector3(0.1f, 1.2f, 0.4f);
             _player.AttractionTarget = character.ModelPivot.CreateChild("AttractionTarget");
             _player.AttractionTarget.Position = new Vector3(0, 1.0f, 1.5f);
             _player.AttractionTarget.CreateComponent<RigidBody>();
@@ -85,7 +85,7 @@ namespace RbfxTemplate
             cameraPrefab.SetPrefab(
                 Context.ResourceCache.GetResource<PrefabResource>("Models/Characters/Camera.prefab"));
             cameraPrefab.Inline(PrefabInlineFlag.None);
-            _player.Camera = _character.FindComponent<Camera>(ComponentSearchFlag.Default);
+            _player.Camera = _character.FindComponent<Camera>();
             _cameraNode = _player.Camera.Node;
             _character.CreateComponent<MoveAndOrbitController>().InputMap = _inputMap;
             character.CameraYaw = _character.GetChild("CameraYawPivot", true);
@@ -118,7 +118,7 @@ namespace RbfxTemplate
         public override void Activate(StringVariantMap bundle)
         {
             Application.Settings.Apply(_scene.Ptr.GetComponent<RenderPipeline>());
-
+            Application.Settings.Apply(Context);
             base.Activate(bundle);
         }
 
@@ -178,13 +178,20 @@ namespace RbfxTemplate
             var player = _character.CreateComponent<Character>();
             player.CharacterController = _character.GetComponent<KinematicCharacterController>();
             player.CameraCollisionMask = uint.MaxValue & ~player.CharacterController.CollisionLayer;
-            player.AnimationController = _character.FindComponent<AnimationController>(ComponentSearchFlag.Default);
+            player.AnimationController = _character.FindComponent<AnimationController>();
             player.ModelPivot = _character.GetChild("ModelPivot");
-            player.Idle = Context.ResourceCache.GetResource<Animation>("Animations/Idle.ani");
-            //player.Idle = Context.ResourceCache.GetResource<Animation>("Animations/CrouchIdle.ani");
-            player.Walk = Context.ResourceCache.GetResource<Animation>("Animations/Walking.ani");
-            player.Run = Context.ResourceCache.GetResource<Animation>("Animations/Running.ani");
-            player.Falling = Context.ResourceCache.GetResource<Animation>("Animations/FallingIdle.ani");
+
+            player.Idle = Context.ResourceCache.GetResource<Animation>("Animations/EmptyHanded/Idle.ani");
+            player.Walk = Context.ResourceCache.GetResource<Animation>("Animations/EmptyHanded/Walking.ani");
+            player.Run = Context.ResourceCache.GetResource<Animation>("Animations/EmptyHanded/Running.ani");
+            player.Falling = Context.ResourceCache.GetResource<Animation>("Animations/EmptyHanded/FallingIdle.ani");
+
+            //player.Idle = Context.ResourceCache.GetResource<Animation>("Animations/Rifle/Idle.ani");
+            //player.Walk = Context.ResourceCache.GetResource<Animation>("Animations/Rifle/WalkForward.ani");
+            //player.Run = Context.ResourceCache.GetResource<Animation>("Animations/Rifle/RunForward.ani");
+            //player.Falling = Context.ResourceCache.GetResource<Animation>("Animations/EmptyHanded/FallingIdle.ani");
+
+
             player.Drive = Context.ResourceCache.GetResource<Animation>("Animations/Driving.ani");
             return player;
         }

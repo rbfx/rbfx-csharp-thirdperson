@@ -114,6 +114,18 @@
 					</attributes>
 				</component>
 			</components>
+			<nodes>
+				<node>
+					<attributes>
+						<attribute name="Name" type="String" value="LeftHandTarget" />
+					</attributes>
+				</node>
+				<node>
+					<attributes>
+						<attribute name="Name" type="String" value="RightHandTarget" />
+					</attributes>
+				</node>
+			</nodes>
 		</node>
 		<node>
 			<attributes>
