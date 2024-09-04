@@ -96,6 +96,7 @@ namespace RbfxTemplate
 
         public Node PistolAttachment { get; set; }
         public Node RifleAttachment { get; set; }
+        public Node BowPivot { get; set; }
 
         public override void DelayedStart()
         {
@@ -107,6 +108,11 @@ namespace RbfxTemplate
         public override void Update(float timeStep)
         {
             base.Update(timeStep);
+
+            if (BowPivot != null)
+            {
+                BowPivot.Rotation = new Quaternion(new Vector3( _character.GetPitch(), 0, 0));
+            }
 
             if (_selectedNode != null && _selectedNode.IsExpired)
             {

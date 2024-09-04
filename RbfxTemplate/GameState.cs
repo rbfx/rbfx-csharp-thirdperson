@@ -71,10 +71,9 @@ namespace RbfxTemplate
             var character = SetupCharacter(_character);
             _player = _character.CreateComponent<Player>();
             _player.InputMap = _inputMap;
-            _player.PistolAttachment = character.ModelPivot.CreateChild("PistolAttachment");
-            _player.PistolAttachment.Position = new Vector3(0.1f, 1.2f, 0.3f);
-            _player.RifleAttachment = character.ModelPivot.CreateChild("RifleAttachment");
-            _player.RifleAttachment.Position = new Vector3(0.1f, 1.2f, 0.4f);
+            _player.PistolAttachment = character.ModelPivot.FindChild("PistolAttachment", true);
+            _player.RifleAttachment = character.ModelPivot.FindChild("RifleAttachment", true);
+            _player.BowPivot = character.ModelPivot.FindChild("BowPivot", true);
             _player.AttractionTarget = character.ModelPivot.CreateChild("AttractionTarget");
             _player.AttractionTarget.Position = new Vector3(0, 1.0f, 1.5f);
             _player.AttractionTarget.CreateComponent<RigidBody>();

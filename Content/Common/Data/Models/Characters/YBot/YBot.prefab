@@ -245,36 +245,6 @@
 							"value": 2
 						}
 					]
-				},
-				{
-					"_typeName": "IKSpineSolver",
-					"attributes": [
-						{
-							"name": "Bone Names",
-							"type": "StringVector",
-							"value": [
-								"Spine_01",
-								"Spine_02",
-								"Spine_03",
-								"Neck"
-							]
-						},
-						{
-							"name": "Target Name",
-							"type": "String",
-							"value": "TwistTarget"
-						},
-						{
-							"name": "Twist Target Name",
-							"type": "String",
-							"value": "BowTarget"
-						},
-						{
-							"name": "Twist Rotation Offset",
-							"type": "Quaternion",
-							"value": "1 0 0 0"
-						}
-					]
 				}
 			],
 			"nodes": [
@@ -534,67 +504,7 @@
 									"value": [
 										{
 											"type": "Int",
-											"value": 1
-										},
-										{
-											"type": "ResourceRef",
-											"value": "Animation;Animations/EmptyHanded/Idle.ani"
-										},
-										{
-											"type": "Bool",
-											"value": true
-										},
-										{
-											"type": "Bool",
-											"value": true
-										},
-										{
-											"type": "Int",
 											"value": 0
-										},
-										{
-											"type": "Int",
-											"value": 0
-										},
-										{
-											"type": "String",
-											"value": ""
-										},
-										{
-											"type": "Float",
-											"value": 0.0
-										},
-										{
-											"type": "Float",
-											"value": 0.0
-										},
-										{
-											"type": "Float",
-											"value": 0.0
-										},
-										{
-											"type": "Float",
-											"value": 3.8000001907348635
-										},
-										{
-											"type": "Float",
-											"value": 1.0
-										},
-										{
-											"type": "Bool",
-											"value": false
-										},
-										{
-											"type": "Float",
-											"value": 1.0
-										},
-										{
-											"type": "Float",
-											"value": 1.0
-										},
-										{
-											"type": "Float",
-											"value": 0.0
 										}
 									]
 								}
@@ -611,32 +521,32 @@
 							]
 						},
 						{
-							"_typeName": "IKArmSolver",
+							"_typeName": "IKSpineSolver",
 							"attributes": [
 								{
-									"name": "Arm Bone Name",
-									"type": "String",
-									"value": "Shoulder_R"
-								},
-								{
-									"name": "Forearm Bone Name",
-									"type": "String",
-									"value": "Elbow_R"
-								},
-								{
-									"name": "Hand Bone Name",
-									"type": "String",
-									"value": "Hand_R"
+									"name": "Bone Names",
+									"type": "StringVector",
+									"value": [
+										"Spine_01",
+										"Spine_02",
+										"Spine_03",
+										"Neck"
+									]
 								},
 								{
 									"name": "Target Name",
 									"type": "String",
-									"value": "RightHandTarget"
+									"value": "BowTarget"
 								},
 								{
-									"name": "Bend Direction",
-									"type": "Vector3",
-									"value": "0 0 -1"
+									"name": "Twist Target Name",
+									"type": "String",
+									"value": "TwistTarget"
+								},
+								{
+									"name": "Twist Rotation Offset",
+									"type": "Quaternion",
+									"value": "0.518643 -0.480634 0.518643 -0.480634"
 								}
 							]
 						},
@@ -664,9 +574,39 @@
 									"value": "LeftHandTarget"
 								},
 								{
-									"name": "Bend Direction",
-									"type": "Vector3",
-									"value": "0 0 -1"
+									"name": "Bend Target Name",
+									"type": "String",
+									"value": "ElbowTargetLeft"
+								}
+							]
+						},
+						{
+							"_typeName": "IKArmSolver",
+							"attributes": [
+								{
+									"name": "Arm Bone Name",
+									"type": "String",
+									"value": "Shoulder_R"
+								},
+								{
+									"name": "Forearm Bone Name",
+									"type": "String",
+									"value": "Elbow_R"
+								},
+								{
+									"name": "Hand Bone Name",
+									"type": "String",
+									"value": "Hand_R"
+								},
+								{
+									"name": "Target Name",
+									"type": "String",
+									"value": "RightHandTarget"
+								},
+								{
+									"name": "Bend Target Name",
+									"type": "String",
+									"value": "ElbowTargetRight"
 								}
 							]
 						}
@@ -678,16 +618,6 @@
 									"name": "Name",
 									"type": "String",
 									"value": "Root"
-								},
-								{
-									"name": "Position",
-									"type": "Vector3",
-									"value": "0.056222 -0.06012 0.064117"
-								},
-								{
-									"name": "Rotation",
-									"type": "Quaternion",
-									"value": "0.929321 -0.036514 0.367229 0.013135"
 								}
 							],
 							"nodes": [
@@ -725,7 +655,7 @@
 												{
 													"name": "Rotation",
 													"type": "Quaternion",
-													"value": "-0.040827 0.987878 -0.149621 -0.006686"
+													"value": "8.8963e-10 0.99502 -0.099679 -7.94387e-08"
 												}
 											],
 											"nodes": [
@@ -744,7 +674,7 @@
 														{
 															"name": "Rotation",
 															"type": "Quaternion",
-															"value": "-0.081912 0.996528 0.002988 0.014614"
+															"value": "-5.86554e-08 0.995186 -0.098003 4.3719e-09"
 														}
 													],
 													"nodes": [
@@ -763,7 +693,7 @@
 																{
 																	"name": "Rotation",
 																	"type": "Quaternion",
-																	"value": "-0.081712 0.974122 -0.210153 -0.015691"
+																	"value": "1.65268e-07 0.99381 -0.11109 -1.02077e-08"
 																}
 															],
 															"nodes": [
@@ -782,7 +712,7 @@
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "0.999566 -0.003566 0.001166 0.029216"
+																			"value": "0.999129 -2.17965e-08 6.74924e-08 0.041733"
 																		}
 																	],
 																	"nodes": [
@@ -801,7 +731,7 @@
 																				{
 																					"name": "Rotation",
 																					"type": "Quaternion",
-																					"value": "0.546265 0.450503 -0.541627 0.453081"
+																					"value": "0.53825 0.458571 -0.53825 0.458571"
 																				}
 																			]
 																		}
@@ -822,7 +752,7 @@
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "-0.336075 -0.559063 0.644128 -0.3995"
+																			"value": "-0.375472 -0.578547 0.632486 -0.352513"
 																		}
 																	],
 																	"nodes": [
@@ -841,7 +771,7 @@
 																				{
 																					"name": "Rotation",
 																					"type": "Quaternion",
-																					"value": "0.80849 0.013853 0.250383 0.53241"
+																					"value": "0.970889 0.011328 0.23686 0.033807"
 																				}
 																			],
 																			"nodes": [
@@ -860,7 +790,7 @@
 																						{
 																							"name": "Rotation",
 																							"type": "Quaternion",
-																							"value": "0.912906 0.058511 0.403809 -0.010865"
+																							"value": "0.998316 0.001684 0.04075 -0.041252"
 																						}
 																					],
 																					"nodes": [
@@ -879,7 +809,7 @@
 																								{
 																									"name": "Rotation",
 																									"type": "Quaternion",
-																									"value": "0.955465 0.205017 0.161447 -0.137801"
+																									"value": "0.999358 -2.8052e-15 -0.035831 3.59228e-15"
 																								}
 																							],
 																							"nodes": [
@@ -959,7 +889,7 @@
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.949088 0.112774 0.081651 0.282571"
+																											"value": "0.956534 0.025481 0.276843 0.088039"
 																										}
 																									],
 																									"nodes": [
@@ -978,7 +908,7 @@
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.999173 -0.039981 -0.00173 -0.00721"
+																													"value": "0.982068 -0.039942 -0.11784 0.141636"
 																												}
 																											],
 																											"nodes": [
@@ -1020,7 +950,7 @@
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.994944 -0.009072 -0.09488 0.031649"
+																											"value": "0.997824 0.00028 0.065794 0.004254"
 																										}
 																									],
 																									"nodes": [
@@ -1039,7 +969,7 @@
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.989727 -0.001923 0.005754 0.142843"
+																													"value": "0.995095 -0.001154 -0.010742 0.09833"
 																												}
 																											],
 																											"nodes": [
@@ -1058,7 +988,7 @@
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.999976 -0.006926 5.03104e-09 -2.50859e-08"
+																															"value": "0.998019 -0.006912 -0.025718 0.057003"
 																														}
 																													]
 																												}
@@ -1142,7 +1072,7 @@
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.963532 -0.008312 -0.229133 0.137965"
+																											"value": "0.997434 -0.002486 -0.04388 0.056519"
 																										}
 																									],
 																									"nodes": [
@@ -1161,7 +1091,7 @@
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.981736 0.00123 0.033582 0.187258"
+																													"value": "0.99958 0.002637 0.019492 0.021269"
 																												}
 																											],
 																											"nodes": [
@@ -1180,7 +1110,7 @@
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.999833 -0.018275 -1.14475e-08 4.25523e-08"
+																															"value": "0.992977 -0.018149 -0.071479 0.092511"
 																														}
 																													]
 																												}
@@ -1211,7 +1141,7 @@
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "-0.455631 0.614651 0.527439 0.36934"
+																			"value": "-0.352514 0.632486 0.578547 0.375472"
 																		}
 																	],
 																	"nodes": [
@@ -1230,7 +1160,7 @@
 																				{
 																					"name": "Rotation",
 																					"type": "Quaternion",
-																					"value": "0.867615 0.025319 0.023842 0.49602"
+																					"value": "0.970889 0.011328 0.23686 0.033807"
 																				}
 																			],
 																			"nodes": [
@@ -1249,7 +1179,7 @@
 																						{
 																							"name": "Rotation",
 																							"type": "Quaternion",
-																							"value": "0.932062 -0.028465 0.35821 0.046226"
+																							"value": "0.998316 0.001684 0.04075 -0.041252"
 																						}
 																					],
 																					"nodes": [
@@ -1268,7 +1198,7 @@
 																								{
 																									"name": "Rotation",
 																									"type": "Quaternion",
-																									"value": "0.954989 0.088331 0.260011 0.112198"
+																									"value": "0.999358 -2.8052e-15 -0.035831 3.59228e-15"
 																								}
 																							],
 																							"nodes": [
@@ -1586,6 +1516,34 @@
 																	]
 																}
 															]
+														},
+														{
+															"attributes": [
+																{
+																	"name": "Name",
+																	"type": "String",
+																	"value": "ElbowTargetLeft"
+																},
+																{
+																	"name": "Position",
+																	"type": "Vector3",
+																	"value": "1.76081e-06 5.72112e-08 0.257241"
+																}
+															]
+														},
+														{
+															"attributes": [
+																{
+																	"name": "Name",
+																	"type": "String",
+																	"value": "ElbowTargetRight"
+																},
+																{
+																	"name": "Position",
+																	"type": "Vector3",
+																	"value": "-2.58378e-06 -8.39503e-08 -0.377471"
+																}
+															]
 														}
 													]
 												}
@@ -1606,7 +1564,7 @@
 												{
 													"name": "Rotation",
 													"type": "Quaternion",
-													"value": "0.143775 0.057159 -0.612878 0.774882"
+													"value": "-0.064159 0.041775 0.705872 -0.70419"
 												}
 											],
 											"nodes": [
@@ -1625,7 +1583,7 @@
 														{
 															"name": "Rotation",
 															"type": "Quaternion",
-															"value": "0.677227 0.666598 0.229921 -0.210113"
+															"value": "0.764301 0.644378 0.024463 -0.004738"
 														}
 													],
 													"nodes": [
@@ -1644,7 +1602,7 @@
 																{
 																	"name": "Rotation",
 																	"type": "Quaternion",
-																	"value": "-0.137102 0.723451 0.673005 -0.0699"
+																	"value": "-0.074544 0.85767 0.507213 0.039753"
 																}
 															],
 															"nodes": [
@@ -1663,7 +1621,7 @@
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "0.958522 0.003674 0.002155 -0.284988"
+																			"value": "0.962856 -1.03445e-08 5.73907e-08 -0.270016"
 																		}
 																	]
 																}
@@ -1688,7 +1646,7 @@
 												{
 													"name": "Rotation",
 													"type": "Quaternion",
-													"value": "0.743015 -0.643192 -0.184079 0.018631"
+													"value": "0.70419 -0.705872 0.041775 -0.064159"
 												}
 											],
 											"nodes": [
@@ -1707,7 +1665,7 @@
 														{
 															"name": "Rotation",
 															"type": "Quaternion",
-															"value": "0.7957 0.514525 0.272369 -0.167152"
+															"value": "0.764301 0.644378 0.024463 -0.004738"
 														}
 													],
 													"nodes": [
@@ -1726,7 +1684,7 @@
 																{
 																	"name": "Rotation",
 																	"type": "Quaternion",
-																	"value": "-0.101758 0.825288 0.555443 -0.005265"
+																	"value": "-0.074544 0.85767 0.507213 0.039753"
 																}
 															],
 															"nodes": [
@@ -1745,7 +1703,7 @@
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "0.95673 -0.014833 -0.024842 -0.289537"
+																			"value": "0.962856 -3.21884e-08 3.89991e-08 -0.270016"
 																		}
 																	]
 																}
@@ -1779,6 +1737,11 @@
 									"name": "Position",
 									"type": "Vector3",
 									"value": "0 0.89744 0"
+								},
+								{
+									"name": "Rotation",
+									"type": "Quaternion",
+									"value": "0.99981 -0.018625 0 0"
 								}
 							],
 							"nodes": [
@@ -1788,6 +1751,54 @@
 											"name": "Name",
 											"type": "String",
 											"value": "BowTarget"
+										},
+										{
+											"name": "Position",
+											"type": "Vector3",
+											"value": "0 1.162819 0"
+										},
+										{
+											"name": "Scale",
+											"type": "Vector3",
+											"value": "0.1 0.1 0.1"
+										}
+									]
+								},
+								{
+									"attributes": [
+										{
+											"name": "Name",
+											"type": "String",
+											"value": "RifleAttachment"
+										},
+										{
+											"name": "Position",
+											"type": "Vector3",
+											"value": "0.155406 0.519536 0.469802"
+										}
+									],
+									"components": [
+										{
+											"_typeName": "PrefabReference"
+										}
+									]
+								},
+								{
+									"attributes": [
+										{
+											"name": "Name",
+											"type": "String",
+											"value": "PistolAttachment"
+										},
+										{
+											"name": "Position",
+											"type": "Vector3",
+											"value": "0.155406 0.5259 0.299066"
+										}
+									],
+									"components": [
+										{
+											"_typeName": "PrefabReference"
 										}
 									]
 								}
