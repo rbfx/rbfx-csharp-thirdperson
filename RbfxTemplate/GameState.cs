@@ -5,19 +5,21 @@ namespace RbfxTemplate
     [ObjectFactory]
     public partial class GameState : RmlUIStateBase
     {
-        protected readonly SharedPtr<Scene> _scene;
-        protected readonly SharedPtr<Sprite> _cross;
-        private readonly Node _cameraNode;
-        private readonly Viewport _viewport;
-        private readonly Node _character;
-        private readonly Node _cameraRoot;
-        private readonly Player _player;
+        private readonly string _sceneResourceName = "Scenes/Sample.xml";
+
+        protected SharedPtr<Scene> _scene;
+        protected SharedPtr<Sprite> _cross;
+        private Node _cameraNode;
+        private Viewport _viewport;
+        private Node _character;
+        private Node _cameraRoot;
+        private Player _player;
 
         private string _interactableTooltip = string.Empty;
         private bool _interactionEnabled = false;
         private bool _hasInteractable = false;
         private float _interactionProgress;
-        private readonly InputMap _inputMap;
+        private InputMap _inputMap;
         private bool _inTransition = false;
 
         public Player Player => _player;
@@ -51,10 +53,37 @@ namespace RbfxTemplate
             MouseMode = MouseMode.MmRelative;
             IsMouseVisible = false;
 
+            app.QueueSceneResourcesAsync(_sceneResourceName);
+        }
+
+        public override void OnDataModelInitialized(GameRmlUIComponent menuComponent)
+        {
+            menuComponent.BindDataModelProperty(nameof(InteractableTooltip), _ => _.Set(_interactableTooltip), _ => { });
+            menuComponent.BindDataModelProperty(nameof(InteractionEnabled), _ => _.Set(_interactionEnabled), _ => { });
+            menuComponent.BindDataModelProperty(nameof(HasInteractable), _ => _.Set(_hasInteractable), _ => { });
+            menuComponent.BindDataModelProperty(nameof(InteractionProgress), _ => _.Set(_interactionProgress), _ => { });
+        }
+
+        public override void Activate(StringVariantMap bundle)
+        {
+            EnsureScene();
+
+            Application.Settings.Apply(_scene.Ptr.GetComponent<RenderPipeline>());
+            Application.Settings.Apply(Context);
+            base.Activate(bundle);
+        }
+
+        private void EnsureScene()
+        {
+            if (_scene)
+            {
+                return;
+            }
+
             _inputMap = Context.ResourceCache.GetResource<InputMap>("Input/MoveAndOrbit.inputmap");
 
             _scene = Context.CreateObject<Scene>();
-            _scene.Ptr.LoadXML("Scenes/Sample.xml");
+            _scene.Ptr.LoadXML(_sceneResourceName);
 
             var nodeList = _scene.Ptr.GetChildrenWithComponent(nameof(KinematicCharacterController), true);
             foreach (var node in nodeList)
@@ -104,21 +133,6 @@ namespace RbfxTemplate
             _cross.Ptr.HorizontalAlignment = HorizontalAlignment.HaCenter;
             _cross.Ptr.HotSpot = new IntVector2(32, 32);
             UIRoot.AddChild(_cross);
-        }
-
-        public override void OnDataModelInitialized(GameRmlUIComponent menuComponent)
-        {
-            menuComponent.BindDataModelProperty(nameof(InteractableTooltip), _ => _.Set(_interactableTooltip), _ => { });
-            menuComponent.BindDataModelProperty(nameof(InteractionEnabled), _ => _.Set(_interactionEnabled), _ => { });
-            menuComponent.BindDataModelProperty(nameof(HasInteractable), _ => _.Set(_hasInteractable), _ => { });
-            menuComponent.BindDataModelProperty(nameof(InteractionProgress), _ => _.Set(_interactionProgress), _ => { });
-        }
-
-        public override void Activate(StringVariantMap bundle)
-        {
-            Application.Settings.Apply(_scene.Ptr.GetComponent<RenderPipeline>());
-            Application.Settings.Apply(Context);
-            base.Activate(bundle);
         }
 
         public override void TransitionStarted()

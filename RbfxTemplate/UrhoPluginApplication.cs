@@ -10,6 +10,11 @@ namespace RbfxTemplate
     public partial class UrhoPluginApplication : PluginApplication
     {
         /// <summary>
+        /// Safe pointer to splash screen.
+        /// </summary>
+        private SharedPtr<SplashScreen> _splashScreen;
+
+        /// <summary>
         ///     Safe pointer to game screen.
         /// </summary>
         private SharedPtr<GameState> _gameState;
@@ -96,13 +101,11 @@ namespace RbfxTemplate
             stateManager.FadeOutDuration = 0.1f;
 
             // Setup end enqueue splash screen.
-            using (SharedPtr<SplashScreen> splash = new SplashScreen(Context))
-            {
-                splash.Ptr.Duration = 1.0f;
-                splash.Ptr.BackgroundImage = Context.ResourceCache.GetResource<Texture2D>("Images/Background.png");
-                splash.Ptr.ForegroundImage = Context.ResourceCache.GetResource<Texture2D>("Images/Splash.png");
-                stateManager.EnqueueState(splash);
-            }
+            _splashScreen = new SplashScreen(Context);
+            _splashScreen.Ptr.Duration = 1.0f;
+            _splashScreen.Ptr.BackgroundImage = Context.ResourceCache.GetResource<Texture2D>("Images/Background.png");
+            _splashScreen.Ptr.ForegroundImage = Context.ResourceCache.GetResource<Texture2D>("Images/Splash.png");
+            stateManager.EnqueueState(_splashScreen);
 
             // Crate end enqueue main menu screen.
             _stateStack.Push(_mainMenuState);
@@ -129,13 +132,23 @@ namespace RbfxTemplate
         }
 
         /// <summary>
+        /// Queue all resources from the given scene to be loaded in background.
+        /// </summary>
+        /// <param name="sceneName"></param>
+        public void QueueSceneResourcesAsync(string sceneName)
+        {
+            _splashScreen.Ptr.QueueSceneResourcesAsync(sceneName);
+        }
+
+        /// <summary>
         ///     Transition to game
         /// </summary>
         public void ToNewGame()
         {
             _gameState?.Dispose();
             _gameState = new GameState(this);
-            _stateStack.Push(_gameState);
+            _stateStack.Push(_splashScreen);
+            _stateStack.Switch(_gameState);
         }
 
         /// <summary>
