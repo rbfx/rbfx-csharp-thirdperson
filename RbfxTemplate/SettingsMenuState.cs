@@ -24,7 +24,33 @@ namespace RbfxTemplate
                 val => Settings.MusicVolume = val.Float);
             menuComponent.BindDataModelProperty("effects", val => val.Set(Settings.EffectVolume),
                 val => Settings.EffectVolume = val.Float);
+            menuComponent.BindDataModelProperty("debughud", val => val.Set(GetDebugHUD()),
+                val => SetDebugHUD(val.Bool));
             //menuComponent.BindDataModelProperty("shadows", val => val.Set(_shadowsQuality), (val) => _shadowsQuality = val.Convert(VariantType.VarInt).Int);
+        }
+
+        private void SetDebugHUD(bool value)
+        {
+            if (value)
+            {
+                Context.Engine.CreateDebugHud().Mode = DebugHudMode.DebughudShowAll;
+            }
+            else
+            {
+                var hud = GetSubsystem<DebugHud>();
+                if (hud != null)
+                {
+                    hud.Mode = DebugHudMode.DebughudShowNone;
+                }
+            }
+        }
+
+        private bool GetDebugHUD()
+        {
+            var hud = GetSubsystem<DebugHud>();
+            if (hud == null)
+                return false;
+            return hud.Mode != DebugHudMode.DebughudShowNone;
         }
 
         public override void Activate(StringVariantMap bundle)
