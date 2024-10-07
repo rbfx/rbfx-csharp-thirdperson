@@ -7,7 +7,220 @@
 			"_typeName": "PhysicsWorld"
 		},
 		{
-			"_typeName": "RenderPipeline"
+			"_typeName": "RenderPipeline",
+			"attributes": [
+				{
+					"name": "Render Passes",
+					"type": "VariantVector",
+					"value": [
+						{
+							"type": "String",
+							"value": "Postprocess: Exposure"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: SSAO"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Bloom"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Draw Outlines"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Tone Mapping"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: Adjust Color"
+						},
+						{
+							"type": "Bool",
+							"value": true
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: FXAA v2"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"type": "String",
+							"value": "Postprocess: FXAA v3"
+						},
+						{
+							"type": "Bool",
+							"value": false
+						}
+					]
+				},
+				{
+					"name": "Render Path Parameters",
+					"type": "StringVariantMap",
+					"value": [
+						{
+							"key": "SSAO: Near Distance",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Exposure: Adapt Rate",
+							"type": "Float",
+							"value": 0.6000000238418579
+						},
+						{
+							"key": "Exposure: Min",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Max Brightness",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "SSAO: Normal Threshold",
+							"type": "Float",
+							"value": 0.20000000298023225
+						},
+						{
+							"key": "SSAO: Near Radius",
+							"type": "Float",
+							"value": 0.05000000074505806
+						},
+						{
+							"key": "SSAO: Strength",
+							"type": "Float",
+							"value": 0.699999988079071
+						},
+						{
+							"key": "Adjust Color: HSVParams",
+							"type": "Vector4",
+							"value": "1 1 1 1"
+						},
+						{
+							"key": "SSAO: End Fade Distance",
+							"type": "Float",
+							"value": 200.0
+						},
+						{
+							"key": "Exposure: Automatic",
+							"type": "Bool",
+							"value": false
+						},
+						{
+							"key": "Tone Mapping: Mode@",
+							"type": "StringVector",
+							"value": [
+								"None",
+								"Reinhard",
+								"ReinhardWhite",
+								"Uncharted2"
+							]
+						},
+						{
+							"key": "SSAO: Begin Fade Distance",
+							"type": "Float",
+							"value": 100.0
+						},
+						{
+							"key": "Adjust Color: ColorOffset",
+							"type": "Vector4",
+							"value": "0 0 0 0"
+						},
+						{
+							"key": "Bloom: Base Intensity",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Iteration Intensity Factor",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Min Brightness",
+							"type": "Float",
+							"value": 0.800000011920929
+						},
+						{
+							"key": "SSAO: Depth Threshold",
+							"type": "Float",
+							"value": 0.10000000149011612
+						},
+						{
+							"key": "SSAO: Far Distance",
+							"type": "Float",
+							"value": 100.0
+						},
+						{
+							"key": "SSAO: Downscale",
+							"type": "Int",
+							"value": 0
+						},
+						{
+							"key": "Exposure: Max",
+							"type": "Float",
+							"value": 3.0
+						},
+						{
+							"key": "Adjust Color: ColorFilter",
+							"type": "Vector4",
+							"value": "1 1 1 1"
+						},
+						{
+							"key": "SSAO: Exponent",
+							"type": "Float",
+							"value": 1.5
+						},
+						{
+							"key": "FXAA: FXAAParams",
+							"type": "Vector3",
+							"value": "0.4 0.5 0.75"
+						},
+						{
+							"key": "SSAO: Far Radius",
+							"type": "Float",
+							"value": 1.0
+						},
+						{
+							"key": "Bloom: Num Iterations",
+							"type": "Int",
+							"value": 5
+						},
+						{
+							"key": "Tone Mapping: Mode",
+							"type": "Int",
+							"value": 0
+						}
+					]
+				}
+			]
 		},
 		{
 			"_typeName": "ReflectionProbeManager"
@@ -55,7 +268,7 @@
 								{
 									"name": "Material",
 									"type": "ResourceRefList",
-									"value": "Material;Models/Characters/XBot/Limbs.xml;Materials/VertexColor.xml"
+									"value": "Material;Materials/VertexColor.xml"
 								},
 								{
 									"name": "Cast Shadows",
@@ -66,22 +279,6 @@
 									"name": "Bone Animation Enabled",
 									"type": "VariantVector",
 									"value": [
-										{
-											"type": "Bool",
-											"value": true
-										},
-										{
-											"type": "Bool",
-											"value": true
-										},
-										{
-											"type": "Bool",
-											"value": true
-										},
-										{
-											"type": "Bool",
-											"value": true
-										},
 										{
 											"type": "Bool",
 											"value": true
@@ -367,14 +564,9 @@
 									"value": "Root"
 								},
 								{
-									"name": "Position",
-									"type": "Vector3",
-									"value": "0.056222 -0.06012 0.064117"
-								},
-								{
 									"name": "Rotation",
 									"type": "Quaternion",
-									"value": "0.929321 -0.036514 0.367229 0.013135"
+									"value": "1 -8.55714e-09 -1.71143e-08 2.92898e-16"
 								}
 							],
 							"nodes": [
@@ -388,12 +580,17 @@
 										{
 											"name": "Position",
 											"type": "Vector3",
-											"value": "1.24292e-08 1.039915 0.020761"
+											"value": "5.16595e-16 0.876276 1.50925e-08"
 										},
 										{
 											"name": "Rotation",
 											"type": "Quaternion",
 											"value": "0.536053 0.461137 -0.536053 -0.461137"
+										},
+										{
+											"name": "Scale",
+											"type": "Vector3",
+											"value": "1 1 1"
 										}
 									],
 									"nodes": [
@@ -407,12 +604,17 @@
 												{
 													"name": "Position",
 													"type": "Vector3",
-													"value": "-0.100477 0.016513 1.23487e-07"
+													"value": "-0.103933 2.23517e-08 2.08944e-08"
 												},
 												{
 													"name": "Rotation",
 													"type": "Quaternion",
-													"value": "-0.040827 0.987878 -0.149621 -0.006686"
+													"value": "1.94082e-08 0.99502 -0.099679 1.41665e-09"
+												},
+												{
+													"name": "Scale",
+													"type": "Vector3",
+													"value": "1.000003 1 1"
 												}
 											],
 											"nodes": [
@@ -426,12 +628,17 @@
 														{
 															"name": "Position",
 															"type": "Vector3",
-															"value": "-0.100212 0.015007 -1.08408e-08"
+															"value": "-0.181511 6.47269e-08 -3.61423e-08"
 														},
 														{
 															"name": "Rotation",
 															"type": "Quaternion",
-															"value": "-0.081912 0.996528 0.002988 0.014614"
+															"value": "7.39894e-09 -0.995186 0.098003 -6.78689e-08"
+														},
+														{
+															"name": "Scale",
+															"type": "Vector3",
+															"value": "1.000004 1 1"
 														}
 													],
 													"nodes": [
@@ -445,12 +652,17 @@
 																{
 																	"name": "Position",
 																	"type": "Vector3",
-																	"value": "-0.09203 -0.000294 5.50911e-08"
+																	"value": "-0.179036 -9.31323e-08 1.12047e-08"
 																},
 																{
 																	"name": "Rotation",
 																	"type": "Quaternion",
-																	"value": "-0.081712 0.974122 -0.210153 -0.015691"
+																	"value": "2.163e-08 0.99381 -0.11109 1.60979e-07"
+																},
+																{
+																	"name": "Scale",
+																	"type": "Vector3",
+																	"value": "0.999995 1 1"
 																}
 															],
 															"nodes": [
@@ -464,12 +676,17 @@
 																		{
 																			"name": "Position",
 																			"type": "Vector3",
-																			"value": "-0.164323 0.037753 5.14457e-08"
+																			"value": "-0.111889 -2.75671e-07 -4.33203e-08"
 																		},
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "0.999566 -0.003566 0.001166 0.029216"
+																			"value": "0.999129 -1.20808e-08 -2.3027e-07 0.041733"
+																		},
+																		{
+																			"name": "Scale",
+																			"type": "Vector3",
+																			"value": "1 1 1"
 																		}
 																	],
 																	"nodes": [
@@ -483,12 +700,57 @@
 																				{
 																					"name": "Position",
 																					"type": "Vector3",
-																					"value": "-0.097635 -0.001358 -3.06646e-08"
+																					"value": "-0.121644 -3.51109e-07 8.92336e-09"
 																				},
 																				{
 																					"name": "Rotation",
 																					"type": "Quaternion",
-																					"value": "0.546265 0.450503 -0.541627 0.453081"
+																					"value": "0.538249 0.458572 -0.538249 0.458572"
+																				},
+																				{
+																					"name": "Scale",
+																					"type": "Vector3",
+																					"value": "1 1 1"
+																				}
+																			],
+																			"nodes": [
+																				{
+																					"attributes": [
+																						{
+																							"name": "Name",
+																							"type": "String",
+																							"value": "Eyes"
+																						},
+																						{
+																							"name": "Position",
+																							"type": "Vector3",
+																							"value": "-1.35872e-09 0.094476 0.122722"
+																						},
+																						{
+																							"name": "Rotation",
+																							"type": "Quaternion",
+																							"value": "1 3.7253e-08 -5.54505e-09 2.06291e-10"
+																						}
+																					]
+																				},
+																				{
+																					"attributes": [
+																						{
+																							"name": "Name",
+																							"type": "String",
+																							"value": "Eyebrows"
+																						},
+																						{
+																							"name": "Position",
+																							"type": "Vector3",
+																							"value": "-1.37242e-09 0.127669 0.122722"
+																						},
+																						{
+																							"name": "Rotation",
+																							"type": "Quaternion",
+																							"value": "1 3.7253e-08 -5.54505e-09 2.06292e-10"
+																						}
+																					]
 																				}
 																			]
 																		}
@@ -504,12 +766,17 @@
 																		{
 																			"name": "Position",
 																			"type": "Vector3",
-																			"value": "-0.107147 0.034519 -0.045704"
+																			"value": "-0.058011 -0.041915 -0.074472"
 																		},
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "-0.336075 -0.559063 0.644128 -0.3995"
+																			"value": "0.375471 0.578548 -0.632485 0.352514"
+																		},
+																		{
+																			"name": "Scale",
+																			"type": "Vector3",
+																			"value": "1 1 1"
 																		}
 																	],
 																	"nodes": [
@@ -523,12 +790,17 @@
 																				{
 																					"name": "Position",
 																					"type": "Vector3",
-																					"value": "-0.104062 -0.003895 0.030024"
+																					"value": "-0.131979 -1.41532e-07 -1.17646e-08"
 																				},
 																				{
 																					"name": "Rotation",
 																					"type": "Quaternion",
-																					"value": "0.80849 0.013853 0.250383 0.53241"
+																					"value": "0.970889 0.011328 0.23686 0.033807"
+																				},
+																				{
+																					"name": "Scale",
+																					"type": "Vector3",
+																					"value": "1 1 1"
 																				}
 																			],
 																			"nodes": [
@@ -542,12 +814,17 @@
 																						{
 																							"name": "Position",
 																							"type": "Vector3",
-																							"value": "-0.277453 0.022968 0.002761"
+																							"value": "-0.339474 -0.001449 -0.001436"
 																						},
 																						{
 																							"name": "Rotation",
 																							"type": "Quaternion",
-																							"value": "0.912906 0.058511 0.403809 -0.010865"
+																							"value": "0.998316 0.001684 0.04075 -0.041252"
+																						},
+																						{
+																							"name": "Scale",
+																							"type": "Vector3",
+																							"value": "1 1 1"
 																						}
 																					],
 																					"nodes": [
@@ -561,12 +838,12 @@
 																								{
 																									"name": "Position",
 																									"type": "Vector3",
-																									"value": "-0.282561 0 -0.020287"
+																									"value": "-0.271145 -1.46519e-08 -0.000381"
 																								},
 																								{
 																									"name": "Rotation",
 																									"type": "Quaternion",
-																									"value": "0.955465 0.205017 0.161447 -0.137801"
+																									"value": "0.999358 1.49373e-08 -0.035831 1.48572e-07"
 																								}
 																							],
 																							"nodes": [
@@ -580,12 +857,12 @@
 																										{
 																											"name": "Position",
 																											"type": "Vector3",
-																											"value": "-0.024662 -0.015751 0.026824"
+																											"value": "-0.03514 -0.011706 0.045055"
 																										},
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.949088 0.112774 0.081651 0.282571"
+																											"value": "0.956534 0.025481 0.276843 0.08804"
 																										}
 																									],
 																									"nodes": [
@@ -599,12 +876,17 @@
 																												{
 																													"name": "Position",
 																													"type": "Vector3",
-																													"value": "-0.040042 -0.011531 -0.001486"
+																													"value": "-0.063702 -2.50526e-07 4.24746e-08"
 																												},
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.999173 -0.039981 -0.00173 -0.00721"
+																													"value": "0.982068 -0.039942 -0.11784 0.141636"
+																												},
+																												{
+																													"name": "Scale",
+																													"type": "Vector3",
+																													"value": "1 1 1"
 																												}
 																											],
 																											"nodes": [
@@ -618,12 +900,12 @@
 																														{
 																															"name": "Position",
 																															"type": "Vector3",
-																															"value": "-0.033646 -8.56459e-05 0.006375"
+																															"value": "-0.056656 6.51926e-08 -4.24785e-08"
 																														},
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.960553 -0.036403 -0.152035 -0.229995"
+																															"value": "0.960553 -0.036403 -0.152035 -0.229996"
 																														}
 																													]
 																												}
@@ -641,12 +923,17 @@
 																										{
 																											"name": "Position",
 																											"type": "Vector3",
-																											"value": "-0.091093 -0.005171 0.022601"
+																											"value": "-0.103965 0.003987 0.026727"
 																										},
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.994944 -0.009072 -0.09488 0.031649"
+																											"value": "0.997824 0.000281 0.065794 0.004254"
+																										},
+																										{
+																											"name": "Scale",
+																											"type": "Vector3",
+																											"value": "1 1 1"
 																										}
 																									],
 																									"nodes": [
@@ -660,12 +947,17 @@
 																												{
 																													"name": "Position",
 																													"type": "Vector3",
-																													"value": "-0.036445 0.000311 -0.004827"
+																													"value": "-0.040936 -5.99559e-08 -1.98944e-08"
 																												},
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.989727 -0.001923 0.005754 0.142843"
+																													"value": "0.995095 -0.001154 -0.010741 0.09833"
+																												},
+																												{
+																													"name": "Scale",
+																													"type": "Vector3",
+																													"value": "1 1 1"
 																												}
 																											],
 																											"nodes": [
@@ -679,134 +971,43 @@
 																														{
 																															"name": "Position",
 																															"type": "Vector3",
-																															"value": "-0.028053 0.005848 -0.003168"
+																															"value": "-0.037912 -2.04855e-08 -2.31934e-08"
 																														},
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.999976 -0.006926 5.03104e-09 -2.50859e-08"
-																														}
-																													]
-																												}
-																											]
-																										}
-																									]
-																								},
-																								{
-																									"attributes": [
-																										{
-																											"name": "Name",
-																											"type": "String",
-																											"value": "mixamorig:LeftHandMiddle1"
-																										},
-																										{
-																											"name": "Position",
-																											"type": "Vector3",
-																											"value": "-0.095334 -4.76837e-07 6.33299e-08"
-																										},
-																										{
-																											"name": "Rotation",
-																											"type": "Quaternion",
-																											"value": "1 -1.74623e-08 2.22045e-16 -2.27414e-11"
-																										}
-																									],
-																									"nodes": [
-																										{
-																											"attributes": [
-																												{
-																													"name": "Name",
-																													"type": "String",
-																													"value": "mixamorig:LeftHandMiddle2"
-																												},
-																												{
-																													"name": "Position",
-																													"type": "Vector3",
-																													"value": "-0.036982 2.8624e-09 1.7037e-07"
-																												},
-																												{
-																													"name": "Rotation",
-																													"type": "Quaternion",
-																													"value": "1 5.82077e-09 1.16415e-08 -1.81672e-08"
-																												}
-																											],
-																											"nodes": [
-																												{
-																													"attributes": [
-																														{
-																															"name": "Name",
-																															"type": "String",
-																															"value": "mixamorig:LeftHandMiddle3"
+																															"value": "0.998019 -0.006912 -0.025717 0.057002"
 																														},
 																														{
-																															"name": "Position",
+																															"name": "Scale",
 																															"type": "Vector3",
-																															"value": "-0.029509 -4.70573e-07 1.97478e-07"
-																														},
-																														{
-																															"name": "Rotation",
-																															"type": "Quaternion",
-																															"value": "1 1.16415e-08 -2.03727e-08 2.32831e-08"
+																															"value": "1 1 1"
 																														}
-																													]
-																												}
-																											]
-																										}
-																									]
-																								},
-																								{
-																									"attributes": [
-																										{
-																											"name": "Name",
-																											"type": "String",
-																											"value": "mixamorig:LeftHandRing1"
-																										},
-																										{
-																											"name": "Position",
-																											"type": "Vector3",
-																											"value": "-0.091046 -0.00044 -0.018651"
-																										},
-																										{
-																											"name": "Rotation",
-																											"type": "Quaternion",
-																											"value": "1 -2.85608e-15 -1.81899e-09 -3.93357e-09"
-																										}
-																									],
-																									"nodes": [
-																										{
-																											"attributes": [
-																												{
-																													"name": "Name",
-																													"type": "String",
-																													"value": "mixamorig:LeftHandRing2"
-																												},
-																												{
-																													"name": "Position",
-																													"type": "Vector3",
-																													"value": "-0.03154 -1.39888e-08 1.0035e-07"
-																												},
-																												{
-																													"name": "Rotation",
-																													"type": "Quaternion",
-																													"value": "1 -1.13291e-16 4.72937e-09 9.75433e-09"
-																												}
-																											],
-																											"nodes": [
-																												{
-																													"attributes": [
+																													],
+																													"nodes": [
 																														{
-																															"name": "Name",
-																															"type": "String",
-																															"value": "mixamorig:LeftHandRing3"
-																														},
-																														{
-																															"name": "Position",
-																															"type": "Vector3",
-																															"value": "-0.029377 -5.65826e-07 -7.45058e-09"
-																														},
-																														{
-																															"name": "Rotation",
-																															"type": "Quaternion",
-																															"value": "1 2.91038e-09 2.2817e-16 -5.09317e-09"
+																															"attributes": [
+																																{
+																																	"name": "Name",
+																																	"type": "String",
+																																	"value": "IndexFinger_04"
+																																},
+																																{
+																																	"name": "Position",
+																																	"type": "Vector3",
+																																	"value": "-0.037798 -2.12895e-08 -3.81908e-08"
+																																},
+																																{
+																																	"name": "Rotation",
+																																	"type": "Quaternion",
+																																	"value": "0.986859 -0.00452 -0.02804 -0.159068"
+																																},
+																																{
+																																	"name": "Scale",
+																																	"type": "Vector3",
+																																	"value": "1 1 1"
+																																}
+																															]
 																														}
 																													]
 																												}
@@ -824,12 +1025,17 @@
 																										{
 																											"name": "Position",
 																											"type": "Vector3",
-																											"value": "-0.080778 -0.004887 -0.038061"
+																											"value": "-0.099825 -0.00116 -0.032833"
 																										},
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.963532 -0.008312 -0.229133 0.137965"
+																											"value": "0.997434 -0.002487 -0.04388 0.056519"
+																										},
+																										{
+																											"name": "Scale",
+																											"type": "Vector3",
+																											"value": "1 1 1"
 																										}
 																									],
 																									"nodes": [
@@ -843,12 +1049,17 @@
 																												{
 																													"name": "Position",
 																													"type": "Vector3",
-																													"value": "-0.035632 0.004051 0.003161"
+																													"value": "-0.042488 4.41505e-07 1.00959e-08"
 																												},
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.981736 0.00123 0.033582 0.187258"
+																													"value": "0.99958 0.002637 0.019492 0.02127"
+																												},
+																												{
+																													"name": "Scale",
+																													"type": "Vector3",
+																													"value": "1 1 1"
 																												}
 																											],
 																											"nodes": [
@@ -862,12 +1073,38 @@
 																														{
 																															"name": "Position",
 																															"type": "Vector3",
-																															"value": "-0.020862 0.003276 0.001027"
+																															"value": "-0.035133 1.08732e-07 -1.50194e-08"
 																														},
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.999833 -0.018275 -1.14475e-08 4.25523e-08"
+																															"value": "0.992977 -0.018149 -0.071479 0.092511"
+																														},
+																														{
+																															"name": "Scale",
+																															"type": "Vector3",
+																															"value": "1 1 1"
+																														}
+																													],
+																													"nodes": [
+																														{
+																															"attributes": [
+																																{
+																																	"name": "Name",
+																																	"type": "String",
+																																	"value": "Finger_04"
+																																},
+																																{
+																																	"name": "Position",
+																																	"type": "Vector3",
+																																	"value": "-0.030033 -2.99886e-07 -3.89502e-08"
+																																},
+																																{
+																																	"name": "Rotation",
+																																	"type": "Quaternion",
+																																	"value": "0.980714 0.016647 0.096525 -0.16913"
+																																}
+																															]
 																														}
 																													]
 																												}
@@ -893,12 +1130,17 @@
 																		{
 																			"name": "Position",
 																			"type": "Vector3",
-																			"value": "-0.107149 0.034519 0.0457"
+																			"value": "-0.058015 -0.041914 0.074471"
 																		},
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "-0.455631 0.614651 0.527439 0.36934"
+																			"value": "0.352514 -0.632485 -0.578548 -0.375471"
+																		},
+																		{
+																			"name": "Scale",
+																			"type": "Vector3",
+																			"value": "1 1 1"
 																		}
 																	],
 																	"nodes": [
@@ -912,12 +1154,17 @@
 																				{
 																					"name": "Position",
 																					"type": "Vector3",
-																					"value": "0.104066 0.003897 -0.030027"
+																					"value": "0.131979 6.58038e-06 6.4593e-08"
 																				},
 																				{
 																					"name": "Rotation",
 																					"type": "Quaternion",
-																					"value": "0.867615 0.025319 0.023842 0.49602"
+																					"value": "0.970889 0.011328 0.23686 0.033807"
+																				},
+																				{
+																					"name": "Scale",
+																					"type": "Vector3",
+																					"value": "1 1 1"
 																				}
 																			],
 																			"nodes": [
@@ -931,12 +1178,17 @@
 																						{
 																							"name": "Position",
 																							"type": "Vector3",
-																							"value": "0.277453 -0.022969 -0.00276"
+																							"value": "0.339474 0.001447 0.001436"
 																						},
 																						{
 																							"name": "Rotation",
 																							"type": "Quaternion",
-																							"value": "0.932062 -0.028465 0.35821 0.046226"
+																							"value": "0.998316 0.001684 0.04075 -0.041252"
+																						},
+																						{
+																							"name": "Scale",
+																							"type": "Vector3",
+																							"value": "1 1 1"
 																						}
 																					],
 																					"nodes": [
@@ -950,12 +1202,17 @@
 																								{
 																									"name": "Position",
 																									"type": "Vector3",
-																									"value": "0.282561 2.38419e-07 0.020287"
+																									"value": "0.271145 -5.25766e-08 0.000381"
 																								},
 																								{
 																									"name": "Rotation",
 																									"type": "Quaternion",
-																									"value": "0.954989 0.088331 0.260011 0.112198"
+																									"value": "0.999358 -1.55606e-08 -0.035831 5.57907e-10"
+																								},
+																								{
+																									"name": "Scale",
+																									"type": "Vector3",
+																									"value": "1 1 1"
 																								}
 																							],
 																							"nodes": [
@@ -964,17 +1221,17 @@
 																										{
 																											"name": "Name",
 																											"type": "String",
-																											"value": "Finger_01 1"
+																											"value": "Thumb_01 1"
 																										},
 																										{
 																											"name": "Position",
 																											"type": "Vector3",
-																											"value": "0.080767 0.004885 0.03806"
+																											"value": "0.03514 0.01171 -0.045055"
 																										},
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.997434 -0.002486 -0.04388 0.056519"
+																											"value": "0.956534 0.025481 0.276843 0.08804"
 																										}
 																									],
 																									"nodes": [
@@ -983,17 +1240,22 @@
 																												{
 																													"name": "Name",
 																													"type": "String",
-																													"value": "Finger_02 1"
+																													"value": "Thumb_02 1"
 																												},
 																												{
 																													"name": "Position",
 																													"type": "Vector3",
-																													"value": "0.035631 -0.004052 -0.003162"
+																													"value": "0.063701 -7.54884e-06 2.99965e-07"
 																												},
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.99958 0.002637 0.019492 0.021269"
+																													"value": "0.982068 -0.039942 -0.11784 0.141636"
+																												},
+																												{
+																													"name": "Scale",
+																													"type": "Vector3",
+																													"value": "1 1 1"
 																												}
 																											],
 																											"nodes": [
@@ -1002,139 +1264,22 @@
 																														{
 																															"name": "Name",
 																															"type": "String",
-																															"value": "Finger_03 1"
+																															"value": "Thumb_03 1"
 																														},
 																														{
 																															"name": "Position",
 																															"type": "Vector3",
-																															"value": "0.020862 -0.003276 -0.001027"
+																															"value": "0.056655 -1.67638e-08 -1.85523e-07"
 																														},
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.992977 -0.018149 -0.071479 0.092511"
-																														}
-																													]
-																												}
-																											]
-																										}
-																									]
-																								},
-																								{
-																									"attributes": [
-																										{
-																											"name": "Name",
-																											"type": "String",
-																											"value": "mixamorig:RightHandRing1"
-																										},
-																										{
-																											"name": "Position",
-																											"type": "Vector3",
-																											"value": "0.091036 0.000439 0.018651"
-																										},
-																										{
-																											"name": "Rotation",
-																											"type": "Quaternion",
-																											"value": "2.77556e-15 1 2.31012e-08 7.27596e-09"
-																										}
-																									],
-																									"nodes": [
-																										{
-																											"attributes": [
-																												{
-																													"name": "Name",
-																													"type": "String",
-																													"value": "mixamorig:RightHandRing2"
-																												},
-																												{
-																													"name": "Position",
-																													"type": "Vector3",
-																													"value": "0.03154 5.35151e-07 4.35318e-07"
-																												},
-																												{
-																													"name": "Rotation",
-																													"type": "Quaternion",
-																													"value": "1 -2.91038e-09 -1.01863e-08 2.23736e-08"
-																												}
-																											],
-																											"nodes": [
-																												{
-																													"attributes": [
-																														{
-																															"name": "Name",
-																															"type": "String",
-																															"value": "mixamorig:RightHandRing3"
+																															"value": "0.960553 -0.036403 -0.152035 -0.229996"
 																														},
 																														{
-																															"name": "Position",
+																															"name": "Scale",
 																															"type": "Vector3",
-																															"value": "0.029377 -5.28172e-07 -3.75734e-07"
-																														},
-																														{
-																															"name": "Rotation",
-																															"type": "Quaternion",
-																															"value": "1 -2.91038e-09 2.91038e-09 3.63798e-10"
-																														}
-																													]
-																												}
-																											]
-																										}
-																									]
-																								},
-																								{
-																									"attributes": [
-																										{
-																											"name": "Name",
-																											"type": "String",
-																											"value": "mixamorig:RightHandMiddle1"
-																										},
-																										{
-																											"name": "Position",
-																											"type": "Vector3",
-																											"value": "0.095325 1.19209e-07 -1.8999e-07"
-																										},
-																										{
-																											"name": "Rotation",
-																											"type": "Quaternion",
-																											"value": "2.77463e-15 1 6.13908e-09 1.45519e-09"
-																										}
-																									],
-																									"nodes": [
-																										{
-																											"attributes": [
-																												{
-																													"name": "Name",
-																													"type": "String",
-																													"value": "mixamorig:RightHandMiddle2"
-																												},
-																												{
-																													"name": "Position",
-																													"type": "Vector3",
-																													"value": "0.036982 -9.84454e-09 -2.29704e-07"
-																												},
-																												{
-																													"name": "Rotation",
-																													"type": "Quaternion",
-																													"value": "1 -5.82077e-09 2.22045e-16 2.85127e-08"
-																												}
-																											],
-																											"nodes": [
-																												{
-																													"attributes": [
-																														{
-																															"name": "Name",
-																															"type": "String",
-																															"value": "mixamorig:RightHandMiddle3"
-																														},
-																														{
-																															"name": "Position",
-																															"type": "Vector3",
-																															"value": "0.029509 2.98493e-08 -7.97034e-09"
-																														},
-																														{
-																															"name": "Rotation",
-																															"type": "Quaternion",
-																															"value": "1 5.82077e-09 -2.22045e-16 -3.32875e-08"
+																															"value": "1 1 1"
 																														}
 																													]
 																												}
@@ -1152,12 +1297,17 @@
 																										{
 																											"name": "Position",
 																											"type": "Vector3",
-																											"value": "0.091083 0.005168 -0.022601"
+																											"value": "0.103966 -0.00399 -0.026726"
 																										},
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
 																											"value": "0.997824 0.00028 0.065794 0.004254"
+																										},
+																										{
+																											"name": "Scale",
+																											"type": "Vector3",
+																											"value": "1 1 1"
 																										}
 																									],
 																									"nodes": [
@@ -1171,12 +1321,17 @@
 																												{
 																													"name": "Position",
 																													"type": "Vector3",
-																													"value": "0.036445 -0.000311 0.004827"
+																													"value": "0.040936 6.86147e-07 -3.2125e-08"
 																												},
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.995095 -0.001154 -0.010742 0.09833"
+																													"value": "0.995095 -0.001154 -0.010741 0.09833"
+																												},
+																												{
+																													"name": "Scale",
+																													"type": "Vector3",
+																													"value": "1 1 1"
 																												}
 																											],
 																											"nodes": [
@@ -1190,12 +1345,43 @@
 																														{
 																															"name": "Position",
 																															"type": "Vector3",
-																															"value": "0.028053 -0.005848 0.003167"
+																															"value": "0.037912 3.31374e-06 -5.11511e-08"
 																														},
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.998019 -0.006912 -0.025718 0.057003"
+																															"value": "0.998019 -0.006912 -0.025717 0.057003"
+																														},
+																														{
+																															"name": "Scale",
+																															"type": "Vector3",
+																															"value": "1 1 1"
+																														}
+																													],
+																													"nodes": [
+																														{
+																															"attributes": [
+																																{
+																																	"name": "Name",
+																																	"type": "String",
+																																	"value": "IndexFinger_04 1"
+																																},
+																																{
+																																	"name": "Position",
+																																	"type": "Vector3",
+																																	"value": "0.037793 -5.01437e-06 -1.11661e-07"
+																																},
+																																{
+																																	"name": "Rotation",
+																																	"type": "Quaternion",
+																																	"value": "0.986859 -0.004519 -0.02804 -0.159068"
+																																},
+																																{
+																																	"name": "Scale",
+																																	"type": "Vector3",
+																																	"value": "1 1 1"
+																																}
+																															]
 																														}
 																													]
 																												}
@@ -1208,17 +1394,22 @@
 																										{
 																											"name": "Name",
 																											"type": "String",
-																											"value": "Thumb_01 1"
+																											"value": "Finger_01 1"
 																										},
 																										{
 																											"name": "Position",
 																											"type": "Vector3",
-																											"value": "0.024648 0.015727 -0.026826"
+																											"value": "0.099825 0.00116 0.032833"
 																										},
 																										{
 																											"name": "Rotation",
 																											"type": "Quaternion",
-																											"value": "0.956534 0.025481 0.276843 0.088039"
+																											"value": "0.997434 -0.002487 -0.04388 0.056519"
+																										},
+																										{
+																											"name": "Scale",
+																											"type": "Vector3",
+																											"value": "1 1 1"
 																										}
 																									],
 																									"nodes": [
@@ -1227,17 +1418,22 @@
 																												{
 																													"name": "Name",
 																													"type": "String",
-																													"value": "Thumb_02 1"
+																													"value": "Finger_02 1"
 																												},
 																												{
 																													"name": "Position",
 																													"type": "Vector3",
-																													"value": "0.040042 0.011532 0.001486"
+																													"value": "0.042488 3.29106e-07 -7.61993e-09"
 																												},
 																												{
 																													"name": "Rotation",
 																													"type": "Quaternion",
-																													"value": "0.982068 -0.039942 -0.11784 0.141636"
+																													"value": "0.99958 0.002637 0.019492 0.02127"
+																												},
+																												{
+																													"name": "Scale",
+																													"type": "Vector3",
+																													"value": "1 1 1"
 																												}
 																											],
 																											"nodes": [
@@ -1246,17 +1442,48 @@
 																														{
 																															"name": "Name",
 																															"type": "String",
-																															"value": "Thumb_03 1"
+																															"value": "Finger_03 1"
 																														},
 																														{
 																															"name": "Position",
 																															"type": "Vector3",
-																															"value": "0.033646 8.51278e-05 -0.006374"
+																															"value": "0.035133 -2.6566e-07 1.62434e-08"
 																														},
 																														{
 																															"name": "Rotation",
 																															"type": "Quaternion",
-																															"value": "0.960553 -0.036403 -0.152035 -0.229995"
+																															"value": "0.992977 -0.018149 -0.071479 0.092511"
+																														},
+																														{
+																															"name": "Scale",
+																															"type": "Vector3",
+																															"value": "1 1 1"
+																														}
+																													],
+																													"nodes": [
+																														{
+																															"attributes": [
+																																{
+																																	"name": "Name",
+																																	"type": "String",
+																																	"value": "Finger_04 1"
+																																},
+																																{
+																																	"name": "Position",
+																																	"type": "Vector3",
+																																	"value": "0.030031 1.42818e-06 4.11214e-07"
+																																},
+																																{
+																																	"name": "Rotation",
+																																	"type": "Quaternion",
+																																	"value": "0.980714 0.016646 0.096525 -0.16913"
+																																},
+																																{
+																																	"name": "Scale",
+																																	"type": "Vector3",
+																																	"value": "1 1 1"
+																																}
+																															]
 																														}
 																													]
 																												}
@@ -1283,17 +1510,22 @@
 												{
 													"name": "Name",
 													"type": "String",
-													"value": "UpperLeg_L"
+													"value": "UpperLeg_R"
 												},
 												{
 													"name": "Position",
 													"type": "Vector3",
-													"value": "0.064369 -0.025904 0.082078"
+													"value": "0.041158 -0.026921 -0.098967"
 												},
 												{
 													"name": "Rotation",
 													"type": "Quaternion",
-													"value": "0.743015 -0.643192 -0.184079 0.018631"
+													"value": "0.06416 -0.041775 -0.705872 0.70419"
+												},
+												{
+													"name": "Scale",
+													"type": "Vector3",
+													"value": "1 1 1"
 												}
 											],
 											"nodes": [
@@ -1302,17 +1534,22 @@
 														{
 															"name": "Name",
 															"type": "String",
-															"value": "LowerLeg_L"
+															"value": "LowerLeg_R"
 														},
 														{
 															"name": "Position",
 															"type": "Vector3",
-															"value": "0.443481 0.014084 0.002846"
+															"value": "-0.399309 -4.47816e-08 8.43738e-08"
 														},
 														{
 															"name": "Rotation",
 															"type": "Quaternion",
-															"value": "0.7957 0.514525 0.272369 -0.167152"
+															"value": "0.764301 0.644378 0.024463 -0.004738"
+														},
+														{
+															"name": "Scale",
+															"type": "Vector3",
+															"value": "1 1 1"
 														}
 													],
 													"nodes": [
@@ -1321,17 +1558,22 @@
 																{
 																	"name": "Name",
 																	"type": "String",
-																	"value": "Ankle_L"
+																	"value": "Ankle_R"
 																},
 																{
 																	"name": "Position",
 																	"type": "Vector3",
-																	"value": "0.445143 -0.009762 -0.005021"
+																	"value": "-0.377124 1.18744e-08 8.70012e-08"
 																},
 																{
 																	"name": "Rotation",
 																	"type": "Quaternion",
-																	"value": "-0.101758 0.825288 0.555443 -0.005265"
+																	"value": "0.074544 -0.85767 -0.507213 -0.039753"
+																},
+																{
+																	"name": "Scale",
+																	"type": "Vector3",
+																	"value": "1 1 1"
 																}
 															],
 															"nodes": [
@@ -1340,17 +1582,43 @@
 																		{
 																			"name": "Name",
 																			"type": "String",
-																			"value": "Ball_L"
+																			"value": "Ball_R"
 																		},
 																		{
 																			"name": "Position",
 																			"type": "Vector3",
-																			"value": "0.136874 0.018867 4.48718e-08"
+																			"value": "-0.11284 1.63465e-09 -2.12916e-08"
 																		},
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "0.95673 -0.014833 -0.024842 -0.289537"
+																			"value": "0.962856 2.05e-08 -9.13821e-08 -0.270016"
+																		},
+																		{
+																			"name": "Scale",
+																			"type": "Vector3",
+																			"value": "1 1 1"
+																		}
+																	],
+																	"nodes": [
+																		{
+																			"attributes": [
+																				{
+																					"name": "Name",
+																					"type": "String",
+																					"value": "Toes_R"
+																				},
+																				{
+																					"name": "Position",
+																					"type": "Vector3",
+																					"value": "-0.072958 -2.11459e-11 8.20947e-09"
+																				},
+																				{
+																					"name": "Rotation",
+																					"type": "Quaternion",
+																					"value": "0.707107 -2.05887e-22 -0.707107 6.28037e-16"
+																				}
+																			]
 																		}
 																	]
 																}
@@ -1365,17 +1633,22 @@
 												{
 													"name": "Name",
 													"type": "String",
-													"value": "UpperLeg_R"
+													"value": "UpperLeg_L"
 												},
 												{
 													"name": "Position",
 													"type": "Vector3",
-													"value": "0.064369 -0.025904 -0.082078"
+													"value": "0.041158 -0.026921 0.098967"
 												},
 												{
 													"name": "Rotation",
 													"type": "Quaternion",
-													"value": "0.143775 0.057159 -0.612878 0.774882"
+													"value": "0.70419 -0.705872 0.041775 -0.064159"
+												},
+												{
+													"name": "Scale",
+													"type": "Vector3",
+													"value": "1 1 1"
 												}
 											],
 											"nodes": [
@@ -1384,17 +1657,17 @@
 														{
 															"name": "Name",
 															"type": "String",
-															"value": "LowerLeg_R"
+															"value": "LowerLeg_L"
 														},
 														{
 															"name": "Position",
 															"type": "Vector3",
-															"value": "-0.443482 -0.014084 -0.002862"
+															"value": "0.399309 -3.40626e-07 -2.24916e-09"
 														},
 														{
 															"name": "Rotation",
 															"type": "Quaternion",
-															"value": "0.677227 0.666598 0.229921 -0.210113"
+															"value": "0.764301 0.644378 0.024463 -0.004738"
 														}
 													],
 													"nodes": [
@@ -1403,17 +1676,22 @@
 																{
 																	"name": "Name",
 																	"type": "String",
-																	"value": "Ankle_R"
+																	"value": "Ankle_L"
 																},
 																{
 																	"name": "Position",
 																	"type": "Vector3",
-																	"value": "-0.445142 0.009778 0.005023"
+																	"value": "0.377123 1.89524e-07 -9.02566e-07"
 																},
 																{
 																	"name": "Rotation",
 																	"type": "Quaternion",
-																	"value": "-0.137102 0.723451 0.673005 -0.0699"
+																	"value": "0.074544 -0.85767 -0.507213 -0.039753"
+																},
+																{
+																	"name": "Scale",
+																	"type": "Vector3",
+																	"value": "1 1 1"
 																}
 															],
 															"nodes": [
@@ -1422,17 +1700,38 @@
 																		{
 																			"name": "Name",
 																			"type": "String",
-																			"value": "Ball_R"
+																			"value": "Ball_L"
 																		},
 																		{
 																			"name": "Position",
 																			"type": "Vector3",
-																			"value": "-0.136874 -0.018867 1.47501e-08"
+																			"value": "0.11284 1.29643e-07 -1.03613e-08"
 																		},
 																		{
 																			"name": "Rotation",
 																			"type": "Quaternion",
-																			"value": "0.958522 0.003674 0.002155 -0.284988"
+																			"value": "0.962856 -2.41539e-08 -1.69557e-08 -0.270016"
+																		}
+																	],
+																	"nodes": [
+																		{
+																			"attributes": [
+																				{
+																					"name": "Name",
+																					"type": "String",
+																					"value": "Toes_L"
+																				},
+																				{
+																					"name": "Position",
+																					"type": "Vector3",
+																					"value": "0.072957 2.99284e-08 -4.83398e-09"
+																				},
+																				{
+																					"name": "Rotation",
+																					"type": "Quaternion",
+																					"value": "0.707107 1.49432e-15 -0.707107 -2.04111e-15"
+																				}
+																			]
 																		}
 																	]
 																}
