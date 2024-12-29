@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RbfxTemplate.CharacterStates;
 using RbfxTemplate.Inventory;
@@ -29,11 +30,30 @@ namespace RbfxTemplate
         private float _interactionElapsed;
 
         private IKSolver _solver;
+        private IList<ArmSolver> _armSolvers = Array.Empty<ArmSolver>();
 
         public Player(Context context) : base(context)
         {
             UpdateEventMask = UpdateEvent.UseUpdate | UpdateEvent.UseFixedupdate;
             _raycastResult = new PhysicsRaycastResult();
+
+            SubscribeToEvent(E.IKPreSolve, HandlePreSolve);
+        }
+
+        private void HandlePreSolve(StringHash hash, VariantMap map)
+        {
+            UpdateArmTargetPositions();
+        }
+
+        private void UpdateArmTargetPositions()
+        {
+            foreach (var arm in _armSolvers)
+            {
+                if (arm.ArmAtachmentNode != null)
+                {
+                    arm.ArmAtachmentNode.WorldPosition = arm.WieldableAtachmentNode.WorldPosition;
+                }
+            }
         }
 
         public IReadOnlyDictionary<string, InventorySlot> Inventory
@@ -102,7 +122,12 @@ namespace RbfxTemplate
         {
             base.DelayedStart();
             _solver = Node.FindComponent<IKSolver>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Disabled);
+            _armSolvers = Node.FindComponents<IKArmSolver>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Derived | ComponentSearchFlag.Disabled)
+                .Cast<IKArmSolver>()
+                .Select(solver=>new ArmSolver { Solver = solver })
+                .ToList();
             _character = Node.GetDerivedComponent<MoveAndOrbitComponent>() as Character;
+            UpdateArmTargets();
         }
 
         public override void Update(float timeStep)
@@ -242,13 +267,40 @@ namespace RbfxTemplate
                 }
 
                 _solver.IsEnabled = true;
-
-                //foreach (var solver in node.FindComponents<IKSolverComponent>())
-                //{
-                //    solver.IsEnabled = false;
-                //    solver.IsEnabled = true;
-                //}
             }
+
+            UpdateArmTargets();
+        }
+
+        private void UpdateArmTargets()
+        {
+            foreach (var arm in _armSolvers)
+            {
+                if (_wieldAttachment != null)
+                {
+                    var target = _wieldAttachment.Node.FindChild(arm.Solver.TargetName, true);
+                    if (target != null)
+                    {
+                        var armTarget =  this.Node.FindChild(arm.Solver.TargetName, true);
+                        if (armTarget != target)
+                        {
+                            arm.WieldableAtachmentNode = target;
+                            arm.ArmAtachmentNode = armTarget;
+                            arm.Solver.PositionWeight = 1;
+                            arm.Solver.RotationWeight = 0;
+                            arm.Solver.BendWeight = 1;
+                            continue;
+                        }
+                    }
+                }
+                arm.WieldableAtachmentNode = null;
+                arm.ArmAtachmentNode = null;
+                arm.Solver.PositionWeight = 0;
+                arm.Solver.RotationWeight = 0;
+                arm.Solver.BendWeight = 0;
+            }
+
+            UpdateArmTargetPositions();
         }
 
         public bool HasInInventory(ResourceRef inventoryKey)
@@ -294,6 +346,15 @@ namespace RbfxTemplate
                 _wieldAttachment.SetPrefab(null);
                 _wieldAttachment = null;
             }
+        }
+
+        private class ArmSolver
+        {
+            public IKArmSolver Solver { get; set; }
+
+            public Node ArmAtachmentNode { get; set; }
+
+            public Node WieldableAtachmentNode { get; set; }
         }
     }
 }

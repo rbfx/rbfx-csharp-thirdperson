@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Urho3DNet;
 using RbfxTemplate.CharacterStates;
 

@@ -123,6 +123,7 @@
 				<node>
 					<attributes>
 						<attribute name="Name" type="String" value="RightHandTarget" />
+						<attribute name="Position" type="Vector3" value="0 0 0.018374" />
 					</attributes>
 				</node>
 			</nodes>
