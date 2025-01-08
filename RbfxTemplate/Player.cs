@@ -49,9 +49,9 @@ namespace RbfxTemplate
         {
             foreach (var arm in _armSolvers)
             {
-                if (arm.ArmAtachmentNode != null)
+                if (arm.ArmAttachmentNode != null && !arm.WieldableAttachmentNode.IsExpired)
                 {
-                    arm.ArmAtachmentNode.WorldPosition = arm.WieldableAtachmentNode.WorldPosition;
+                    arm.ArmAttachmentNode.WorldPosition = arm.WieldableAttachmentNode.WorldPosition;
                 }
             }
         }
@@ -284,8 +284,8 @@ namespace RbfxTemplate
                         var armTarget =  this.Node.FindChild(arm.Solver.TargetName, true);
                         if (armTarget != target)
                         {
-                            arm.WieldableAtachmentNode = target;
-                            arm.ArmAtachmentNode = armTarget;
+                            arm.WieldableAttachmentNode = target;
+                            arm.ArmAttachmentNode = armTarget;
                             arm.Solver.PositionWeight = 1;
                             arm.Solver.RotationWeight = 0;
                             arm.Solver.BendWeight = 1;
@@ -293,8 +293,8 @@ namespace RbfxTemplate
                         }
                     }
                 }
-                arm.WieldableAtachmentNode = null;
-                arm.ArmAtachmentNode = null;
+                arm.WieldableAttachmentNode = null;
+                arm.ArmAttachmentNode = null;
                 arm.Solver.PositionWeight = 0;
                 arm.Solver.RotationWeight = 0;
                 arm.Solver.BendWeight = 0;
@@ -352,9 +352,9 @@ namespace RbfxTemplate
         {
             public IKArmSolver Solver { get; set; }
 
-            public Node ArmAtachmentNode { get; set; }
+            public Node ArmAttachmentNode { get; set; }
 
-            public Node WieldableAtachmentNode { get; set; }
+            public Node WieldableAttachmentNode { get; set; }
         }
     }
 }
