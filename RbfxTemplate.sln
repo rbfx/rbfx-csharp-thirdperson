@@ -25,6 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{D82AE45E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IconUpdater", "Tools\IconUpdater\IconUpdater.csproj", "{2940DEDC-756B-43AE-BAD2-49BFA7D83009}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GithubActions", "GithubActions", "{AA9C6A90-F458-4AB6-9AF8-EED4BC308B3C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-master.yml = .github\workflows\build-master.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +148,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2940DEDC-756B-43AE-BAD2-49BFA7D83009} = {D82AE45E-DEA4-4B99-897B-80FF32460DFF}
+		{AA9C6A90-F458-4AB6-9AF8-EED4BC308B3C} = {7DE6BF8D-C5F4-4C2A-8F02-525A97B81F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DFC4B6F7-CE69-4022-B783-EB634FF510C9}

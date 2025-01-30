@@ -7,7 +7,7 @@ namespace RbfxTemplate
 {
     [Activity(Label = "@string/app_name",
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.KeyboardHidden,
-        Theme = "@android:style/Theme.NoTitleBar.Fullscreen", HardwareAccelerated = true, MainLauncher = true)]
+        Theme = "@android:style/Theme.NoTitleBar.Fullscreen", HardwareAccelerated = true, MainLauncher = true, LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : UrhoActivity
     {
         protected override void OnResume()

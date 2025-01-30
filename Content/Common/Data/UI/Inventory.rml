@@ -25,7 +25,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="gray-outer-panel" style="position:absolute; width:25vw; height:100vh" data-model="GameRmlUIComponent">
+		<div data-model="GameRmlUIComponent" class="gray-outer-panel" style="position:absolute; width:25vw; height:100vh">
 			Inventory items: {{ inventory_items.size }}<br/>
 			<div class="gray-inner-panel" style="display: block;" data-for="item_value : inventory_items">
 				{{ item_value.name }}

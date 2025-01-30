@@ -36,8 +36,8 @@
 		</style>
 	</head>
 
-	<body data-model="GameRmlUIComponent"  style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png); nav: auto">
-		<div class="gray-inner-panel menu-panel" style="top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%); max-height: 90%; max-height: 90%; min-width: 800px">
+	<body style="width: 100%; height: 100%; margin: 0; decorator: image(../Images/Background.png); nav: auto">
+		<div data-model="GameRmlUIComponent" class="gray-inner-panel menu-panel" style="top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%); max-height: 90%; max-height: 90%; min-width: 800px">
 			<div style="text-align: center">Settings</div>
 			<br/>
 			<table>
