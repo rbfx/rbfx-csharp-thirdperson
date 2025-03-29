@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>true</ImplicitUsings>
 		<SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+		<ApplicationId>com.companyname.RbfxTemplate</ApplicationId>
 		<!-- FastUpToDateCheck disabled as a workaround. Without this flag the build system going to miss changes in content files. -->
 		<DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
 	</PropertyGroup>
