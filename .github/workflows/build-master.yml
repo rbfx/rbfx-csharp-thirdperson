@@ -55,11 +55,21 @@ jobs:
             echo "HAS_STEAM_USERNAME=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Check for IOS_CERTIFICATE_BASE64
+        id: ios-check
+        run: |
+          if [ "${{ secrets.IOS_CERTIFICATE_BASE64 }}" != '' ]; then
+            echo "HAS_IOS_CERTIFICATE=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "HAS_IOS_CERTIFICATE=false" >> "$GITHUB_OUTPUT"
+          fi
+
     outputs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
       ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
       HAS_PLAY_KEYSTORE: ${{ steps.play-keystore-check.outputs.HAS_PLAY_KEYSTORE }}
       HAS_STEAM_USERNAME: ${{ steps.steam-check.outputs.HAS_STEAM_USERNAME }}
+      HAS_IOS_CERTIFICATE: ${{ steps.ios-check.outputs.HAS_IOS_CERTIFICATE }}
 
   # ---------------------------------------------------------------------------------------
   tests:
@@ -162,6 +172,64 @@ jobs:
         dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
         tools/itch/butler push RbfxTemplate.Desktop/bin/Release/net8.0/${{ env.RUNTIME_ID }}/publish/ ${{ vars.ITCH_PROJECT }}:${{ env.RUNTIME_ID }}
       shell: bash
+
+  # ---------------------------------------------------------------------------------------
+  build_ios:
+    needs: [set_version, tests]
+    runs-on: macos-latest
+    if: needs.set_version.outputs.HAS_IOS_CERTIFICATE == 'true'
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install Apple Certificate
+      env:
+        IOS_CERTIFICATE_PASS: ${{ secrets.IOS_CERTIFICATE_PASS }}
+      run: |
+        echo "${{ secrets.IOS_CERTIFICATE_BASE64 }}" | base64 --decode > IOS_CERTIFICATE.p12
+        security import IOS_CERTIFICATE.p12 -P "$IOS_CERTIFICATE_PASS" -A
+
+    - name: Extract Apple Distribution Certificate Name
+      run: |
+        CERT_NAME=$(security find-certificate -a -c "Apple Distribution" -Z | awk -F'"' '/^    "alis"<blob>="{9}/ {print $2; exit}')
+        echo "IOS_CERTIFICATE_NAME=$CERT_NAME" >> $GITHUB_ENV
+
+    - name: Install provisioning profile
+      run: |
+        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+        echo "${{ secrets.IOS_PROVISIONING_PROFILE }}" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
+
+    - name: Restore tools
+      run: dotnet tool restore
+
+    - name: Install Workloads
+      run: dotnet workload install ios 
+
+    - name: Dotnet Publish
+      working-directory: ./RbfxTemplate.IOS
+      run: |
+        dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="${{ secrets.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
+
+    - name: Find IPA
+      run: |
+        dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.IOS/bin/Release/**/*.ipa -v IPA_PATH
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ${{ env.IPA_PATH }}
+        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   # ---------------------------------------------------------------------------------------
   build_android:

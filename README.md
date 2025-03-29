@@ -186,3 +186,56 @@ This step use https://github.com/r0adkll/upload-google-play for the publishing. 
    1. Open https://play.google.com/console and pick your developer account.
    1. Press `Create App` and create new application using the same ApplicationId as in your c# project
    1. Make sure you upload an apk or aab manually first by creating a release through the play console.
+
+## Optional: iOS Publishing
+
+### Enroll in the Apple Developer Program
+
+If you don't have one, go to [Apple ID](https://appleid.apple.com/) and sign up.​
+
+Visit [Apple Developer Program Enrollment](https://developer.apple.com/programs/enroll/) and follow the instructions to enroll as an individual or organization. This process includes identity verification and requires an annual fee. ​
+
+### Create an App ID
+
+Log in to your [Apple Developer Account](https://developer.apple.com/account/).
+
+Navigate to ["Certificates, Identifiers & Profiles / Register an App ID"](https://developer.apple.com/account/resources/identifiers/bundleId/add/bundle). Fill in the required details for the new App Bundle ID.
+
+Navigate to ["Apps"](https://appstoreconnect.apple.com/apps) and click the "+" button. Select "New App". Fill in the required details, ensuring the Bundle ID matches your application's identifier.
+
+### Generate a Signing Certificate
+
+In "Certificates, Identifiers & Profiles," go to ["Certificates"](https://developer.apple.com/account/resources/certificates/list) and click the "+" button.
+
+Choose "Apple Distribution" and follow the prompts to generate a Certificate Signing Request (CSR) using Keychain Access on your Mac.
+
+Upload the CSR to obtain your distribution certificate, then download and install it.
+
+### IOS_CERTIFICATE_BASE64, IOS_CERTIFICATE_NAME and IOS_CERTIFICATE_PASS Secrets
+
+Open "Keychain Access" on Apple device and export Apple Distribution certificate with password to a IOS_CERTIFICATE.p12 file.
+
+Open terminal and apply BASE64 encoding to the p12 file
+```shell
+openssl base64 < IOS_CERTIFICATE.p12 | tr -d '\n' | tee IOS_CERTIFICATE_BASE64.txt
+```
+
+Set IOS_CERTIFICATE_BASE64.txt content to IOS_CERTIFICATE_BASE64 GitHub secret. Set .p12 file password to IOS_CERTIFICATE_PASS github secret. Set certificate name ("Apple Distribution: Your Name (SOMEHEXID)") to IOS_CERTIFICATE_NAME GitHub secret.
+
+### Create a Provisioning Profile
+
+Still in "Certificates, Identifiers & Profiles," select ["Profiles"](https://developer.apple.com/account/resources/profiles/list) and click the "+" button.
+
+Choose "Ad Hoc" under Distribution. Select the App ID, your distribution certificate, and the devices for internal testing.
+
+Download and install the provisioning profile.
+
+### IOS_PROVISIONING_PROFILE_BASE64 Secret
+
+Convert downloaded provisioning profile to base64 encoded text.
+```shell
+openssl base64 < ProvisioningProfileName.mobileprovision | tr -d '\n' | tee IOS_PROVISIONING_PROFILE_BASE64.txt
+```
+Replace ```ProvisioningProfileName.mobileprovision``` with your profile file name.
+
+Set IOS_PROVISIONING_PROFILE_BASE64.txt content to IOS_PROVISIONING_PROFILE_BASE64 GitHub secret.
