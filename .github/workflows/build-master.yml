@@ -220,14 +220,10 @@ jobs:
         dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.IOS.csproj -p ApplicationId -v IOS_PACKAGENAME
 
     - name: Dotnet Restore
-      working-directory: ./RbfxTemplate.IOS
-      run: |
-        dotnet restore
+      run: dotnet restore
 
     - name: Dotnet Publish
-      working-directory: ./RbfxTemplate.IOS
-      run: |
-        dotnet publish -f net8.0-ios -c Release --no-restore -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:ApplicationId="${{ env.IOS_PACKAGENAME }}" -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
+      run: dotnet publish RbfxTemplate.IOS -f net8.0-ios -c Release --no-restore -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:ApplicationId="${{ env.IOS_PACKAGENAME }}" -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
 
     - name: Find IPA
       run: |
@@ -346,51 +342,51 @@ jobs:
     #     releaseFiles: ${{ env.AAB_PATH }}
     #     track: internal
   # ---------------------------------------------------------------------------------------
-  build_uwp:
-    needs: [set_version, tests]
-    runs-on: windows-latest
+  # build_uwp:
+  #   needs: [set_version, tests]
+  #   runs-on: windows-latest
 
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
-        fetch-depth: 1
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       submodules: recursive
+  #       fetch-depth: 1
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.0.x
+  #   - name: Setup .NET
+  #     uses: actions/setup-dotnet@v3
+  #     with:
+  #       dotnet-version: 8.0.x
 
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+  #   - name: Add msbuild to PATH
+  #     uses: microsoft/setup-msbuild@v1.1
 
-    - name: Restore tools
-      run: dotnet tool restore
+  #   - name: Restore tools
+  #     run: dotnet tool restore
 
-    - name: Restore application
-      working-directory: ./RbfxTemplate.UWP
-      run: msbuild RbfxTemplate.UWP.csproj /t:Restore /p:Configuration=Release
+  #   - name: Restore application
+  #     working-directory: ./RbfxTemplate.UWP
+  #     run: msbuild RbfxTemplate.UWP.csproj /t:Restore /p:Configuration=Release
    
-    - name: Patch manifest version
-      working-directory: ./RbfxTemplate.UWP
-      run: dotnet tool run ezpipeline -- set-xml -i Package.appxmanifest -p default:Package/default:Identity -a Version -v ${{ needs.set_version.outputs.BUILD_VERSION }}.0
+  #   - name: Patch manifest version
+  #     working-directory: ./RbfxTemplate.UWP
+  #     run: dotnet tool run ezpipeline -- set-xml -i Package.appxmanifest -p default:Package/default:Identity -a Version -v ${{ needs.set_version.outputs.BUILD_VERSION }}.0
 
-    - name: Dotnet Publish
-      working-directory: ./RbfxTemplate.UWP
-      run: msbuild RbfxTemplate.UWP.csproj /p:AppxPackageDir=appxupload /p:AppxBundle=Always /p:AppxBundlePlatforms="x64" /p:Platform=x64 /p:AppxPackageSigningEnabled=false /p:UapAppxPackageBuildMode=StoreUpload /p:Configuration=Release /p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+  #   - name: Dotnet Publish
+  #     working-directory: ./RbfxTemplate.UWP
+  #     run: msbuild RbfxTemplate.UWP.csproj /p:AppxPackageDir=appxupload /p:AppxBundle=Always /p:AppxBundlePlatforms="x64" /p:Platform=x64 /p:AppxPackageSigningEnabled=false /p:UapAppxPackageBuildMode=StoreUpload /p:Configuration=Release /p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
 
-    - name: Zip Package
-      run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_Test -o RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP.x64.zip
+  #   - name: Zip Package
+  #     run: dotnet tool run ezpipeline -- zip -i RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_Test -o RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP.x64.zip
 
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: |
-           RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_x64_bundle.appxupload
-           RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP.x64.zip
-        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+  #   - name: Release
+  #     uses: softprops/action-gh-release@v1
+  #     with:
+  #       files: |
+  #          RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP_${{ needs.set_version.outputs.BUILD_VERSION }}.0_x64_bundle.appxupload
+  #          RbfxTemplate.UWP/appxupload/RbfxTemplate.UWP.x64.zip
+  #       name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+  #       tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+  #       token: ${{ secrets.GITHUB_TOKEN }}
 
   # ------------ Steam ------------
   publish_to_steam:
