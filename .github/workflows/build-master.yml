@@ -199,7 +199,8 @@ jobs:
 
     - name: Extract Apple Distribution Certificate Name
       run: |
-        CERT_NAME=$(security find-certificate -a -c "Apple Distribution" -Z | sed -E 's/.*<blob>="(.*)"$/\1/'
+        security find-certificate -a -c "Apple Distribution" -Z
+        CERT_NAME=$(security find-certificate -a -c "Apple Distribution" -Z | sed -E 's/.*<blob>="(.*)"$/\1/')
         echo "IOS_CERTIFICATE_NAME=$CERT_NAME" >> $GITHUB_ENV
 
     - name: Install provisioning profile
