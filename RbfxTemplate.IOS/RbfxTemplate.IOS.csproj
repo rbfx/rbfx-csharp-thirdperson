@@ -5,10 +5,10 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>true</ImplicitUsings>
 		<SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+		<ApplicationTitle>RbfxTemplate</ApplicationTitle>
 		<ApplicationId>com.companyname.RbfxTemplate</ApplicationId>
 		<!-- FastUpToDateCheck disabled as a workaround. Without this flag the build system going to miss changes in content files. -->
 		<DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
-		<ProvisioningType>automatic</ProvisioningType>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <MtouchUseLlvm>False</MtouchUseLlvm>

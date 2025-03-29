@@ -211,7 +211,7 @@ Choose "Apple Distribution" and follow the prompts to generate a Certificate Sig
 
 Upload the CSR to obtain your distribution certificate, then download and install it.
 
-### IOS_CERTIFICATE_BASE64, IOS_CERTIFICATE_NAME and IOS_CERTIFICATE_PASS Secrets
+### IOS_CERTIFICATE_BASE64 and IOS_CERTIFICATE_PASS Secrets
 
 Open "Keychain Access" on Apple device and export Apple Distribution certificate with password to a IOS_CERTIFICATE.p12 file.
 
@@ -220,7 +220,7 @@ Open terminal and apply BASE64 encoding to the p12 file
 openssl base64 < IOS_CERTIFICATE.p12 | tr -d '\n' | tee IOS_CERTIFICATE_BASE64.txt
 ```
 
-Set IOS_CERTIFICATE_BASE64.txt content to IOS_CERTIFICATE_BASE64 GitHub secret. Set .p12 file password to IOS_CERTIFICATE_PASS github secret. Set certificate name ("Apple Distribution: Your Name (SOMEHEXID)") to IOS_CERTIFICATE_NAME GitHub secret.
+Set IOS_CERTIFICATE_BASE64.txt content to IOS_CERTIFICATE_BASE64 GitHub secret. Set .p12 file password to IOS_CERTIFICATE_PASS github secret.
 
 ### Create a Provisioning Profile
 

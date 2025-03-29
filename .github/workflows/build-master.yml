@@ -174,73 +174,71 @@ jobs:
       shell: bash
 
   # ---------------------------------------------------------------------------------------
-  build_ios:
-    needs: [set_version, tests]
-    runs-on: macos-latest
-    if: needs.set_version.outputs.HAS_IOS_CERTIFICATE == 'true'
+  # build_ios:
+  #   needs: [set_version, tests]
+  #   runs-on: macos-latest
+  #   if: needs.set_version.outputs.HAS_IOS_CERTIFICATE == 'true'
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 1
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #       fetch-depth: 1
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.0.x
+  #   - name: Setup .NET SDK
+  #     uses: actions/setup-dotnet@v3
+  #     with:
+  #       dotnet-version: 8.0.x
 
-    - name: Install Apple Certificate
-      env:
-        IOS_CERTIFICATE_PASS: ${{ secrets.IOS_CERTIFICATE_PASS }}
-      run: |
-        echo "${{ secrets.IOS_CERTIFICATE_BASE64 }}" | base64 --decode > IOS_CERTIFICATE.p12
-        security import IOS_CERTIFICATE.p12 -P "$IOS_CERTIFICATE_PASS" -A
+  #   - name: Install Apple Certificate
+  #     env:
+  #       IOS_CERTIFICATE_PASS: ${{ secrets.IOS_CERTIFICATE_PASS }}
+  #     run: |
+  #       echo "${{ secrets.IOS_CERTIFICATE_BASE64 }}" | base64 --decode > IOS_CERTIFICATE.p12
+  #       security import IOS_CERTIFICATE.p12 -P "$IOS_CERTIFICATE_PASS" -A
 
-    - name: Extract Apple Distribution Certificate Name
-      run: |
-        security find-certificate -a -c "Apple Distribution" -Z | grep -E '"alis"<blob>="' | sed -E 's/.*<blob>="(.*)"$/\1/'
-        CERT_NAME=$(security find-certificate -a -c "Apple Distribution" -Z | grep -E '"alis"<blob>="' | sed -E 's/.*<blob>="(.*)"$/\1/')
-        echo "IOS_CERTIFICATE_NAME=$CERT_NAME" >> $GITHUB_ENV
+  #   - name: Extract Apple Distribution Certificate Name
+  #     run: |
+  #       CERT_NAME=$(security find-certificate -a -c "Apple Distribution" -Z | grep -E '"alis"<blob>="' | sed -E 's/.*<blob>="(.*)"$/\1/')
+  #       echo "IOS_CERTIFICATE_NAME=$CERT_NAME" >> $GITHUB_ENV
 
-    - name: Install provisioning profile
-      run: |
-        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        echo "${{ secrets.IOS_PROVISIONING_PROFILE }}" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
+  #   - name: Install provisioning profile
+  #     run: |
+  #       mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+  #       echo "${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
 
-    - name: Restore tools
-      run: dotnet tool restore
+  #   - name: Select Xcode version
+  #     uses: maxim-lobanov/setup-xcode@v1
+  #     with:
+  #       xcode-version: '16.2.0'
 
-    - name: Install Workloads
-      run: dotnet workload install ios 
+  #   - name: Restore tools
+  #     run: dotnet tool restore
 
-    - name: Extract ApplicationId from RbfxTemplate.IOS.csproj
-      working-directory: ./RbfxTemplate.IOS
-      run: |
-        dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.IOS.csproj -p ApplicationId -v IOS_PACKAGENAME
+  #   - name: Install Workloads
+  #     run: dotnet workload install ios 
 
-    - name: Dotnet Restore
-      working-directory: ./RbfxTemplate.IOS
-      run: |
-        dotnet restore
+  #   - name: Extract ApplicationId from RbfxTemplate.IOS.csproj
+  #     working-directory: ./RbfxTemplate.IOS
+  #     run: |
+  #       dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.IOS.csproj -p ApplicationId -v IOS_PACKAGENAME
 
-    - name: Dotnet Publish
-      working-directory: ./RbfxTemplate.IOS
-      run: |
-        dotnet publish -f net8.0-ios -c Release --no-restore -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:ApplicationId="${{ env.IOS_PACKAGENAME }}" -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
+  #   - name: Dotnet Publish
+  #     working-directory: ./RbfxTemplate.IOS
+  #     run: dotnet publish -c Release -p:RuntimeIdentifier=ios-arm64 -p:ArchiveOnBuild=true -p:MtouchUseLlvm=false -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
 
-    - name: Find IPA
-      run: |
-        dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.IOS/bin/Release/**/*.ipa -v IPA_PATH
+  #   - name: Find IPA
+  #     run: |
+  #       dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.IOS/bin/Release/**/*.ipa -v IPA_PATH
 
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: |
-          ${{ env.IPA_PATH }}
-        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+  #   - name: Release
+  #     uses: softprops/action-gh-release@v1
+  #     with:
+  #       files: |
+  #         ${{ env.IPA_PATH }}
+  #       name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+  #       tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+  #       token: ${{ secrets.GITHUB_TOKEN }}
 
   # ---------------------------------------------------------------------------------------
   build_android:
@@ -253,98 +251,98 @@ jobs:
         submodules: recursive
         fetch-depth: 1
 
-    # - name: Setup .NET
-    #   uses: actions/setup-dotnet@v3
-    #   with:
-    #     dotnet-version: 8.0.x
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
 
-    # - name: Restore tools
-    #   run: dotnet tool restore
+    - name: Restore tools
+      run: dotnet tool restore
 
-    # - name: Install Workloads
-    #   run: dotnet workload install android 
+    - name: Install Workloads
+      run: dotnet workload install android 
 
-    # - name: Restore dependencies
-    #   working-directory: ./RbfxTemplate.Android
-    #   run: dotnet restore
+    - name: Restore dependencies
+      working-directory: ./RbfxTemplate.Android
+      run: dotnet restore
 
-    # - name: Install android-sdk
-    #   shell: bash
-    #   run: |
-    #     sudo apt-get install -y wget tar android-sdk unzip tree
-    #     echo $ANDROID_HOME
-    #     sudo chmod -R a+rw $ANDROID_HOME
+    - name: Install android-sdk
+      shell: bash
+      run: |
+        sudo apt-get install -y wget tar android-sdk unzip tree
+        echo $ANDROID_HOME
+        sudo chmod -R a+rw $ANDROID_HOME
 
-    # - name: Fetch AndroidSDKManager
-    #   run: |
-    #     dotnet tool run ezpipeline fetch-tool -n AndroidSDKManager --output $ANDROID_HOME --path --version 9123335
-    #     yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses --sdk_root=$ANDROID_HOME
+    - name: Fetch AndroidSDKManager
+      run: |
+        dotnet tool run ezpipeline fetch-tool -n AndroidSDKManager --output $ANDROID_HOME --path --version 9123335
+        yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses --sdk_root=$ANDROID_HOME
 
-    # - name: 'Print Java version'
-    #   run: javac -version
+    - name: 'Print Java version'
+      run: javac -version
 
-    # - name: Install Android SDK and Platforms
-    #   run: $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33" --sdk_root=$ANDROID_HOME
+    - name: Install Android SDK and Platforms
+      run: $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33" --sdk_root=$ANDROID_HOME
 
-    # - name: Decode Keystore
-    #   id: decode_keystore
-    #   if: ${{ needs.set_version.outputs.HAS_PLAY_KEYSTORE == 'true' }}
-    #   uses: timheuer/base64-to-file@v1
-    #   with:
-    #     fileDir: '${{ github.workspace }}/RbfxTemplate.Android'
-    #     fileName: 'googleplay.jks'
-    #     encodedString: ${{ secrets.PLAY_KEYSTORE }}
+    - name: Decode Keystore
+      id: decode_keystore
+      if: ${{ needs.set_version.outputs.HAS_PLAY_KEYSTORE == 'true' }}
+      uses: timheuer/base64-to-file@v1
+      with:
+        fileDir: '${{ github.workspace }}/RbfxTemplate.Android'
+        fileName: 'googleplay.jks'
+        encodedString: ${{ secrets.PLAY_KEYSTORE }}
 
-    # - name: Extract ApplicationId from RbfxTemplate.Android.csproj
-    #   working-directory: ./RbfxTemplate.Android
-    #   run: |
-    #     dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.Android.csproj -p ApplicationId -v ANDROID_PACKAGENAME
+    - name: Extract ApplicationId from RbfxTemplate.Android.csproj
+      working-directory: ./RbfxTemplate.Android
+      run: |
+        dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.Android.csproj -p ApplicationId -v ANDROID_PACKAGENAME
     
-    # - name: Dotnet Publish
-    #   working-directory: ./RbfxTemplate.Android
-    #   run: |
-    #     if [ -n "${{ secrets.PLAY_KEYSTORE }}" ]; then
-    #       echo "Secret PLAY_KEYSTORE is defined. Building and signing the aab file."
-    #       dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationId=${{ env.ANDROID_PACKAGENAME }} -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}  /p:AndroidKeyStore=true /p:AndroidSigningKeyStore=googleplay.jks /p:AndroidSigningKeyAlias=${{secrets.PLAY_KEYSTORE_ALIAS}} /p:AndroidSigningKeyPass="${{ secrets.PLAY_KEYSTORE_PASS }}" /p:AndroidSigningStorePass="${{ secrets.PLAY_KEYSTORE_PASS }}"
-    #     else
-    #       echo "Secret PLAY_KEYSTORE is not defined. Building with no signature."
-    #       dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationId=${{ env.ANDROID_PACKAGENAME }} -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
-    #     fi
+    - name: Dotnet Publish
+      working-directory: ./RbfxTemplate.Android
+      run: |
+        if [ -n "${{ secrets.PLAY_KEYSTORE }}" ]; then
+          echo "Secret PLAY_KEYSTORE is defined. Building and signing the aab file."
+          dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationId=${{ env.ANDROID_PACKAGENAME }} -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}  /p:AndroidKeyStore=true /p:AndroidSigningKeyStore=googleplay.jks /p:AndroidSigningKeyAlias=${{secrets.PLAY_KEYSTORE_ALIAS}} /p:AndroidSigningKeyPass="${{ secrets.PLAY_KEYSTORE_PASS }}" /p:AndroidSigningStorePass="${{ secrets.PLAY_KEYSTORE_PASS }}"
+        else
+          echo "Secret PLAY_KEYSTORE is not defined. Building with no signature."
+          dotnet publish -f net8.0-android -c Release --no-restore -p:ApplicationId=${{ env.ANDROID_PACKAGENAME }} -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:AndroidSdkDirectory=$ANDROID_HOME -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }}
+        fi
 
-    # - name: Find APK
-    #   run: |
-    #     dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.Android/bin/Release/**/*-Signed.apk -v APK_PATH
-    #     dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.Android/bin/Release/**/*-Signed.aab -v AAB_PATH
+    - name: Find APK
+      run: |
+        dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.Android/bin/Release/**/*-Signed.apk -v APK_PATH
+        dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.Android/bin/Release/**/*-Signed.aab -v AAB_PATH
 
-    # - name: Release
-    #   uses: softprops/action-gh-release@v1
-    #   with:
-    #     files: |
-    #       ${{ env.APK_PATH }}
-    #       ${{ env.AAB_PATH }}
-    #     name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-    #     tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-    #     token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ${{ env.APK_PATH }}
+          ${{ env.AAB_PATH }}
+        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
-    # - name: Release to itch.io ${{ vars.ITCH_PROJECT }}
-    #   env:
-    #     BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-    #   if: ${{ env.BUTLER_API_KEY != '' && vars.ITCH_PROJECT != '' }}
-    #   run: |
-    #     dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
-    #     tools/itch/butler push ${{ env.APK_PATH }} ${{ vars.ITCH_PROJECT }}:android
-    #   shell: bash
+    - name: Release to itch.io ${{ vars.ITCH_PROJECT }}
+      env:
+        BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      if: ${{ env.BUTLER_API_KEY != '' && vars.ITCH_PROJECT != '' }}
+      run: |
+        dotnet tool run ezpipeline -- fetch-tool --name Butler -o tools/itch
+        tools/itch/butler push ${{ env.APK_PATH }} ${{ vars.ITCH_PROJECT }}:android
+      shell: bash
 
-    # - uses: r0adkll/upload-google-play@v1.1.3
-    #   name: Upload Android Artifact to Play Console
-    #   env:
-    #     PLAYSTORE_SERVICE_ACC: ${{ secrets.PLAYSTORE_SERVICE_ACC }}
-    #   if: ${{ env.PLAYSTORE_SERVICE_ACC != '' }}
-    #   with:
-    #     serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_SERVICE_ACC }}
-    #     packageName: ${{ env.ANDROID_PACKAGENAME }}
-    #     releaseFiles: ${{ env.AAB_PATH }}
-    #     track: internal
+    - uses: r0adkll/upload-google-play@v1.1.3
+      name: Upload Android Artifact to Play Console
+      env:
+        PLAYSTORE_SERVICE_ACC: ${{ secrets.PLAYSTORE_SERVICE_ACC }}
+      if: ${{ env.PLAYSTORE_SERVICE_ACC != '' }}
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_SERVICE_ACC }}
+        packageName: ${{ env.ANDROID_PACKAGENAME }}
+        releaseFiles: ${{ env.AAB_PATH }}
+        track: internal
   # ---------------------------------------------------------------------------------------
   build_uwp:
     needs: [set_version, tests]
