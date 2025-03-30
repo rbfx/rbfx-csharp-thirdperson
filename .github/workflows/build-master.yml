@@ -225,7 +225,7 @@ jobs:
 
     - name: Dotnet Publish
       working-directory: ./RbfxTemplate.IOS
-      run: dotnet publish -c Release -p:RuntimeIdentifier=ios-arm64 -p:ArchiveOnBuild=true -p:MtouchUseLlvm=false -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
+      run: dotnet publish -c Release -p:RuntimeIdentifier=ios-arm64 -p:ArchiveOnBuild=true --verbosity detailed -p:MtouchUseLlvm=false -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
 
     - name: Find IPA
       run: |
