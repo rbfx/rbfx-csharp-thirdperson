@@ -64,12 +64,22 @@ jobs:
             echo "HAS_IOS_CERTIFICATE=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Check for APPSTORE_PRIVATE_KEY_BASE64
+        id: appstore-check
+        run: |
+          if [ "${{ secrets.APPSTORE_PRIVATE_KEY_BASE64 }}" != '' ]; then
+            echo "HAS_APPSTORE=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "HAS_APPSTORE=false" >> "$GITHUB_OUTPUT"
+          fi
+
     outputs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
       ANDROID_VERSION: ${{ env.ANDROID_VERSION }}
       HAS_PLAY_KEYSTORE: ${{ steps.play-keystore-check.outputs.HAS_PLAY_KEYSTORE }}
       HAS_STEAM_USERNAME: ${{ steps.steam-check.outputs.HAS_STEAM_USERNAME }}
       HAS_IOS_CERTIFICATE: ${{ steps.ios-check.outputs.HAS_IOS_CERTIFICATE }}
+      HAS_APPSTORE: ${{ steps.appstore-check.outputs.HAS_APPSTORE }}
 
   # ---------------------------------------------------------------------------------------
   tests:
@@ -238,6 +248,55 @@ jobs:
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
+
+  # ---------------------------------------------------------------------------------------
+  publish_ios:
+    needs: [build_ios]
+    runs-on: macos-latest
+    if: needs.set_version.outputs.HAS_APPSTORE == 'true'
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install Fastlane
+      run: gem install fastlane
+
+    - name: Restore tools
+      run: dotnet tool restore
+
+    - name: Extract ApplicationId from RbfxTemplate.IOS.csproj
+      working-directory: ./RbfxTemplate.IOS
+      run: |
+        dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.IOS.csproj -p ApplicationId -v IOS_PACKAGENAME
+
+    - name: Download specific assets from GitHub release
+      uses: robinraju/release-downloader@v1
+      with:
+        tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        fileName: '*.ipa'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Find IPA
+      run: |
+        dotnet tool run ezpipeline resolve-path -i ./**/*.ipa -v IPA_PATH
+
+    - name: Upload to TestFlight
+      env:
+        APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+        APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+        APPSTORE_PRIVATE_KEY_BASE64: ${{ secrets.APPSTORE_PRIVATE_KEY_BASE64 }}
+        APPSTORE_USER_EMAIL: ${{ secrets.APPSTORE_USER_EMAIL }}
+      run: |
+        echo "$APPSTORE_PRIVATE_KEY_BASE64" | base64 --decode > AuthKey.p8
+        fastlane pilot upload -u $APPSTORE_USER_EMAIL -i AuthKey.p8 --app_identifier ${{ env.IOS_PACKAGENAME }} -q $APPSTORE_KEY_ID -b $APPSTORE_ISSUER_ID -a ${{ env.IPA_PATH }}
 
   # ---------------------------------------------------------------------------------------
   build_android:

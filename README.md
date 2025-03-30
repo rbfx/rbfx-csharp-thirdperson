@@ -239,3 +239,37 @@ openssl base64 < ProvisioningProfileName.mobileprovision | tr -d '\n' | tee IOS_
 Replace ```ProvisioningProfileName.mobileprovision``` with your profile file name.
 
 Set IOS_PROVISIONING_PROFILE_BASE64.txt content to IOS_PROVISIONING_PROFILE_BASE64 GitHub secret.
+
+### Deploying to App Store
+
+Navigate to [App Store Connect](https://appstoreconnect.apple.com/) and sign in with your Apple Developer account credentials.
+
+Once logged in, click on the [Users and Access](https://appstoreconnect.apple.com/access/users) section.​
+
+Within the Users and Access page, select the [Integrations](https://appstoreconnect.apple.com/access/integrations/api) tab.​
+
+Here, you'll find the Issuer ID displayed near the top of the page.  Copy and store it into ```APPSTORE_ISSUER_ID``` GitHub secret.
+
+Permission is required to access the App Store Connect API. You can request access on behalf of your organization by pressing "Request Access" if necessary.
+
+In the [Integrations](https://appstoreconnect.apple.com/access/integrations/api) tab, click the "+" button to create a new API key.​
+
+Enter a name for the key to help you identify its purpose.​
+
+Assign an access level to the key. For tasks such as uploading builds or managing app metadata, the App Manager role is typically sufficient. However, ensure the role aligns with the permissions required for your specific use case.​
+
+Click Generate to create the key.
+
+After generating the key, it will appear in the list of active keys.​
+
+Click ```Download API``` Key to download the .p8 file. **Important**: This file can only be downloaded once, so store it securely. If lost, you'll need to revoke the key and create a new one.​  You can have a maximum of 50 active keys at a time.
+
+Use the usual approach to generate base64 encoded version of the downloaded file.
+```shell
+openssl base64 < ProvisioningProfileName.mobileprovision | tr -d '\n' | tee APPSTORE_PRIVATE_KEY_BASE64.txt
+```
+Store the content of the base64 encoded file into ```APPSTORE_PRIVATE_KEY_BASE64``` GitHub secret.
+
+In the list of active keys, locate the newly created key. The Key ID is displayed alongside the key's name. Note this Key ID for future reference. Store it into ```APPSTORE_KEY_ID``` GitHub secret.
+
+And the last bit of information the GitHub Action needs is your Apple account email. Store it into ```APPSTORE_USER_EMAIL``` GitHub secret.
