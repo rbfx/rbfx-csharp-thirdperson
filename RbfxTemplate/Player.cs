@@ -121,8 +121,8 @@ namespace RbfxTemplate
         public override void DelayedStart()
         {
             base.DelayedStart();
-            _solver = Node.FindComponent<IKSolver>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Disabled);
-            _armSolvers = Node.FindComponents<IKArmSolver>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Derived | ComponentSearchFlag.Disabled)
+            _solver = Node.FindComponent<IKSolver>(ComponentSearchFlag.SelfOrChildrenRecursive);
+            _armSolvers = Node.FindComponents<IKArmSolver>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Derived)
                 .Cast<IKArmSolver>()
                 .Select(solver=>new ArmSolver { Solver = solver })
                 .ToList();
