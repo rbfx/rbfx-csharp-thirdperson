@@ -191,11 +191,10 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Install Apple Certificate
-      env:
-        IOS_CERTIFICATE_PASS: ${{ secrets.IOS_CERTIFICATE_PASS }}
-      run: |
-        echo "${{ secrets.IOS_CERTIFICATE_BASE64 }}" | base64 --decode > IOS_CERTIFICATE.p12
-        security import IOS_CERTIFICATE.p12 -P "$IOS_CERTIFICATE_PASS" -A
+      uses: apple-actions/import-codesign-certs@v3
+      with: 
+        p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
+        p12-password: ${{ secrets.IOS_CERTIFICATE_PASS }}
 
     - name: Extract Apple Distribution Certificate Name
       run: |
