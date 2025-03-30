@@ -174,71 +174,71 @@ jobs:
       shell: bash
 
   # ---------------------------------------------------------------------------------------
-  # build_ios:
-  #   needs: [set_version, tests]
-  #   runs-on: macos-latest
-  #   if: needs.set_version.outputs.HAS_IOS_CERTIFICATE == 'true'
+  build_ios:
+    needs: [set_version, tests]
+    runs-on: macos-latest
+    if: needs.set_version.outputs.HAS_IOS_CERTIFICATE == 'true'
 
-  #   steps:
-  #   - uses: actions/checkout@v4
-  #     with:
-  #       submodules: recursive
-  #       fetch-depth: 1
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
 
-  #   - name: Setup .NET SDK
-  #     uses: actions/setup-dotnet@v3
-  #     with:
-  #       dotnet-version: 8.0.x
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
 
-  #   - name: Install Apple Certificate
-  #     env:
-  #       IOS_CERTIFICATE_PASS: ${{ secrets.IOS_CERTIFICATE_PASS }}
-  #     run: |
-  #       echo "${{ secrets.IOS_CERTIFICATE_BASE64 }}" | base64 --decode > IOS_CERTIFICATE.p12
-  #       security import IOS_CERTIFICATE.p12 -P "$IOS_CERTIFICATE_PASS" -A
+    - name: Install Apple Certificate
+      env:
+        IOS_CERTIFICATE_PASS: ${{ secrets.IOS_CERTIFICATE_PASS }}
+      run: |
+        echo "${{ secrets.IOS_CERTIFICATE_BASE64 }}" | base64 --decode > IOS_CERTIFICATE.p12
+        security import IOS_CERTIFICATE.p12 -P "$IOS_CERTIFICATE_PASS" -A
 
-  #   - name: Extract Apple Distribution Certificate Name
-  #     run: |
-  #       CERT_NAME=$(security find-certificate -a -c "Apple Distribution" -Z | grep -E '"alis"<blob>="' | sed -E 's/.*<blob>="(.*)"$/\1/')
-  #       echo "IOS_CERTIFICATE_NAME=$CERT_NAME" >> $GITHUB_ENV
+    - name: Extract Apple Distribution Certificate Name
+      run: |
+        CERT_NAME=$(security find-certificate -a -c "Apple Distribution" -Z | grep -E '"alis"<blob>="' | sed -E 's/.*<blob>="(.*)"$/\1/')
+        echo "IOS_CERTIFICATE_NAME=$CERT_NAME" >> $GITHUB_ENV
 
-  #   - name: Install provisioning profile
-  #     run: |
-  #       mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-  #       echo "${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
+    - name: Install provisioning profile
+      run: |
+        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+        echo "${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
 
-  #   - name: Select Xcode version
-  #     uses: maxim-lobanov/setup-xcode@v1
-  #     with:
-  #       xcode-version: '16.2.0'
+    - name: Select Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '16.2.0'
 
-  #   - name: Restore tools
-  #     run: dotnet tool restore
+    - name: Restore tools
+      run: dotnet tool restore
 
-  #   - name: Install Workloads
-  #     run: dotnet workload install ios 
+    - name: Install Workloads
+      run: dotnet workload install ios 
 
-  #   - name: Extract ApplicationId from RbfxTemplate.IOS.csproj
-  #     working-directory: ./RbfxTemplate.IOS
-  #     run: |
-  #       dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.IOS.csproj -p ApplicationId -v IOS_PACKAGENAME
+    - name: Extract ApplicationId from RbfxTemplate.IOS.csproj
+      working-directory: ./RbfxTemplate.IOS
+      run: |
+        dotnet tool run ezpipeline get-msbuild-property -i RbfxTemplate.IOS.csproj -p ApplicationId -v IOS_PACKAGENAME
 
-  #   - name: Dotnet Publish
-  #     working-directory: ./RbfxTemplate.IOS
-  #     run: dotnet publish -c Release -p:RuntimeIdentifier=ios-arm64 -p:ArchiveOnBuild=true -p:MtouchUseLlvm=false -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
+    - name: Dotnet Publish
+      working-directory: ./RbfxTemplate.IOS
+      run: dotnet publish -c Release -p:RuntimeIdentifier=ios-arm64 -p:ArchiveOnBuild=true -p:MtouchUseLlvm=false -p:CodesignKey="${{ env.IOS_CERTIFICATE_NAME }}" -p:ApplicationDisplayVersion=${{ needs.set_version.outputs.BUILD_VERSION }} -p:ApplicationVersion=${{ needs.set_version.outputs.ANDROID_VERSION }} -p:Version=${{ needs.set_version.outputs.BUILD_VERSION }} 
 
-  #   - name: Find IPA
-  #     run: |
-  #       dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.IOS/bin/Release/**/*.ipa -v IPA_PATH
+    - name: Find IPA
+      run: |
+        dotnet tool run ezpipeline resolve-path -i ./RbfxTemplate.IOS/bin/Release/**/*.ipa -v IPA_PATH
 
-  #   - name: Release
-  #     uses: softprops/action-gh-release@v1
-  #     with:
-  #       files: |
-  #         ${{ env.IPA_PATH }}
-  #       name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-  #       tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
-  #       token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ${{ env.IPA_PATH }}
+        name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   # ---------------------------------------------------------------------------------------
   build_android:
