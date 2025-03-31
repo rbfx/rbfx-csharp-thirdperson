@@ -193,6 +193,8 @@ class Program
     }
     private static void MakeIOSIcons(string outPath, Image? background, Color backgroundColor, Image? foreground)
     {
+        // iOS icons can't have transparency.
+        backgroundColor = Color.FromArgb(255, backgroundColor);
 
         MakePng(Path.Combine(outPath, "RbfxTemplate.IOS\\Assets.xcassets\\AppIcon.appiconset\\Icon1024.png"), 1024, 1024, (Bitmap bmp) =>
         {
