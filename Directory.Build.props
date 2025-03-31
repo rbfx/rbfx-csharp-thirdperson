@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Urho3DNetVersion>0.3.7.864</Urho3DNetVersion>
+    <Urho3DNetVersion>0.3.7.866</Urho3DNetVersion>
   </PropertyGroup>
 </Project>
