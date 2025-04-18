@@ -15,6 +15,8 @@
 	<array>
 		<string>arm64</string>
 	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Our app uses bluetooth to connect to gamepads.</string>
 	<key>UISupportedInterfaceOrientations</key>
