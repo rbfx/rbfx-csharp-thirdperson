@@ -125,6 +125,30 @@ However, it is possible to go through the MFA process only once by setting up Gi
 
 More documentation on steam publishing could be found at https://github.com/game-ci/steam-deploy
 
+## Optional: Windows Store Publishing (XBOX via UWP)
+
+Detailed instruction can be found [here](https://github.com/marketplace/actions/windows-store-publish).
+
+### Prerequisites
+
+- You must have an Azure AD directory, and you must have [global administrator permission](https://azure.microsoft.com/en-us/documentation/articles/active-directory-assign-admin-roles/) for the directory. You can create a new Azure AD [from Dev Center](https://msdn.microsoft.com/windows/uwp/publish/manage-account-users).
+
+- You must associate your Azure AD directory with your Dev Center account to obtain the credentials to allow this extension to access your account and perform actions on your behalf.
+
+- The app you want to publish must already exist: this extension can only publish updates to existing applications. You can [create your app in Dev Center](https://msdn.microsoft.com/windows/uwp/publish/create-your-app-by-reserving-a-name).
+
+- You must have already [created at least one submission](https://msdn.microsoft.com/windows/uwp/publish/app-submissions) for your app before you can use the Publish task provided by this extension. If you have not created a submission, the task will fail.
+
+### GitHub Action Secrets
+
+Application ID (string, required) - The identification for the app. Depending on your selection, this should be either the app ID (visible in the URL of the app's page on Dev Center) or the app primary name (visible on the app's page on Dev Center). Set it to ```WINDOWS_STORE_APP_ID``` secret value.
+
+In the [partner's account settings](https://partner.microsoft.com/en-us/dashboard/account/v3/tenantmanagement#developer) associate your account to Microsoft Entra ID.
+
+From manage users page, click the name of your Azure AD application to go to the application settings, and copy the Tenant ID to ```AZURE_AD_TENANT_ID``` secret and Client ID to ```AZURE_AD_APPLICATION_CLIENT_ID```.
+
+Click Add new key. On the following screen, copy the Key value to ```AZURE_AD_APPLICATION_SECRET``` secret.
+
 ## Optional: Google Play Publishing
 
 To publish app to Google Play directly from the GitHub Action you need to define several secrets in the pipeline.

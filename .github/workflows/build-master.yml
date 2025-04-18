@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "master", "main" ]
 
+env:
+  REQUIRE_DOTNET_SDK: '8.0.x'
+
 permissions:
   contents: write
 
@@ -19,13 +22,13 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
 
       - name: Restore tools
         run: dotnet tool restore
 
       - name: Get version
-        run: dotnet tool run ezpipeline git-height-version -- -b 0.0.1 -v BUILD_VERSION
+        run: dotnet tool run ezpipeline git-height-version -- -b 0.0.0 -v BUILD_VERSION
 
       - name: Get android version
         run: dotnet tool run ezpipeline git-height-version -- -v ANDROID_VERSION
@@ -72,6 +75,15 @@ jobs:
           else
             echo "HAS_APPSTORE=false" >> "$GITHUB_OUTPUT"
           fi
+      
+      - name: Check for WINDOWS_STORE_APP_ID
+        id: winstore-check
+        run: |
+          if [ "${{ secrets.WINDOWS_STORE_APP_ID }}" != '' ]; then
+            echo "HAS_WINDOWS_STORE=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "HAS_WINDOWS_STORE=false" >> "$GITHUB_OUTPUT"
+          fi
 
     outputs:
       BUILD_VERSION: ${{ env.BUILD_VERSION }}
@@ -80,6 +92,7 @@ jobs:
       HAS_STEAM_USERNAME: ${{ steps.steam-check.outputs.HAS_STEAM_USERNAME }}
       HAS_IOS_CERTIFICATE: ${{ steps.ios-check.outputs.HAS_IOS_CERTIFICATE }}
       HAS_APPSTORE: ${{ steps.appstore-check.outputs.HAS_APPSTORE }}
+      HAS_WINDOWS_STORE: ${{ steps.winstore-check.outputs.HAS_WINDOWS_STORE }}
 
   # ---------------------------------------------------------------------------------------
   tests:
@@ -92,7 +105,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
 
       - name: Restore tools
         run: dotnet tool restore
@@ -140,7 +153,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
 
     - name: Restore tools
       run: dotnet tool restore
@@ -198,7 +211,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
 
     - name: Install Apple Certificate
       uses: apple-actions/import-codesign-certs@v3
@@ -264,7 +277,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
 
     - name: Install Fastlane
       run: gem install fastlane
@@ -312,7 +325,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
 
     - name: Restore tools
       run: dotnet tool restore
@@ -415,7 +428,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
@@ -447,6 +460,46 @@ jobs:
         name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         tag_name: v${{ needs.set_version.outputs.BUILD_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
+
+  # ---------------------------------------------------------------------------------------
+  publish_winstore:
+    needs: [set_version, build_uwp]
+    runs-on: windows-latest
+    if: needs.set_version.outputs.HAS_WINDOWS_STORE == 'true'
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.REQUIRE_DOTNET_SDK }}
+
+    - name: Restore tools
+      run: dotnet tool restore
+
+    - name: Download specific assets from GitHub release
+      uses: robinraju/release-downloader@v1
+      with:
+        tag: v${{ needs.set_version.outputs.BUILD_VERSION }}
+        fileName: '*.appxupload'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Find *.appxupload
+      run: |
+        dotnet tool run ezpipeline resolve-path -i ./**/*.appxupload -v APPX_PATH
+
+    - name: Publish to Microsoft Store
+      uses: microsoft/windows-store-publish@v1
+      with:
+        app-id: ${{ secrets.WINDOWS_STORE_APP_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        package-path: ${{ env.APPX_PATH }}
 
   # ------------ Steam ------------
   publish_to_steam:
