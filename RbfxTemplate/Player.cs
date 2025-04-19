@@ -122,8 +122,12 @@ namespace RbfxTemplate
         {
             base.DelayedStart();
             _solver = Node.FindComponent<IKSolver>(ComponentSearchFlag.SelfOrChildrenRecursive);
-            _armSolvers = Node.FindComponents<IKArmSolver>(ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Derived)
-                .Cast<IKArmSolver>()
+            ComponentList componentList = new ComponentList();
+            Node.FindComponents(componentList, IKSolver.TypeId, ComponentSearchFlag.SelfOrChildrenRecursive | ComponentSearchFlag.Derived);
+
+            _armSolvers = componentList
+                .Select(solver => solver as IKArmSolver)
+                .Where(solver => solver != null)
                 .Select(solver=>new ArmSolver { Solver = solver })
                 .ToList();
             _character = Node.GetDerivedComponent<MoveAndOrbitComponent>() as Character;
